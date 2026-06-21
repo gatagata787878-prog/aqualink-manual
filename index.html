@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0B2545">
+<title>アクアリンクマニュアル</title>
+<meta name="apple-mobile-web-app-title" content="アクアリンクマニュアル">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2545; --deep:#13315C; --blue:#1C7293; --accent:#E8A020; --teal:#2A9D8F; --gold:#C9A227;
+  --bg:#eef2f6; --card:#ffffff; --ink:#15233a; --ink2:#5c708a; --ink3:#93a4ba;
+  --line:#e4ebf2; --line2:#d3dde8;
+  --okbg:#e9f6f3; --okline:#bfe5dd;
+  --warnbg:#fdf3e7; --warn:#bd6b1c; --warnline:#f0d6ac;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;-webkit-text-size-adjust:100%;}
+body{padding-bottom:40px;line-height:1.65;}
+.wrap{max-width:640px;margin:0 auto;padding:0 12px;}
+.hdr{background:var(--navy);color:#fff;padding:13px 0 12px;position:sticky;top:0;z-index:30;box-shadow:0 1px 8px rgba(11,37,69,.18);}
+.hdr .wrap{display:flex;align-items:center;gap:9px;}
+.logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;cursor:pointer;}
+.hdr-t{font-size:14px;font-weight:900;letter-spacing:.01em;white-space:nowrap;}
+.hdr-s{font-size:10px;color:#9ec2d6;margin-top:1px;}
+.hdr-home{margin-left:auto;font-size:12px;color:#cfe0ea;background:rgba(255,255,255,.12);border:none;font-family:inherit;font-weight:700;padding:7px 13px;border-radius:9px;cursor:pointer;display:none;}
+.searchbar{background:var(--navy);padding:0 0 12px;position:sticky;top:55px;z-index:29;}
+.search{position:relative;}
+.search input{width:100%;padding:13px 40px 13px 42px;border:none;border-radius:11px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.12);}
+.search input:focus{outline:2px solid var(--teal);}
+.search .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--ink3);}
+.search .clr{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:none;background:var(--line);border-radius:50%;color:var(--ink2);font-size:15px;cursor:pointer;display:none;}
+.search .clr.show{display:block;}
+.crumb{display:none;align-items:center;gap:7px;padding:11px 2px 2px;font-size:13px;color:var(--ink2);font-weight:700;}
+.crumb.show{display:flex;}
+.crumb .home{color:var(--blue);cursor:pointer;}
+.crumb .sep{color:var(--ink3);}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:11px 0 3px;scrollbar-width:none;}
+.chips::-webkit-scrollbar{display:none;}
+.chips.hide{display:none;}
+.chip{white-space:nowrap;font-size:13px;font-weight:500;padding:7px 13px;border-radius:99px;border:1px solid var(--line2);background:#fff;color:var(--ink2);cursor:pointer;flex-shrink:0;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.chip .dot{width:8px;height:8px;border-radius:50%;}
+.chip.active{color:#fff;border-color:transparent;}
+.cnt{font-size:11px;color:var(--ink3);padding:11px 3px 4px;font-weight:500;}
+/* HOME tiles */
+.hello{font-size:12.5px;color:var(--ink2);padding:13px 2px 2px;line-height:1.6;}
+.hello b{color:var(--navy);}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:11px;}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 14px;cursor:pointer;box-shadow:0 1px 2px rgba(11,37,69,.05);display:flex;flex-direction:column;gap:5px;min-height:112px;border-top:3px solid var(--blue);}
+.tile:active{background:#f7fafc;}
+.tile.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:13px;min-height:0;padding:15px 15px;}
+.tile.wide .tile-tx{flex:1;}
+.tile-ic{font-size:25px;line-height:1;}
+.tile.wide .tile-ic{font-size:28px;}
+.tile-n{font-size:14.5px;font-weight:900;color:var(--navy);}
+.tile-s{font-size:11px;color:var(--ink2);line-height:1.5;}
+.tile-c{margin-top:auto;font-size:11px;color:var(--ink3);font-weight:700;}
+.tile.wide .tile-c{margin:0;}
+.tile-c b{color:var(--accent);font-size:14px;}
+/* search-result group headers */
+.grp{margin:18px 0 9px;}
+.grp:first-child{margin-top:8px;}
+.grp-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:900;color:var(--navy);padding:0 2px 9px;cursor:pointer;}
+.grp-h .gi{font-size:16px;}
+.grp-h .gc{margin-left:auto;font-size:11px;color:var(--ink3);font-weight:700;}
+/* item card */
+.item{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:9px;overflow:hidden;box-shadow:0 1px 2px rgba(11,37,69,.05);}
+.item-head{display:flex;align-items:flex-start;gap:11px;padding:14px 14px;cursor:pointer;user-select:none;}
+.item-head:active{background:#f7fafc;}
+.qbar{width:4px;align-self:stretch;border-radius:3px;flex-shrink:0;}
+.item-main{flex:1;min-width:0;}
+.item-cat{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;display:inline-block;margin-bottom:5px;}
+.item-q{font-size:15px;font-weight:700;color:var(--ink);line-height:1.45;}
+.item-q .quote{color:var(--ink3);font-weight:900;}
+.item-pt{font-size:12.5px;color:var(--ink2);margin-top:4px;line-height:1.5;}
+.chev{color:var(--ink3);font-size:14px;flex-shrink:0;transition:transform .25s;margin-top:3px;}
+.chev.open{transform:rotate(90deg);}
+.detail{display:none;padding:0 14px 16px;}
+.detail.open{display:block;}
+.sec{margin-top:14px;}
+.sec-l{font-size:11px;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.sec-l .b{width:3px;height:14px;border-radius:2px;}
+.ans{background:#f3f8fb;border:1px solid #d8e7f0;border-left:3px solid var(--blue);border-radius:9px;padding:11px 13px;font-size:14px;color:var(--ink);line-height:1.7;}
+.ans b{color:var(--blue);}
+.script{background:var(--okbg);border:1px solid var(--okline);border-radius:11px;padding:11px 12px 12px;margin-bottom:8px;position:relative;}
+.script-l{font-size:11px;font-weight:700;color:var(--teal);margin-bottom:6px;padding-right:78px;}
+.script-t{font-size:14px;color:var(--ink);line-height:1.85;white-space:pre-wrap;}
+.copy-btn{position:absolute;top:9px;right:9px;background:var(--teal);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:4px;box-shadow:0 1px 3px rgba(42,157,143,.4);}
+.copy-btn:active{transform:scale(.95);}
+.copy-btn.done{background:var(--deep);}
+.notes{background:var(--warnbg);border:1px solid var(--warnline);border-radius:11px;padding:11px 13px;}
+.note{font-size:13px;color:var(--ink);line-height:1.7;display:flex;gap:8px;margin-bottom:6px;}
+.note:last-child{margin-bottom:0;}
+.note .m{color:var(--warn);font-weight:900;flex-shrink:0;}
+.note.do .m{color:var(--teal);}
+.note b{color:var(--ink);}
+.esc{background:#fef0ef;border:1px solid #f6cfca;border-radius:10px;padding:9px 12px;font-size:13px;color:#a23b2d;display:flex;gap:8px;align-items:flex-start;}
+.esc .m{font-weight:900;flex-shrink:0;}
+.esc b{color:#7d2a20;}
+.refs-toggle{margin-top:10px;font-size:12px;color:var(--blue);background:none;border:none;font-family:inherit;cursor:pointer;padding:4px 0;font-weight:700;}
+.refs{display:none;margin-top:6px;}
+.refs.open{display:block;}
+.ref{font-size:12px;background:#f7fafc;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:6px;padding:8px 10px;margin-bottom:5px;color:var(--ink);}
+.ref .tag{font-size:10px;color:#fff;background:var(--blue);padding:1px 7px;border-radius:99px;margin-right:6px;white-space:nowrap;}
+.alt{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.alt-c{font-size:11px;color:var(--ink2);background:#eef2f6;border:1px solid var(--line);border-radius:99px;padding:3px 9px;}
+/* quote table */
+.qt{margin-top:0;border:1px solid #e6d3b0;border-radius:11px;overflow:hidden;background:#fffaf2;}
+.qt-hd{background:#faf0dc;padding:7px 12px;font-size:11px;color:var(--warn);font-weight:700;display:flex;justify-content:space-between;}
+.qt-row{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid #f0e2c6;}
+.qt-nm{flex:1;min-width:0;font-size:12.5px;color:var(--ink);line-height:1.4;}
+.qt-pr{text-align:right;flex-shrink:0;}
+.qt-genka{font-size:11px;color:var(--ink3);}
+.qt-teiji{font-size:14px;color:var(--warn);font-weight:900;}
+.qt-lbl{font-size:9px;color:var(--ink3);}
+.qt-note{font-size:10.5px;color:var(--ink3);padding:8px 12px;border-top:1px solid #f0e2c6;line-height:1.5;}
+/* mitsu rows */
+.mitsu-note{background:#eef4f8;border:1px solid #d4e3ee;border-radius:10px;padding:10px 13px;font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:10px;}
+.mitsu-note b{color:var(--blue);}
+.prow{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:7px;}
+.pcat{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;background:#eef2f6;color:var(--ink2);white-space:nowrap;align-self:flex-start;}
+.pnm{flex:1;min-width:0;font-size:13px;color:var(--ink);line-height:1.45;font-weight:500;}
+.ppr{text-align:right;flex-shrink:0;}
+.pg{font-size:11px;color:var(--ink3);}
+.pt{font-size:15px;color:var(--warn);font-weight:900;}
+.pl{font-size:9px;color:var(--ink3);}
+/* kitei */
+.kcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin-bottom:8px;box-shadow:0 1px 2px rgba(11,37,69,.05);}
+.kcard .kh{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap;}
+.ktag{font-size:10px;color:#fff;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:700;}
+.kref{font-size:11px;color:var(--ink2);font-weight:700;background:#eef2f6;padding:2px 7px;border-radius:5px;}
+.ktitle{font-size:14.5px;font-weight:900;color:var(--ink);}
+.kbody{font-size:13.5px;color:var(--ink);line-height:1.72;}
+.kbody b{color:var(--blue);}
+.intro{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--ink2);line-height:1.6;margin-bottom:11px;}
+.intro b{color:var(--navy);}
+/* info */
+.info-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:9px;box-shadow:0 1px 2px rgba(11,37,69,.05);}
+.info-card.hl{border:1.5px solid var(--teal);background:#f3fbf9;}
+.ic-l{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:5px;}
+.ic-row{display:flex;align-items:flex-start;gap:10px;}
+.ic-v{flex:1;min-width:0;font-size:14px;color:var(--ink);line-height:1.65;font-weight:500;word-break:break-all;}
+.ic-copy{flex-shrink:0;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;}
+.ic-copy.done{background:var(--teal);}
+.info-name{font-size:18px;font-weight:900;color:var(--navy);text-align:center;padding:6px 0 12px;}
+.info-tel{display:flex;gap:8px;}
+.info-tel a{flex:1;text-align:center;background:var(--teal);color:#fff;text-decoration:none;border-radius:10px;padding:11px 0;font-weight:700;font-size:14px;}
+.info-tel a.fax{background:var(--ink2);}
+.sub-h{font-size:12px;font-weight:900;color:var(--navy);margin:16px 2px 8px;}
+.staff{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:7px;}
+.staff .sn{flex:1;min-width:0;font-size:14px;font-weight:700;color:var(--ink);}
+.staff .sr{font-size:10px;color:#fff;background:var(--blue);border-radius:99px;padding:2px 8px;margin-right:4px;}
+.staff a{background:var(--teal);color:#fff;text-decoration:none;border-radius:8px;padding:7px 13px;font-size:13px;font-weight:700;white-space:nowrap;}
+.nores{text-align:center;color:var(--ink3);font-size:14px;padding:46px 16px;}
+.nores .big{font-size:30px;margin-bottom:8px;}
+.hl-t{background:#fff09e;border-radius:3px;padding:0 1px;}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(16px);background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:99px;opacity:0;pointer-events:none;transition:all .25s;z-index:99;box-shadow:0 4px 16px rgba(0,0,0,.3);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.foot{text-align:center;font-size:10.5px;color:var(--ink3);margin-top:18px;line-height:1.7;padding:0 16px;}
+</style>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="hdr">
+  <div class="wrap">
+    <div class="logo" id="logo">🐟</div>
+    <div>
+      <div class="hdr-t">アクアリンクマニュアル</div>
+      <div class="hdr-s" id="hdrsub">山縣専用 ｜ 困ったらまず検索</div>
+    </div>
+    <button class="hdr-home" id="homeBtn">🏠 ホーム</button>
+  </div>
+</div>
+<div class="searchbar">
+  <div class="wrap">
+    <div class="search">
+      <span class="ic">🔍</span>
+      <input id="q" type="text" inputmode="search" placeholder="全体検索：解約 / 魚 死んだ / リース / 有給 / 振込">
+      <button class="clr" id="clr">×</button>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="crumb" id="crumb"></div>
+  <div class="chips hide" id="chips"></div>
+  <div class="cnt" id="cnt"></div>
+  <div id="list"></div>
+  <div class="nores" id="nores" style="display:none;">
+    <div class="big">🔍</div>見つかりませんでした。<br>別のキーワードでお試しください。
+  </div>
+  <div class="foot">アクアリンクマニュアル ｜ 山縣専用 v1<br>金額・条件・期間は各お客様の個別契約と最新の規定を必ずご確認ください。</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const CATS=[
+ {id:"gyo",    name:"生体（魚）",   c:"#E2574C"},
+ {id:"kusa",   name:"水草・水質",   c:"#2A9D8F"},
+ {id:"setsubi",name:"設備・機械",   c:"#1C7293"},
+ {id:"saigai", name:"環境・災害",   c:"#E07B39"},
+ {id:"kane",   name:"料金・支払",   c:"#D38A12"},
+ {id:"keiyaku",name:"契約・解約",   c:"#9163A8"},
+ {id:"jimu",   name:"事務・依頼",   c:"#6b7e96"},
+];
+const PRODUCTS=[
+{c:"規格セット",n:"淡水水草水槽 30cmワイド（スタ水草300）",g:127630},
+{c:"規格セット",n:"淡水水草水槽 60cmワイド スリム（スタ水草600S）",g:151870},
+{c:"規格セット",n:"淡水水草水槽 60cmワイド（スタ水草600）",g:174720},
+{c:"規格セット",n:"淡水水草水槽 90cmワイド（スタ水草900）",g:223180},
+{c:"規格セット",n:"淡水水草水槽 120cmワイド（スタ水草1200）",g:295420},
+{c:"規格セット",n:"海水魚飼育水槽 60cmワイド スリム（海水600S）",g:173050},
+{c:"規格セット",n:"海水魚飼育水槽 60cmワイド（海水600）",g:196900},
+{c:"規格セット",n:"海水魚飼育水槽 90cmワイド（海水900）",g:270390},
+{c:"規格セット",n:"海水魚飼育水槽 120cmワイド（海水1200）",g:333680},
+{c:"規格セット",n:"海水魚風 淡水魚水槽 30cmワイド（海風300）",g:103490},
+{c:"規格セット",n:"海水魚風 淡水魚水槽 60cmワイド スリム（海風600S）",g:110390},
+{c:"規格セット",n:"海水魚風 淡水魚水槽 60cmワイド（海風600）",g:137860},
+{c:"規格セット",n:"海水魚風 淡水魚水槽 90cmワイド（海風900）",g:188250},
+{c:"規格セット",n:"海水魚風 淡水魚水槽 120cmワイド（海風1200）",g:251620},
+{c:"規格セット",n:"デザイナーズ造花水槽 30cmワイド（造花300）",g:90370},
+{c:"規格セット",n:"デザイナーズ造花水槽 60cmワイド スリム（造花600S）",g:105720},
+{c:"規格セット",n:"デザイナーズ造花水槽 60cmワイド（造花600）",g:125120},
+{c:"規格セット",n:"デザイナーズ造花水槽 90cmワイド（造花900）",g:179890},
+{c:"規格セット",n:"デザイナーズ造花水槽 120cmワイド（造花1200）",g:238780},
+{c:"水槽",n:"既製品　ガラス水槽300＊300＊500H　フタ付",g:5000},
+{c:"水槽",n:"既製品　ガラス水槽300＊300＊500H　フタ付",g:6600},
+{c:"水槽",n:"既製品　ガラス水槽300＊300＊500H　フタ付",g:9750},
+{c:"水槽",n:"既製品　アクロ 水槽台 30×30×70 穴有り 黒 30cmOF水槽　フタ付",g:23600},
+{c:"水槽",n:"ハイタイプ30cm水槽 オーバーフローセット クロミス30H+",g:39800},
+{c:"水槽",n:"既製品　ガラス水槽 アクロ45 　450×270×300H　フタ付",g:6750},
+{c:"水槽",n:"既製品　ガラス水槽 アクロ45ハイ 　450×300×400H　フタ付",g:11200},
+{c:"水槽",n:"既製品　ガラス水槽 アクロ45NキューブH(45×45×60cm)　フタなし",g:18500},
+{c:"水槽",n:"ガラスフタ オールガラス水槽アクロ45用(幅43×奥行22cm) 1枚",g:720},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊360H　フタ付",g:4340},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊360H　フタ付",g:6340},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊360H　フタ付",g:11600},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊450H　フタ付",g:11800},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊450H　フタ付",g:13800},
+{c:"水槽",n:"既製品　ガラス水槽600＊300＊450H　フタ付",g:16800},
+{c:"水槽",n:"既製品　ガラス水槽600＊450＊450H　フタ付",g:10170},
+{c:"水槽",n:"既製品　ガラス水槽600＊450＊450H　フタ付",g:12170},
+{c:"水槽",n:"既製品　ガラス水槽600＊450＊450H　フタ付",g:13470},
+{c:"水槽",n:"既製品　ガラス水槽900＊450＊450H　フタ付",g:11790},
+{c:"水槽",n:"既製品　ガラス水槽900＊450＊450H　フタ付",g:14790},
+{c:"水槽",n:"既製品　ガラス水槽900＊450＊450H　フタ付",g:25000},
+{c:"水槽",n:"既製品　ガラス水槽900＊300＊450H　フタ付",g:19000},
+{c:"水槽",n:"既製品　ガラス水槽1200＊450＊450H　フタ付",g:22000},
+{c:"水槽",n:"既製品　ガラス水槽1200＊450＊450H　フタ付",g:25000},
+{c:"水槽",n:"既製品　ガラス水槽1200＊450＊450H　フタ付",g:39500},
+{c:"水槽",n:"ADA　キューブガーデン　600＊300＊360H",g:5900},
+{c:"水槽",n:"ADA　キューブガーデン　600＊450＊450H",g:16600},
+{c:"水槽",n:"高透過アクリル水槽　1200＊450＊600H　フタ付き",g:79700},
+{c:"水槽",n:"特注水槽台 1200＊450＊900H　メラミン仕上げ",g:114000},
+{c:"水槽",n:"専用上部カバー1200＊450＊200H　メラミン仕上げ",g:39000},
+{c:"水槽",n:"エーハイム　変換プラグ　12：16-16：22",g:550},
+{c:"水槽",n:"アクロ プロテクションマット 120cm水槽用 121×46cm 厚さ5mm",g:1100},
+{c:"水槽",n:"アクアスクリーン・フォギータイプ　W1200×H500",g:3850},
+{c:"水槽",n:"バックスクリーン ARTI(アルティ)120 ジェットブラック(125×50cm)",g:1870},
+{c:"水槽",n:"バックスクリーン ARTI(アルティ)90 ジェットブラック(95×50cm)",g:1680},
+{c:"水槽",n:"バックスクリーン ARTI(アルティ)60 ジェットブラック(65×50cm)",g:1200},
+{c:"水槽",n:"バックスクリーン ARTI(アルティ)60 オーシャンブルー(65×50cm)",g:1200},
+{c:"水槽",n:"ADA ライトスクリーン 1200　W1200xH500(mm)用",g:137500},
+{c:"水槽",n:"水槽内仕切りパンチ版（可動式）",g:3500},
+{c:"水槽台",n:"既製品　プロスタイル300/350SQ　370＊364＊750H（黒・白）",g:6900},
+{c:"水槽台",n:"既製品　プロスタイル300/350SQ　370＊364＊750H（黒・白）",g:6900},
+{c:"水槽台",n:"既製品　プロスタイル400/450SQ　470＊464＊750H（黒・白）",g:6900},
+{c:"水槽台",n:"既製品　プロスタイル　4530　460＊320＊700H（黒・白）",g:8200},
+{c:"水槽台",n:"既製品　プロスタイル6030　610＊320＊700H（黒・白・木目）",g:10300},
+{c:"水槽台",n:"既製品　プロスタイル6045　610＊470＊700H（黒・白・木目）",g:15400},
+{c:"水槽台",n:"既製品　プロスタイル9030　910＊320＊700H（黒・白・木目）",g:16000},
+{c:"水槽台",n:"既製品　プロスタイル9045　910＊470＊703H（黒・白・木目）",g:18100},
+{c:"水槽台",n:"既製品　プロスタイル12045　1210＊470＊710H（黒・白）",g:31900},
+{c:"水槽台",n:"既製品　アクロ 水槽台　 450×450×700H（黒・白・木目）",g:29800},
+{c:"水槽台",n:"既製品　JUN ステージア  1200×450×700H　木目",g:72400},
+{c:"水槽台",n:"既製品水槽台のかさ上げ＋300H　（台の高さ1000H）",g:25000},
+{c:"水槽台",n:"既製品水槽台の背面隠し　塩ビ板　W570×H660",g:5200},
+{c:"水槽台",n:"既製品水槽台の背面隠し　塩ビ板　W870×H660",g:7200},
+{c:"水槽台",n:"既製品水槽台の背面隠し　塩ビ板　W1170×H660",g:8500},
+{c:"水槽台",n:"既製品水槽台の背面隠し　ルーバー黒色　W250×H660",g:8200},
+{c:"水槽台",n:"既製品水槽台の背面隠し　ルーバー白色　W250×H660",g:5000},
+{c:"水槽台",n:"HEIAN SHINDO 突っ張り棒 L Lマットブラック 65〜100cm 耐圧200kg",g:3600},
+{c:"水槽台",n:"ベビーガード マグネット式 チャイルドロック",g:2200},
+{c:"水槽台",n:"コーナーガード 全長6M 水洗いで貼り直せるゲルテープ（ホワイト）",g:1600},
+{c:"水槽台",n:"クーラー用カバー　350ｘ400ｘ500H　メラミン化粧（台と同じ色）",g:32000},
+{c:"フード",n:"専用上部カバー300＊300＊190H　塩ビ仕上げ",g:12000},
+{c:"フード",n:"専用上部カバー600＊300＊190H　塩ビ仕上げ",g:12000},
+{c:"フード",n:"専用上部カバー600＊450＊190H　塩ビ仕上げ",g:16200},
+{c:"フード",n:"専用上部カバー900＊450＊190H　塩ビ仕上げ",g:20800},
+{c:"フード",n:"専用上部カバー1200＊450＊190H　塩ビ仕上げ",g:28600},
+{c:"フード",n:"専用上部カバー600＊450＊230H",g:17600},
+{c:"フード",n:"専用上部カバー900＊450＊230H",g:25300},
+{c:"フード",n:"専用上部カバー1200＊450＊230H",g:28600},
+{c:"ろ過・ろ材",n:"エーハイム　外部フィルタープロフェッショナル4+ 2275 （φ244×H453）",g:29200},
+{c:"ろ過・ろ材",n:"エーハイム　外部フィルター2217　（φ235×H390）",g:21400},
+{c:"ろ過・ろ材",n:"エーハイム　外部フィルター2215　ろ材付セット（φ202×H358）",g:17440},
+{c:"ろ過・ろ材",n:"エーハイム　外部フィルター2213",g:8150},
+{c:"ろ過・ろ材",n:"エーハイム　サブフィルター2217",g:6200},
+{c:"ろ過・ろ材",n:"エーハイム　ホース　12：16　3m",g:1200},
+{c:"ろ過・ろ材",n:"エーハイム　ホース　16：22　1m",g:570},
+{c:"ろ過・ろ材",n:"エーハイム　ホース　16：22　3m",g:1970},
+{c:"ろ過・ろ材",n:"エーハイム　変換プラグ　12：16-16：22",g:580},
+{c:"ろ過・ろ材",n:"エーハイム　シングルタップ(φ12/16mm用)",g:850},
+{c:"ろ過・ろ材",n:"エーハイム　シングルタップ(φ16/22mm用)",g:1520},
+{c:"ろ過・ろ材",n:"エーハイム　ダブルタップ(φ12/16mm用)",g:1940},
+{c:"ろ過・ろ材",n:"エーハイム　ダブルタップ(φ16/22mm用)",g:3500},
+{c:"ろ過・ろ材",n:"エーハイム　サブストラットプロレギュラー5リットル",g:7090},
+{c:"ろ過・ろ材",n:"ADA スーパージェットフィルター　ES-2400 　下記は付属品",g:145000},
+{c:"ろ過・ろ材",n:"ADA スーパージェットフィルター　ES-1200 　下記は付属品",g:108900},
+{c:"ろ過・ろ材",n:"高品質ろ過材　セラミックリング　Lサイズ　21L（LSS）ネット付き",g:9500},
+{c:"ろ過・ろ材",n:"高品質ろ過材　パワーハウス　ハード　L サイズ　5L",g:9800},
+{c:"ろ過・ろ材",n:"高品質ろ過材　パワーハウスソフト（淡水用）　5L",g:10700},
+{c:"ろ過・ろ材",n:"高品質ろ過材　パワーハウスベーシック　5L",g:6500},
+{c:"ろ過・ろ材",n:"ボルクスジャパン マンティス バイオスフィア 1kg",g:3200},
+{c:"ろ過・ろ材",n:"ネクストジェネレーション バイオメディア S",g:3800},
+{c:"ろ過・ろ材",n:"ネクストジェネレーション バイオメディア M",g:5500},
+{c:"ろ過・ろ材",n:"ネクストジェネレーション バイオメディア L",g:5500},
+{c:"ろ過・ろ材",n:"ボルクスジャパン マンティス バイオスフィア 1kg",g:3000},
+{c:"ろ過・ろ材",n:"シーケム フォスボンド PhosBond 500ml 淡水海水用",g:6500},
+{c:"ろ過・ろ材",n:"バイコム（海水用）",g:2890},
+{c:"ろ過・ろ材",n:"バイコム（淡水用）",g:2220},
+{c:"ろ過・ろ材",n:"リバースグレイン ソフト",g:8060},
+{c:"ろ過・ろ材",n:"スライドベースパワー　底面式ろ過システム",g:1650},
+{c:"ろ過・ろ材",n:"アクアシステム　プロジェクトフィルター　プラス645",g:5800},
+{c:"ろ過・ろ材",n:"アクアシステム プロジェクトフィルターPS  底面フィルター",g:2800},
+{c:"ろ過・ろ材",n:"水作　スペースパワーフィットプラス　Ｍ　水中フィルター",g:1190},
+{c:"ろ過・ろ材",n:"GEX　イーロカ701",g:1500},
+{c:"ろ過・ろ材",n:"GEX　イーロカPF201",g:669},
+{c:"ろ過・ろ材",n:"エーハイム アクア 160 水中フィルター ディフューザー付き",g:4200},
+{c:"ろ過・ろ材",n:"GEX 外掛けフィルター スリムフィルター Lサイズ　W290×D92×H160",g:1450},
+{c:"ろ過・ろ材",n:"コトブキ工芸 上部フィルタースーパーターボ トリプルボックス 600",g:2400},
+{c:"ろ過・ろ材",n:"コトブキ工芸 上部フィルター スーパーターボゼットプラス900",g:7500},
+{c:"ろ過・ろ材",n:"コトブキ工芸 上部フィルター スーパーターボゼットプラス1200",g:12100},
+{c:"ろ過・ろ材",n:"特注上部ろ過機　1180＊200＊230　ＲＥＩＳＥＡ　P－315Ｖポンプ付",g:35780},
+{c:"ろ過・ろ材",n:"特注上部ろ過機　680＊230＊230　ＲＥＩＳＥＡ　P－315Ｖポンプ付",g:48500},
+{c:"ろ過・ろ材",n:"特注上部ろ過機　1940＊200＊230　ＲＥＩＳＥＡ　P－450Ｖポンプ付",g:73400},
+{c:"ろ過・ろ材",n:"ハイドール　クリスタルフィルター2　投げ込み式ろ過器",g:4500},
+{c:"ろ過・ろ材",n:"ニッソー　スーパーパル",g:2748},
+{c:"ろ過・ろ材",n:"スライドフィルター",g:1559},
+{c:"ろ過・ろ材",n:"カミハタ　Rio800水中ポンプ",g:2425},
+{c:"ろ過・ろ材",n:"カミハタ　Rioコンバージョンキット2",g:443},
+{c:"ろ過・ろ材",n:"カミハタ　Rioアディショナルフィルターチャンバー2",g:423},
+{c:"ろ過・ろ材",n:"カミハタ　Rio+フィルターセット4",g:3780},
+{c:"ろ過・ろ材",n:"高品質ろ過材　グラスリング　α　Mサイズ　10kg/20ℓ",g:3510},
+{c:"ろ過・ろ材",n:"水作エイトＭ",g:544},
+{c:"ろ過・ろ材",n:"ピストルパイプ　50＊16A",g:700},
+{c:"ろ過・ろ材",n:"ニッソー　ティポイント6(テラリウム用ろ過フィルター)",g:3200},
+{c:"ろ過・ろ材",n:"エーハイム　サブフィルター2215",g:4620},
+{c:"ろ過・ろ材",n:"エーハイム　コンパクトポンプ1000",g:2210},
+{c:"ろ過・ろ材",n:"エーハイム　アクアコンパクト　2005",g:4400},
+{c:"ろ過・ろ材",n:"エーハイム　T-ジョイント",g:480},
+{c:"ろ過・ろ材",n:"ニッソー　マスター600DX",g:3400},
+{c:"ろ過・ろ材",n:"ADA　リリィパイプP　P-4",g:6850},
+{c:"ろ過・ろ材",n:"ADA　リリィパイプP　P-6",g:8300},
+{c:"ろ過・ろ材",n:"ADA　リリィパイプV　V-5",g:8150},
+{c:"ろ過・ろ材",n:"ADA　リリィパイプV　V-7",g:11500},
+{c:"ろ過・ろ材",n:"ADA　クリアホース　φ13　3m",g:1000},
+{c:"ろ過・ろ材",n:"ADA　クリアホース　φ17　3m",g:1410},
+{c:"ろ過・ろ材",n:"エーハイム　大型フィルター2260(Ø355＊570H)　2,000 ℓ/h",g:49800},
+{c:"ろ過・ろ材",n:"ろ過吹き出し用ロングパイプ",g:2200},
+{c:"ろ過・ろ材",n:"エーハイム　ダブルタップ(φ25/34mm用)",g:4940},
+{c:"ろ過・ろ材",n:"エーハイム　ダブルタップ(φ16/22mm用)",g:2193},
+{c:"ろ過・ろ材",n:"サブストラットプロレギュラー　5L",g:5821},
+{c:"ポンプ",n:"REI-SEA　RSD-20A",g:14300},
+{c:"ポンプ",n:"REI-SEA　RSD-40A",g:21580},
+{c:"ポンプ",n:"REI-SEA　RSD-50A",g:24050},
+{c:"ポンプ",n:"REI-SEA　RMD-301",g:18600},
+{c:"ポンプ",n:"REI-SEA　RMD-401",g:20860},
+{c:"ポンプ",n:"REI-SEA　RMD-551",g:23180},
+{c:"ポンプ",n:"REI-SEA　RMD-701",g:31200},
+{c:"ポンプ",n:"REI-SEA　RMD-1001",g:36600},
+{c:"ポンプ",n:"カミハタ　Rio3100水中ポンプ　48（L／m）",g:8670},
+{c:"ポンプ",n:"カミハタ　Rio2500水中ポンプ　34（L／m）",g:5900},
+{c:"ポンプ",n:"カミハタ　Rio2100水中ポンプ　32（L／m）",g:5200},
+{c:"ポンプ",n:"カミハタ　Rio1400水中ポンプ　24（L／m）",g:3250},
+{c:"ポンプ",n:"カミハタ　Rio1100水中ポンプ　22（L／m）",g:2930},
+{c:"ポンプ",n:"カミハタ　Rio800水中ポンプ　8（L／m）",g:2430},
+{c:"ポンプ",n:"カミハタ　Rio400水中ポンプ　5.6（L／m）",g:1960},
+{c:"ポンプ",n:"エーハイム コンパクトオン 1000 NEW（400〜1000ℓ/h）",g:1960},
+{c:"ポンプ",n:"上部ろ過用水中式ポンプ　REISEA　P-315",g:16380},
+{c:"ポンプ",n:"REI-SEA　P-425V",g:18000},
+{c:"ポンプ",n:"上部ろ過用水中式ポンプ　REISEA　P-450",g:21740},
+{c:"ポンプ",n:"ＳＩＣＣＥ　ＭＵＬＴＩ-4000",g:13200},
+{c:"ポンプ",n:"オクトバリオス2　DCポンプ",g:22500},
+{c:"ポンプ",n:"オクトバリオス4　DCポンプ",g:28000},
+{c:"ポンプ",n:"オクトバリオス6　DCポンプ",g:38200},
+{c:"ポンプ",n:"オクトバリオス8　DCポンプ",g:50100},
+{c:"ポンプ",n:"DCP3e 3500　DCポンプ",g:21000},
+{c:"ポンプ",n:"DCP3e 5000　DCポンプ",g:24000},
+{c:"ポンプ",n:"DCP3e 8000　DCポンプ",g:28000},
+{c:"ポンプ",n:"REISEA　MX４０１　２００V三相",g:165000},
+{c:"ポンプ",n:"循環ポンプ用　相フランジセット４０A",g:16500},
+{c:"ポンプ",n:"REISEA　RX７５０AS　２００V三相",g:824000},
+{c:"ポンプ",n:"配管一式",g:22000},
+{c:"ポンプ",n:"エーハイム水陸両用ポンプ1260　(流量2400L/h　16/22)",g:23500},
+{c:"ポンプ",n:"ホース　10m （内径15mm）",g:2500},
+{c:"ポンプ",n:"エーハイム　シングルタップ(φ16/22mm用)",g:1520},
+{c:"ポンプ",n:"エーハイム 吸水パイプ(直径12/16用)",g:1100},
+{c:"ポンプ",n:"エーハイム ツ 吸水ストレーナー",g:1100},
+{c:"ポンプ",n:"REI-SEA　RSD-50A",g:15330},
+{c:"ポンプ",n:"カミハタ　Rio1100水中ポンプ",g:2780},
+{c:"ポンプ",n:"エーハイムホース　16：22　3m",g:1920},
+{c:"ポンプ",n:"エーハイム 吸水パイプ(直径12/16用)",g:1000},
+{c:"クーラー",n:"ゼンスイ　ZRmini（200＊260＊405H）",g:38500},
+{c:"クーラー",n:"ゼンスイ　ZR-75E(280＊330＊420H)",g:42200},
+{c:"クーラー",n:"ゼンスイ　ZR-130E(260＊440＊470H)",g:58200},
+{c:"クーラー",n:"ゼンスイ　ZR-180E(260＊440＊470H)",g:65300},
+{c:"クーラー",n:"ゼンスイ　ZR-250(348＊435＊520H)",g:72700},
+{c:"クーラー",n:"ゼンスイ　ZC-200α(200＊320＊350Ｈ)",g:57750},
+{c:"クーラー",n:"ゼンスイ　ZC-500α(250＊420＊470Ｈ)",g:109450},
+{c:"クーラー",n:"ゼンスイ　ZC-700α(250＊430＊530Ｈ)",g:136450},
+{c:"クーラー",n:"ゼンスイ　ZC-1000α(250＊430＊530Ｈ)",g:153450},
+{c:"クーラー",n:"ゼンスイ　ZC-1300α(350＊460＊460H)",g:179300},
+{c:"クーラー",n:"ゼンスイ　ZRW400(800＊300＊505H)",g:103950},
+{c:"クーラー",n:"ゼンスイ　ZTK-500　(310＊310＊416Ｈ)",g:120000,u:1},
+{c:"クーラー",n:"ゼンスイ　ZTK-1000　(310＊310＊458Ｈ)",g:142800,u:1},
+{c:"クーラー",n:"ゼンスイ　ZTK-2000　(310＊310＊500Ｈ)",g:170150,u:1},
+{c:"クーラー",n:"ゼンスイ 　 ZRC-400B　単相100V　385×465×397H",g:168000},
+{c:"クーラー",n:"ゼンスイ　400CL　単相100V",g:325500},
+{c:"クーラー",n:"ゼンスイ　600CL　三相200V　W420×D530×H530",g:429900},
+{c:"クーラー",n:"ゼンスイ　800CL　三相200V",g:433400},
+{c:"クーラー",n:"ゼンスイ　KDA-501A",g:263000},
+{c:"クーラー",n:"ゼンスイ　KDA-1001A",g:418000},
+{c:"クーラー",n:"ゼンスイ　ZCW-2000",g:1029000},
+{c:"クーラー",n:"REISEA　ＬＸ300　※別売りサーモスタットセット（292*430*395H）",g:249000},
+{c:"クーラー",n:"ＲＥＩＳＥＡ　ＬＸ１８０ＥＸＡ１（幅24.8×奥行き41.8×高さ49.3cm）",g:144490},
+{c:"クーラー",n:"ＲＥＩＳＥＡ　ＴＣ-１０１",g:23340},
+{c:"クーラー",n:"ＲＥＩＳＥＡ　Ｐ-４２５Ｖ",g:25290},
+{c:"クーラー",n:"ゼンスイ　クーラーKDA500S（特殊・大型／要相談）　100V　380＊420＊350Ｈ",g:331800},
+{c:"殺菌灯",n:"カミハタ　ターボツイストZ　9W（280＊130＊90H）",g:14500},
+{c:"殺菌灯",n:"カミハタ　ターボツイストZ　18W（340＊160＊120H）",g:20450},
+{c:"殺菌灯",n:"カミハタ　ターボツイストZ　36W（530＊160＊120H）",g:26900},
+{c:"殺菌灯",n:"カミハタ　ターボツイストZ　36W　交換球",g:6111},
+{c:"ライト",n:"ゼンスイ　LED+300　マルチカラー",g:5300,u:1},
+{c:"ライト",n:"ゼンスイ　LED+450　マルチカラー",g:6600,u:1},
+{c:"ライト",n:"ゼンスイ　LED+600　マルチカラー",g:7800,u:1},
+{c:"ライト",n:"ゼンスイ　LED+900　マルチカラー",g:10800,u:1},
+{c:"ライト",n:"ゼンスイ　LED+1200　マルチカラー",g:14800,u:1},
+{c:"ライト",n:"ゼンスイ　LED+1500　マルチカラー",g:18800,u:1},
+{c:"ライト",n:"Chihiros LED WRGB2 300 ブラック",g:11000},
+{c:"ライト",n:"Chihiros LED WRGB2 450 ブラック",g:18000},
+{c:"ライト",n:"Chihiros LED WRGB2 600 ブラック",g:26000},
+{c:"ライト",n:"Chihiros LED WRGB2 900 ブラック",g:34000},
+{c:"ライト",n:"Chihiros LED WRGB2 1200 ブラック",g:40000},
+{c:"ライト",n:"Chihiros LED WRGB2 プロ　300 ブラック",g:21000},
+{c:"ライト",n:"Chihiros LED WRGB2 プロ　450 ブラック",g:30000},
+{c:"ライト",n:"Chihiros LED WRGB2 プロ　600 ブラック",g:39000},
+{c:"ライト",n:"Chihiros LED WRGB2 プロ　900 ブラック",g:54000},
+{c:"ライト",n:"Chihiros LED WRGB2 プロ　1200 ブラック",g:65000},
+{c:"ライト",n:"WRGB2 吊り下げキット",g:3800},
+{c:"ライト",n:"WRGB2 用　アルミニウム合金　ライトスタンド　ブラック",g:11300},
+{c:"ライト",n:"ADA　ソーラーRGB2",g:89500},
+{c:"ライト",n:"ADA　ソーラーRGB　専用シェード",g:5200},
+{c:"ライト",n:"ソーラーRGB専用スタンド W1200mm対応 (受注生産)",g:68200},
+{c:"ライト",n:"ソーラーRGB専用ステンレススタンド　 W60×D45cm対応ライト用",g:24200},
+{c:"ライト",n:"ソーラーRGB専用ステンレススタンド　 W60×D45cm対応レフト用",g:24200},
+{c:"ライト",n:"ソーラーRGB専用ステンレススタンド　 W90×D45cm対応",g:19170},
+{c:"ライト",n:"ステンレスポール　バンド付",g:21525},
+{c:"ライト",n:"アクアリウムスタンド WEEK AQUA純正 背面型スタンド　W900",g:19800},
+{c:"ライト",n:"RGBスイッチングLEDライト　コントローラー・アダプター付",g:21380},
+{c:"ライト",n:"GrassyLeDioRX122s Deep B / ディープ （ブラックorシルバー）23W E26",g:17000},
+{c:"ライト",n:"GrassyLeDioRX122s Coral B /コーラル （ブラックorシルバー）23W E26",g:17000},
+{c:"ライト",n:"GrassyLeDioRX122s Leaf B / リーフ （ブラックorシルバー）23W E26",g:17000},
+{c:"ライト",n:"GrassyLeDio RX201 Marine /マリン（シルバー）18W E26",g:11000},
+{c:"ライト",n:"GrassyLeDio RX072e Deep/ ディープ （シルバー）14W E26",g:8000},
+{c:"ライト",n:"GrassyLeDio RX072e Coral /コーラル  （シルバー）14W E26",g:8000},
+{c:"ライト",n:"GrassyLeDio RX072e Reef/ リーフ （シルバー）14W E26",g:8000},
+{c:"ライト",n:"SwitchBot LED電球 スマート電球 E26（調光可能）２個入り",g:3600},
+{c:"ライト",n:"ZOOX アポロレイズ エキゾチックプランツ 20W Apollo RAYS",g:14500},
+{c:"ライト",n:"ZOOX RGBレイズ 20W RGB RAYS",g:8800},
+{c:"ライト",n:"ZOOX  トロピカルレイズ ウルトラ 20W Tropical RAYS Ultra PPFD",g:8800},
+{c:"ライト",n:"ZOOX  ラグーン レイズ　 20W 　True Sun spectrum",g:9000},
+{c:"ライト",n:"GrassyLeDioRX122s  Fresh / フレッシュ （ブラックorシルバー）23W E26",g:17000},
+{c:"ライト",n:"GrassyLeDio RX201 Fresh /フレッシュ （シルバー）18W E26",g:11000},
+{c:"ライト",n:"GrassyLeDio RX201 Sun /サン （シルバー）18W E26",g:11000},
+{c:"ライト",n:"GrassyLeDioRX121s Fresh/フレッシュ （シルバーorブラック）13W E26",g:9800},
+{c:"ライト",n:"彩光X24 ワイド　22W Ra97 2630lm 6200K　（ブラック）　テラリウム",g:4800},
+{c:"ライト",n:"彩光X24 ナロー　22W Ra97 2630lm 6200K（ブラック）",g:4800},
+{c:"ライト",n:"彩光X24 ズーム　22W Ra97 2630lm 6200K（ブラック）",g:4800},
+{c:"ライト",n:"AXY　FINESPOT　LED　35W　ホワイト",g:11800},
+{c:"ライト",n:"GEX aquarista CLEAR LED RADIUS",g:15800},
+{c:"ライト",n:"ボルクスジャパン レディオアーム2 （ブラック）",g:5930},
+{c:"ライト",n:"ボルクスジャパン レディオアーム2 （シルバー）",g:5930},
+{c:"ライト",n:"レディオクリップSX （ブラック）",g:2600},
+{c:"ライト",n:"レディオクリップSX （シルバー）",g:2600},
+{c:"ライト",n:"レディオクリップSX （ホワイト）",g:2600},
+{c:"ライト",n:"MICMOL AIR PRO450 56W LED照明 45cm-60cm　サンゴ用",g:22100},
+{c:"ライト",n:"MICMOL G3 Aqua Air600 60W LED照明 60-75cm　サンゴ用",g:28400},
+{c:"ライト",n:"MICMOL AIR PRO900  112W LED照明",g:35400},
+{c:"ライト",n:"Grassy Core X120 Reef/リーフ LEDライト",g:62000},
+{c:"ライト",n:"CoreX用ワイヤーセット　吊り下げパーツ",g:5000},
+{c:"ライト",n:"Grassy CoreX用 アームスタンド",g:8200},
+{c:"ライト",n:"エコテックマリン Radion(ラディオン) G6 XR15 Blue 100W サンゴ LED",g:83000},
+{c:"ライト",n:"エコテックマリン Radion(ラディオン) G6 XR15 Pro 105W サンゴ LED",g:83000},
+{c:"ライト",n:"エコテックマリン Radion(ラディオン) G6 XR30 Blue 205W サンゴ LED",g:150000},
+{c:"ライト",n:"エコテックマリン Radion(ラディオン) G6 XR30 Pro 216W サンゴ LED",g:150000},
+{c:"ライト",n:"エコテックマリン　Ｒａｄｉｏｎ（ラディオン）　Ｓｉｎｇｌｅ　Ｕｎｉｔ　Ｈａｎｇｉｎｇ　Ｋｉｔ",g:11000},
+{c:"ライト",n:"エコテックマリン Radion(ラディオン) G5/G6 XR15用 タンクマウント",g:18500},
+{c:"ライト",n:"レッドシー  ReefLED160S",g:87500},
+{c:"ライト",n:"レッドシー  ReefLED160S用　ユニバーサルマウンティングアーム",g:11500},
+{c:"ライト",n:"SPECTRA(スペクトラ) 　SP200　 専用スタンド、天吊りワイヤーセット",g:170000},
+{c:"ライト",n:"ステンレスポール　固定バンド付　W1200＊H1900",g:45000},
+{c:"ライト",n:"16色アクアリウムライト 水槽ライト RGB水中ランプ 防水 照明　28cm",g:4800},
+{c:"ライト",n:"ゼンスイ 水中マルチカラーLED 600",g:11000},
+{c:"ライト",n:"ゼンスイ 水中マルチカラーLED 900",g:15800},
+{c:"ヒーター",n:"200W固定ヒーター",g:2220},
+{c:"ヒーター",n:"ニッソー プロテクトICオート R-110W サーモスタット一体型",g:3220},
+{c:"ヒーター",n:"ニッソー　プロテクトプラス　R-220W",g:4690},
+{c:"ヒーター",n:"ニッソー　プロテクトプラス　R-300W",g:5540},
+{c:"ヒーター",n:"ニッソー　プロテクトプロヒーター　R-500W",g:4430},
+{c:"ヒーター",n:"ニッソー　シーパレックス　600 NEO",g:6170},
+{c:"ヒーター",n:"ニッソー　プロテクトプロヒーター　R-300Ｗ",g:2910},
+{c:"ヒーター",n:"ニッソー　シーパレックス　300　NEO",g:2890},
+{c:"ヒーター",n:"日東チタンヒーター 単相100V 1kw(投込)＋デルサーモ＋ヒーターカバー",g:47500},
+{c:"ヒーター",n:"ニッソー シーパレックス V-1000 サーモスタッド 　1000W対応",g:12900},
+{c:"ヒーター",n:"ニッソー プロテクトヒーター　ストロングセーフ　1000Wヒーター",g:12900},
+{c:"ヒーター",n:"レイシー チタンヒーター SHI型 投込み式 1KW-100V1-G",g:95400},
+{c:"エアポンプ",n:"水心SSPP-7Sエアーポンプ",g:1685},
+{c:"エアポンプ",n:"水心SSPP-3Sエアーポンプ",g:1685},
+{c:"エアポンプ",n:"水心SSPP-2Sエアポンプ",g:2580},
+{c:"エアポンプ",n:"小型エアポンプ ニチドー　ノンノイズH85",g:740},
+{c:"エアポンプ",n:"エアーカーテンシステム300",g:690},
+{c:"エアポンプ",n:"エアーカーテンシステム450",g:800},
+{c:"エアポンプ",n:"エアーカーテンシステム600",g:900},
+{c:"エアポンプ",n:"エアーカーテンシステム900",g:1130},
+{c:"エアポンプ",n:"エアーカーテンシステム1200",g:1330},
+{c:"エアポンプ",n:"エアーチューブ黒3ｍ",g:270},
+{c:"エアポンプ",n:"エアー逆止弁",g:280},
+{c:"エアポンプ",n:"キョーリン　エアポンプ　ハイブローC8000",g:5800},
+{c:"エアポンプ",n:"アデックスX202　高圧エアーポンプ",g:4500},
+{c:"エアポンプ",n:"小型エアポンプ",g:590},
+{c:"エアポンプ",n:"小型エアストーン",g:330},
+{c:"エアポンプ",n:"ニチドー　ワイヤーホース　1.5m",g:150},
+{c:"エアポンプ",n:"活魚水槽用エアーストーン　YS-200",g:3500},
+{c:"エアポンプ",n:"エアーストーン いぶき　 セラミックエアストーン 直径30×300 #150",g:3500},
+{c:"エアポンプ",n:"水作　ニューフラワーDX",g:1050},
+{c:"エアポンプ",n:"水心SSPP-2Sエアポンプ",g:2580},
+{c:"エアポンプ",n:"エアーカーテンシステム1200",g:1330},
+{c:"エアポンプ",n:"エアーチューブ黒3ｍ",g:270},
+{c:"エアポンプ",n:"エアー逆止弁",g:280},
+{c:"床砂",n:"アラゴナイトサンド(底床用)　9㎏",g:4400},
+{c:"床砂",n:"サンゴ砂M(底床用)　15㎏",g:1880},
+{c:"床砂",n:"サンゴ砂パウダー(底床用)　15㎏",g:2800},
+{c:"床砂",n:"ジェックス　アクアスケイプサンド　2kg",g:680},
+{c:"床砂",n:"スドー　ピンクサンド　2.2㎏",g:430},
+{c:"床砂",n:"ADA　メコンサンド　5kg",g:1350},
+{c:"床砂",n:"ガーネットストーン　10kg",g:4500},
+{c:"床砂",n:"GEX ピュアブラック 8L",g:2450},
+{c:"床砂",n:"ADA　アマゾニア　3L　 Ver.2",g:1260},
+{c:"床砂",n:"ADA　アマゾニア　9L　 Ver.2",g:2850},
+{c:"床砂",n:"ADA　アマゾニア　パウダー　9L",g:1550},
+{c:"床砂",n:"JUN プラチナソイル ノーマル 8L 　（吸着系ソイル）",g:1550},
+{c:"床砂",n:"ADA パワーサンド・ベーシックS 2L",g:2880},
+{c:"床砂",n:"ADA　パワーサンドスペシャルＭ　6L",g:6740},
+{c:"床砂",n:"ADA　パワーサンドスペシャルL　6L",g:6740},
+{c:"床砂",n:"ADA　コロラドサンド　8kg",g:2400},
+{c:"床砂",n:"ADA　ラプラタサンド　8kg",g:2400},
+{c:"床砂",n:"ADA　アクアグラベル　8kg",g:2400},
+{c:"床砂",n:"スドー　ボトムサンド　5kg",g:920},
+{c:"床砂",n:"桜大磯砂　1kg",g:920},
+{c:"床砂",n:"クリスタルオレンジ　5kg",g:950},
+{c:"床砂",n:"大磯砂　ミディアム　9L",g:2680},
+{c:"床砂",n:"ブルカミアグリーン　8kg",g:3880},
+{c:"床砂",n:"GEX 水洗い不要天然砂 リバーブレンド　0.5kg",g:220},
+{c:"床砂",n:"ADA　アマゾニア　9L　 Ver.2",g:1550},
+{c:"床砂",n:"ADA パワーサンド・ベーシックS 2L",g:2880},
+{c:"床砂",n:"ADA　アマゾニア　9L　 Ver.2",g:1550},
+{c:"床砂",n:"ADA　パワーサンドスペシャルＭ　6L",g:6740},
+{c:"床砂",n:"ADA　アマゾニア　9L　 Ver.2",g:1550},
+{c:"床砂",n:"ADA　パワーサンドスペシャルＭ　6L",g:6740},
+{c:"床砂",n:"①バクター100　②トルマリン　③クリアスーパー　各一個ずつ（2000円）",g:6000},
+{c:"レイアウト素材",n:"オーシャンロック　人工ライブロック　MLサイズ　20kg",g:33200},
+{c:"レイアウト素材",n:"白系ライブロック　　MLサイズ　20kg",g:19800},
+{c:"レイアウト素材",n:"白系ライブロック　　MLサイズ　30kg",g:29700},
+{c:"レイアウト素材",n:"希少100％沖縄産ライブロック　超特価　MLサイズ　20kg",g:19800},
+{c:"レイアウト素材",n:"希少100％沖縄産ライブロック　超特価　MLサイズ　30kg",g:29700},
+{c:"レイアウト素材",n:"カラーサンゴ岩　各種",g:1700},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　一式",g:9500},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　一式",g:13500},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　一式",g:19500},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　一式",g:24500},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　一式",g:27500},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ",g:1600},
+{c:"レイアウト素材",n:"カラーレプリカサンゴ　および貝殻等　一式",g:16000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　一式",g:10000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　一式",g:20000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　一式",g:25000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　一式",g:35000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　一式",g:40000},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:9000},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:14000},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:16500},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:23000},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:32500},
+{c:"レイアウト素材",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:45000},
+{c:"レイアウト素材",n:"溶岩石　Mサイズ　10kg",g:5000},
+{c:"レイアウト素材",n:"意匠登録済み　造花・人工水草類　各種",g:8900},
+{c:"レイアウト素材",n:"飾りサンゴ岩",g:3000},
+{c:"レイアウト素材",n:"ドラゴンストーン　各サイズミックス　10kg",g:6800},
+{c:"レイアウト素材",n:"風山石　各サイズミックス　10kg",g:6800},
+{c:"レイアウト素材",n:"山水石　Mサイズ　10kg",g:12000},
+{c:"レイアウト素材",n:"黒甲石 サイズミックス 5kg",g:2800},
+{c:"レイアウト素材",n:"タンジェリンレイヤーストーン　S・Mサイズ　10〜15cm 8kg",g:13800},
+{c:"水草",n:"水草各種 30cm水槽用（ミクロソリウム・アヌビアスナナ・タイガーロータス等）",g:20000},
+{c:"水草",n:"水草各種 60cm水槽(スリム)用（ミクロソリウム・アヌビアスナナ・タイガーロータス等）",g:25000},
+{c:"水草",n:"水草各種 60cm水槽用（ミクロソリウム・アヌビアスナナ・タイガーロータス等）",g:30000},
+{c:"水草",n:"水草各種 90cm水槽用（ミクロソリウム・アヌビアスナナ・タイガーロータス等）",g:35000},
+{c:"水草",n:"水草各種 120cm水槽用（ミクロソリウム・アヌビアスナナ・タイガーロータス等）",g:45000},
+{c:"水草",n:"水草　ミクロソリュームナローリーフ",g:600},
+{c:"水草",n:"水草　アヌビアス・ナナ",g:500},
+{c:"水草",n:"水草　アヌビアス・ナナプチ",g:500},
+{c:"水草",n:"水草　ボルビティス・ヒュディロティ",g:1600},
+{c:"水草",n:"水草　タイガーロータスレッド",g:800},
+{c:"水草",n:"水草　クリプトコリネ・ウェンティグリーン",g:450},
+{c:"水草",n:"水草　ウィローモス（マット）",g:800},
+{c:"水草",n:"水草　ハイグロ　ピンナティフィダ",g:550},
+{c:"水草",n:"水草　アヌビアス　ヘテロフィラ",g:900},
+{c:"水草",n:"水草　バリスネリア・スレンダーリーフ",g:250},
+{c:"水草",n:"水草　ウィローモス（マット）",g:800},
+{c:"水草",n:"水草　南米ウィローモス（マット）",g:880},
+{c:"水草",n:"水草一式（グロッソ、ミクロソリウム、ウィローモス）",g:20000},
+{c:"水草",n:"水草　侘び草　有茎草MIX　φ9",g:1800},
+{c:"水草",n:"水草　侘び草　グリーン・ロターラ　φ6.5",g:1200},
+{c:"水草",n:"水草　侘び草　グロッソスティグマ　φ5",g:950},
+{c:"水草",n:"水草　佗び草 水辺MIX　オモダカなど（夏限定）　φ9",g:950},
+{c:"水草",n:"水草　侘び草　エキノ・クリプトMIX　 9φ",g:1800},
+{c:"水草",n:"水草　侘び草 しずく（水上葉）　φ9",g:1800},
+{c:"水草",n:"ヒメトクサ　ビオトーブ",g:900},
+{c:"水草",n:"ネオレゲリア",g:620},
+{c:"水草",n:"コケ一式（マメヅタ、シノブゴケ、コツボゴケ、ハイゴケなど）",g:30000},
+{c:"水草",n:"水草一式（ナナプチ、ミクロソリウム、ウィローモス）",g:28000},
+{c:"水草",n:"観葉植物一式（シダ系、ラン系の植物）",g:40000},
+{c:"水草",n:"観葉植物一式（香丁木、ガジュマルなど）",g:14000},
+{c:"水草",n:"造花・レプリカ観葉植物一式（シダ系、ラン系、赤、紫、黄色系の植物）",g:4000},
+{c:"水草",n:"カミハタ　Rio800水中ポンプ　6.8（L／m）",g:2430},
+{c:"水草",n:"リオプラス専用 テラリウム用接続パーツセット  分岐パーツ",g:700},
+{c:"水草",n:"DOOA ミストメーカー　（霧発生器）",g:6800},
+{c:"水草",n:"DOOA ミストフローキャップ",g:1300},
+{c:"水草",n:"カミハタ　Rio1100水中ポンプ　22（L／m）",g:2930},
+{c:"水草",n:"エアーチューブ黒3ｍ",g:270},
+{c:"水草",n:"エアーチューブ分岐　JEBO 10又分岐",g:2400},
+{c:"水草",n:"発泡ウレタンスプレー",g:1280},
+{c:"水草",n:"魚各種(メダカ・シマドジョウ等)",g:2000},
+{c:"水草",n:"テトラ メダカ産卵繁殖用水つくリ 250ml  （ミネラル ヨウ素 ビタミン剤）",g:380},
+{c:"水草",n:"GEX リーフグロー エクストリーム 卓上ライト 600lm 色温度3種類",g:5800},
+{c:"水草",n:"カミハタ 50Hz リオプラス 底面フィルターセット",g:2350},
+{c:"水草",n:"GEX ピコロカ High コンパクト 底面フィルターセット",g:2100},
+{c:"水草",n:"テトラ 26℃ミニヒーター 20W カバー付き",g:990},
+{c:"水草",n:"GEX エキゾテラ タートルバンク M 亀 浮島　W298×D178×H54mm",g:1780},
+{c:"水草",n:"紫外線ライトセット 26W レプタイルUVB 100+クリップスタンド付き",g:4680},
+{c:"水草",n:"ビバリア スパイラルUVB フォレスト 26W",g:2200},
+{c:"水草",n:"ビバリア 太陽NEO NP　ライトクリップ",g:2600},
+{c:"水草",n:"ビバリア 太陽NEO ランプカバー",g:1600},
+{c:"水草",n:"アクロ  パルダリウムケージ 45×30×45cm 底面排水仕様",g:26000},
+{c:"水草",n:"プロテクションマット 45cm水槽用 45×27cm 厚さ10mm",g:700},
+{c:"水草",n:"EPIWEB Panels 290×440×2cm エピウェブ",g:1100},
+{c:"水草",n:"EPIWEB Panels用 プラスチックピン U-12 12個入り",g:500},
+{c:"水草",n:"ピクタ 極床 植えれる君 A4 厚さ1cm 3枚入り",g:2300},
+{c:"水草",n:"アズー アクアスケーピンググルー 4g×2本入",g:600},
+{c:"水草",n:"システムパルダ 30　（300*300*450H）",g:57000},
+{c:"水草",n:"システムパルダ 60　（600*300*450H）",g:73000},
+{c:"水草",n:"クリスマスモス（佗び草マット）",g:2000},
+{c:"水草",n:"コツボゴケ　4パック",g:2000},
+{c:"水草",n:"シノブゴケ 1パック分",g:900},
+{c:"水草",n:"ビバリウムプランツ レインボーファン",g:900},
+{c:"水草",n:"テラリウム 苔 シダマメヅタ",g:900},
+{c:"水草",n:"シダ(羊歯)ヌリトラノオ(塗虎の尾)3号",g:900},
+{c:"水草",n:"シダ(羊歯)リョウメンシダ(両面羊歯)3号(1ポット)",g:1000},
+{c:"水草",n:"ベゴニア ルゾネンシス(1ポット)原種ベゴニア",g:2800},
+{c:"水草",n:"ビバリウムプランツ ヒメカナワラビ 3cmポット",g:900},
+{c:"水草",n:"GEX 水洗い不要天然砂 リバーブレンド　0.5kg",g:220},
+{c:"水草",n:"溶岩石　Mサイズ　10kg",g:5000},
+{c:"水草",n:"アク抜き済み細枝流木一式　適量(大きさにより個数は変動)",g:9000},
+{c:"CO2",n:"ADA　スピードレギュレータ",g:19530},
+{c:"CO2",n:"ADA　電磁弁ＥＬバルブ",g:7300},
+{c:"CO2",n:"ADA　ボールバルブ",g:1560},
+{c:"CO2",n:"ADA　グラスカウンター",g:3650},
+{c:"CO2",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒3ｍ",g:350},
+{c:"CO2",n:"KS　CO2ミスト",g:650},
+{c:"CO2",n:"CO2　大型ﾎﾞﾝﾍﾞ1.5L",g:16500},
+{c:"CO2",n:"ADA　アラッシュレギュレーター",g:9880},
+{c:"CO2",n:"ADA　CO2アドバンスシステム",g:21000},
+{c:"CO2",n:"JARDLI レギュレーター スピードコントローラー・電磁弁一体型",g:8200},
+{c:"CO2",n:"JARDLI　ガラス製co2拡散器 バブルカウントディフューザー　φ20",g:1300},
+{c:"CO2",n:"アルミ合金 CO2 バブルカウンター",g:1100},
+{c:"CO2",n:"ADA スピードレギュレーター（大型ボンベ用ゲージ）",g:26000},
+{c:"CO2",n:"ADA 電磁弁／EL-バルブ",g:9120},
+{c:"CO2",n:"ADA Co2ディフューザー　パレングラス・ビートルφ20",g:9800},
+{c:"CO2",n:"ADA Co2ディフューザー　パレングラス・ビートルφ40",g:13000},
+{c:"CO2",n:"ADA Co2ディフューザー　パレングラス・ビートルφ50",g:15000},
+{c:"CO2",n:"ADA ツイストカウンター",g:14000},
+{c:"CO2",n:"ADA CO2グラスカウンター",g:5300},
+{c:"CO2",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒2ｍ",g:620},
+{c:"CO2",n:"水心SSPP-2Sエアポンプ",g:2430},
+{c:"CO2",n:"小型エアストーン",g:105},
+{c:"CO2",n:"エアーチューブ白5ｍ",g:260},
+{c:"CO2",n:"エアー逆止弁",g:280},
+{c:"CO2",n:"CO2　タワー／20（ボンベ付き）",g:70800},
+{c:"CO2",n:"ADA スピードレギュレーター",g:31200},
+{c:"CO2",n:"ADA Co2ディフューザー　ビートル50",g:15600},
+{c:"CO2",n:"ADA ツイストカウンター",g:16800},
+{c:"CO2",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒3ｍ",g:420},
+{c:"CO2",n:"ADA　NAコントロールタイマー",g:36000},
+{c:"CO2",n:"水心SSPP-2Sエアポンプ",g:2910},
+{c:"CO2",n:"小型エアストーン",g:130},
+{c:"CO2",n:"エアーチューブ白5ｍ",g:310},
+{c:"CO2",n:"エアー逆止弁",g:330},
+{c:"CO2",n:"CO2　大型ﾎﾞﾝﾍﾞ1.5L",g:16500},
+{c:"CO2",n:"ADA スピードレギュレーター",g:26000},
+{c:"CO2",n:"ADA 電磁弁／EL-バルブ",g:9110},
+{c:"CO2",n:"ADA Co2ディフューザー　パレングラス・ビートルφ20",g:9800},
+{c:"CO2",n:"ADA CO2グラスカウンター",g:5300},
+{c:"CO2",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒3ｍ",g:420},
+{c:"CO2",n:"水心SSPP-2Sエアポンプ",g:2910},
+{c:"CO2",n:"小型エアストーン",g:130},
+{c:"CO2",n:"エアーチューブ白5ｍ",g:310},
+{c:"CO2",n:"エアー逆止弁",g:330},
+{c:"CO2",n:"CO2添加セット（小型ボンベ・レギュレーター・チューブなど）",g:7900},
+{c:"CO2",n:"CO2添加セット（小型ボンベ5本・レギュレーター・チューブなど）",g:10500},
+{c:"CO2",n:"ボルクスジャパン CO2ミキサーZ",g:3540},
+{c:"CO2",n:"CO2　大型ﾎﾞﾝﾍﾞ1.5L",g:16590},
+{c:"CO2",n:"ADA スピードレギュレーター",g:26000},
+{c:"CO2",n:"ADA 電磁弁／EL-バルブ",g:10300},
+{c:"CO2",n:"ボルクスジャパン CO2ミキサーZ",g:3540},
+{c:"CO2",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒3ｍ",g:350},
+{c:"CO2",n:"水心SSPP-2Sエアポンプ",g:2430},
+{c:"CO2",n:"小型エアストーン",g:105},
+{c:"CO2",n:"エアーチューブ白5ｍ",g:260},
+{c:"CO2",n:"エアー逆止弁",g:280},
+{c:"CO2",n:"魚各種(ネオンテトラ・プラティ・プレコ等)",g:5000},
+{c:"CO2",n:"魚各種(アフリカンシクリット・プレコ等)",g:5000},
+{c:"CO2",n:"海水魚　各種(カクレクマノミ・デバスズメダイ・ナンヨウハギ等)",g:17000},
+{c:"CO2",n:"珊瑚礁　本物　各種　(大きさや種類によって個数は変動)",g:5500},
+{c:"CO2",n:"H&S　HS-250",g:37800},
+{c:"CO2",n:"H&S　HS-400",g:40000},
+{c:"CO2",n:"H&S　HS-850",g:60000},
+{c:"CO2",n:"H&S　HS-1500",g:103000},
+{c:"CO2",n:"H&S　HS-2200",g:130000},
+{c:"CO2",n:"H&S　HS-3000",g:150000},
+{c:"CO2",n:"Reef Live Inspire Skimmer300",g:35000},
+{c:"CO2",n:"Reef Live Inspire Skimmer500",g:46000},
+{c:"CO2",n:"Reef Live Inspire Skimmer800",g:55000},
+{c:"CO2",n:"Reef Live Inspire Skimmer2200",g:78000},
+{c:"CO2",n:"OCTO Regal Protein Skimmer　150-S",g:55000},
+{c:"CO2",n:"OCTO Regal Protein Skimmer　200-S",g:77000},
+{c:"CO2",n:"OCTO Regal Protein Skimmer　250-S",g:92000},
+{c:"CO2",n:"OCTO Regal Protein Skimmer　300-S",g:105000},
+{c:"CO2",n:"MAX SPECT MJ -SK　200　165＊165＊474H",g:41700},
+{c:"CO2",n:"MAX SPECT MJ -SK　400",g:54800},
+{c:"CO2",n:"MAX SPECT MJ -SK　800",g:90750},
+{c:"CO2",n:"レッドシー　REEFER　Skimmer 300",g:58300},
+{c:"CO2",n:"レッドシー　REEFER　Skimmer 600",g:72200},
+{c:"CO2",n:"レッドシー　REEFER　Skimmer 900",g:83200},
+{c:"リアクター",n:"H&S　CA-1eco",g:63000},
+{c:"リアクター",n:"H&S　CA-2eco",g:86000},
+{c:"リアクター",n:"ARM　カルシウムリアクターメディア　大粒　3.78ℓ",g:2850},
+{c:"リアクター",n:"CO2　大型ﾎﾞﾝﾍﾞ1.5L",g:16590},
+{c:"リアクター",n:"ADA　耐圧ﾁｭｰﾌﾞ　黒3ｍ",g:350},
+{c:"リアクター",n:"ADA　ボールバルブ",g:1560},
+{c:"リアクター",n:"ADA　電磁弁ＥＬバルブ",g:7300},
+{c:"リアクター",n:"ADA　スピードレギュレータ",g:19530},
+{c:"リアクター",n:"デルフィス　PRSCR-400D",g:89000},
+{c:"リアクター",n:"デルフィス　PRSCR-800D",g:129000},
+{c:"リアクター",n:"デルフィス　PRSCR-1200D",g:149000},
+{c:"リアクター",n:"リーフオクトパス　CR-800R",g:85000},
+{c:"リアクター",n:"ARM　カルシウムリアクターメディア　大粒　3.78ℓ",g:2850},
+{c:"リアクター",n:"マーフィード　エキスパート マリンZ 50",g:13230},
+{c:"流動式ろ過",n:"Multi Media Reactor M",g:33000},
+{c:"流動式ろ過",n:"Multi Media Reactor M　+バイオペレット500ml",g:38000},
+{c:"流動式ろ過",n:"Multi Media Reactor L",g:40000},
+{c:"流動式ろ過",n:"Multi Media Reactor L　+バイオペレット500ml×2",g:50000},
+{c:"流動式ろ過",n:"ReefMat 250",g:50000},
+{c:"流動式ろ過",n:"ReefMat 500",g:55000},
+{c:"流動式ろ過",n:"ReefMat 1200",g:60000},
+{c:"流動式ろ過",n:"ReefMat 250⽤フリースロール 32m",g:2900},
+{c:"流動式ろ過",n:"ReefMat 500⽤フリースロール 28m",g:3500},
+{c:"流動式ろ過",n:"ReefMat 250⽤フリースロール 32m",g:4500},
+{c:"水流ポンプ",n:"コラリア　エボリューション　4400　ボルクスジャパン",g:11000},
+{c:"水流ポンプ",n:"ナプコ　ネワウェーブNWA1900adj",g:3600},
+{c:"水流ポンプ",n:"ナプコ　ネワウェーブNWA3200",g:5300},
+{c:"水流ポンプ",n:"ナプコ　ネワウェーブNWA5900",g:7100},
+{c:"水流ポンプ",n:"Vortech　MP-10　WQD",g:30500},
+{c:"水流ポンプ",n:"レッドシー　ReefWave25",g:57500},
+{c:"水流ポンプ",n:"レッドシー　ReefWave45",g:67500},
+{c:"水流ポンプ",n:"ボルクスジャパン VestaWave VW13HG 40W 13000L",g:23100},
+{c:"水流ポンプ",n:"Vesta Wave VW04A 15W",g:13600},
+{c:"水流ポンプ",n:"Vesta Wave VW08A 20W",g:18400},
+{c:"その他",n:"エサタイマー",g:4870},
+{c:"その他",n:"繰り返しタイマー",g:3630},
+{c:"その他",n:"ニッソー　ウクリーナーM",g:810},
+{c:"その他",n:"ニッソー　ウクリーナーS",g:480},
+{c:"その他",n:"ニッソー　ウクリーナーM",g:630},
+{c:"その他",n:"ニッソー　ウクリーナーL",g:890},
+{c:"その他",n:"FLIPPER　standard　マグフロート",g:4900},
+{c:"その他",n:"FLIPPER　Max　マグフロート",g:9000},
+{c:"その他",n:"レッドシー　ReefDose2　ドーシングポンプ",g:39200},
+{c:"その他",n:"レッドシー　ReefDose4　ドーシングポンプ",g:53000},
+{c:"その他",n:"レッドシー　ReefDose　チューブキット　赤/黄",g:7600},
+{c:"その他",n:"レッドシー　ReefDose　チューブキット　青/緑",g:7600},
+{c:"その他",n:"稚魚の隔離ケース　透明パンチ板水中タイプ　20cmx10cmx10cm",g:2100},
+{c:"その他",n:"黒or透明延長コード・分岐タップ・塩ビパイプ(変換用)",g:1500},
+{c:"その他",n:"ADA　ブライティーK/STEP1",g:1400},
+{c:"その他",n:"ブラックホール　大型水槽用",g:1500},
+{c:"その他",n:"送料",g:12000},
+{c:"その他",n:"SEALIFE　714L",g:4800},
+{c:"その他",n:"コラリア　エボリューション　３２００",g:6840},
+{c:"その他",n:"ミストメーカー　コントローラーセット",g:4800},
+{c:"その他",n:"湧き水システム　Rio400+、配管材",g:2720},
+{c:"その他",n:"漏電保護タップ",g:2930},
+{c:"その他",n:"湯沸しポット",g:9100}
+];
+const PCATS=["規格セット","水草","ライト","ポンプ","クーラー","ヒーター","ろ過・ろ材","水流ポンプ","エアポンプ","殺菌灯","床砂","レイアウト素材","CO2","リアクター","流動式ろ過","水槽","水槽台","フード","その他"];
+const D=[
+// ───── 生体（魚） ─────
+{id:1, cat:"gyo",
+ q:["魚が死んだ・元気がない（少数）"],
+ alt:["お魚がなくなった","数匹死んだ","元気がない","横たわっている"],
+ ans:"心配に寄り添い、まず状況確認（何匹・どの魚・エアー・濁り）。原因は<b>断定せず</b>、亡くなった子は<b>次回メンテでまとめて回収・入れ替え</b>。多数死・全滅は別トピック（緊急）。",
+ scripts:[{l:"受け止め＋状況確認", t:"ご連絡ありがとうございます。お魚が亡くなってしまったんですね…ご心配をおかけして申し訳ございません。\n今、何匹くらい・どのお魚に症状が出ていますか？ エアー（泡）は出ていますか？ 水が白く濁ったりしていませんか？\n水槽は生き物なので、設置環境や水質で突発的に体調を崩すことがございます。亡くなってしまった子は、次回メンテの際にまとめて回収・入れ替えさせていただきますのでご安心ください。それまでに悪化するようでしたら、すぐにご連絡ください。"}],
+ notes:[{t:"補償の話から入らない。まず心配に寄り添う。"},{t:"原因を決めつけない（「餌のあげすぎですね」等NG）。不明なら不明と正直に。"}],
+ refs:[{tag:"約款2-1",txt:"魚の死亡・水草等の枯れの補償は致しかねます（補償ご希望は別途保険）。"},{tag:"契約書",txt:"設置から3ヶ月は水が出来上がっておらず、比較的生体が死にやすい時期。"}],
+ esc:"多数死・全滅・「メンテのせい」と強い不満 → 「魚が大量に死んだ」の対応＋リーダーに相談。"},
+
+{id:2, cat:"gyo",
+ q:["死んだ魚を、次回を待たずにまた持ってきて／回収してほしい"],
+ alt:["今週中に持ってきて","次回まで待てない","また入れて"],
+ ans:"まず共感をたっぷり。馴染めなかった子も含めて<b>次回メンテでまとめて入れる</b>のでご安心を。今すぐ追加は魚にも酷で、また悲しい思いをさせかねないので、<b>メンテのタイミングが結局ベスト</b>と伝える。",
+ scripts:[
+  {l:"基本の返し", t:"ご連絡ありがとうございます。お魚が亡くなってしまったんですね…可哀想でしたね。\n新しい水槽の環境に上手く馴染めなかったのかもしれません。自然界の生き物なので、どんなに上手く管理していても、馴染めなかったり、メンテまでの間に何匹か死んでしまうことはどうしても起きてしまうんです。\nですので大変申し訳ないのですが、馴染めなかった子も含めて、月1回のメンテナンスの際にまとめて入れさせていただいておりますのでご安心ください。\nもちろん、大量に死んでしまった等があれば、それは生命力ではなく機械トラブル等が考えられますので、すぐに緊急対応いたします。"},
+  {l:"死因を聞かれたら", t:"原因としては、問屋での飼育環境との違い・輸送中のストレス・既存の魚との相性・（新規の場合）バクテリアがまだ根付いておらず水質が追いつかなかった、などが考えられますが、実際の原因は分かり兼ねてしまいます。\n直近で追加しても、〇〇様にまた悲しい思いをさせてしまったり、お魚にも可哀想なことになりかねません。次のメンテで様々な確認をしたうえで追加した方が、長い目で見てより良い水槽をご提供できると考えています。"}],
+ notes:[{t:"共感を<b>長く</b>とり、満足されるまで聞き手に回る。角を立てない言い方で。"},{t:"今入れても死んでしまう可能性が高いことを伝える。死因は断定しない。"},{t:"「やってあげたいが、お魚のためにやるべきでない」という姿勢で。出来なくて申し訳ない態度を伝える。"}],
+ esc:"多めに死んだ／ナイト系・飲食店など商業目的／お客様のタイプによっては、この返しをしてはいけないケースあり。迷ったらリーダーに相談。"},
+
+{id:3, cat:"gyo",
+ q:["魚が大量に死んだ・全滅・爆死"],
+ alt:["みんな死んでる","全滅","爆死","たくさん死んだ"],
+ ans:"これは<b>生命力ではなく、機械トラブルや水質の急変</b>が考えられる。決めつけず至急確認。ポンプ・エアー・濁り・臭いをチェックし、<b>緊急で訪問</b>。",
+ scripts:[{l:"緊急対応", t:"ご連絡ありがとうございます。お魚が一度にたくさん…大変申し訳ございません、すぐに確認させてください。\nこれだけ一度に亡くなる場合は、お魚の生命力ではなく、ポンプやヒーターなどの機械トラブルや、水質の急変が考えられます。\nまず、ろ過とエアー（泡）が動いているか、水が白く濁ったり臭いがしないか見ていただけますか。至急、緊急で伺って対応いたします。"}],
+ notes:[{t:"「お客様の責任」と取れる言い方はしない。機械・水質を疑い、至急訪問。"}],
+ refs:[{tag:"約款2-11",txt:"水質トラブルは無料で緊急出張（作業内容により加算あり）。"}],
+ esc:"大量死・全滅は<b>必ずリーダーに即連絡</b>（代打手配・原因調査）。"},
+
+{id:4, cat:"gyo",
+ q:["魚が病気（白点病・ポップアイ等）"],
+ alt:["白い点","ハクテン病","ヒレが溶けた","目が腫れた","病気"],
+ ans:"病気の相談。症状を確認し、断定せず一般対応（水換え等）＋担当が確認。広がりが早い・高額魚は早めに訪問。",
+ scripts:[{l:"受け止め＋確認", t:"ご連絡ありがとうございます。お魚の様子が気になりますよね。白い点が出ている・ヒレや目が腫れている、など、今どんな症状か教えていただけますか？\n病気の可能性もありますので、水換えなどで様子を見つつ、担当が確認して対応いたします。広がるようでしたら早めに伺いますね。"}],
+ notes:[{t:"病名を断定しない。重症・広がりが早い場合は早めに訪問。"}],
+ esc:"高額生体・複数発症はリーダーに相談。"},
+
+{id:5, cat:"gyo",
+ q:["イソギンチャク・サンゴ・エビなど無脊椎の不調"],
+ alt:["イソギンチャク 元気ない","サンゴ","エビが死んだ","海老"],
+ ans:"無脊椎は<b>水質変化に敏感</b>。状態を確認し、致命的でなければ経過観察→次回対応。心配なら早め訪問。",
+ scripts:[{l:"受け止め＋確認", t:"ご連絡ありがとうございます。イソギンチャク（サンゴ）の元気がないのですね。無脊椎の生き物は水質の変化に敏感なので、まず状態を確認させてください。致命的でなければ少し経過を見て、次回メンテで対応します。心配でしたら早めに伺いますね。"}],
+ notes:[{t:"致命傷でなければ経過観察。後日、状態確認の連絡を入れる。"}]},
+
+{id:6, cat:"gyo",
+ q:["お客様の前で、死んだ魚を回収するとき（マナー）"],
+ alt:["死魚 回収 雑","供養","死んだ魚 持ち帰り"],
+ ans:"メンテのゴミ袋に<b>一緒に入れない</b>。供養する旨を伝えて丁寧に回収。<b>死魚回収専用の袋</b>を使う。小型でも大切に思う方は多く、雑な扱いは一瞬で信頼を失う。",
+ scripts:[
+  {l:"声かけ例 ①", t:"アクアリンクでは死んでしまったお魚を供養するようにしておりますので、こちらで供養させていただきますね。"},
+  {l:"声かけ例 ②", t:"可哀想ですが、私の方できちんと埋めてあげるようにしてお持ち帰りしますね。"}],
+ notes:[{do:1,t:"<b>手順：</b>死魚はアミか手で丁寧に掬いペーパーに包む → 専用の死魚回収袋に入れ、ゴミ袋とは必ず分ける → 撤収時も丁寧に扱い、車に戻った後（お客様の目が届かない場所で）ゴミ袋に移す。"},{t:"ペーパーやメラミンスポンジのゴミ袋に、そのまま死魚を入れるのは避ける。"}]},
+
+// ───── 水草・水質 ─────
+{id:7, cat:"kusa",
+ quote:[{n:"水草　アヌビアス・ナナ",g:500},{n:"水草　ミクロソリュームナローリーフ",g:600},{n:"水草　ボルビティス・ヒュディロティ",g:1600},{n:"水草　クリプトコリネ・ウェンティグリーン",g:450},{n:"水草　タイガーロータスレッド",g:800},{n:"水草　ウィローモス（マット）",g:800},{n:"水草各種 入れ替え 30cm水槽用",g:20000},{n:"水草各種 入れ替え 60cm水槽用",g:30000},{n:"水草各種 入れ替え 120cm水槽用",g:45000}],
+ q:["水草が枯れた／交換してほしい"],
+ alt:["葉っぱの色が変わった","水草 変えて","枯れ葉"],
+ ans:"共感 → 状態確認。交換はご契約上<b>別途</b>だが、料金は<b>隠さず先に・やわらかく</b>伝え、個別契約を確認。許容範囲ならメンテで整え、交換が必要なら<b>本数と見積りを先に</b>出して納得いただいてから。",
+ scripts:[{l:"受け止め＋料金は先に率直に", t:"枯れてしまった水草が気になりますよね、ご連絡ありがとうございます。状態を確認させてください。\n水草の交換は、実はご契約上は別途のお見積りになるのですが…（と先にお伝えしたうえで）念のため〇〇様のご契約内容も確認して、正確にご案内させてください。\n枯れの範囲を見て、許容範囲でしたらメンテの際に整えます。交換が必要な場合は、本数とお見積りを先にお伝えしますので、ご納得いただいてから進めますね。"}],
+ notes:[{t:"<b>料金の後出し（作業後・請求段階で初めて別途と伝える）が最大のトラブル要因。</b>料金は隠さず先に、ただし受け止め・共感とセットで。"},{t:"「会社の規約なので」で会話を終えない。必ず個別契約の確認と代替案をセットで。"}],
+ refs:[{tag:"約款2-1",txt:"水草等の枯れの補償は致しかねます。"},{tag:"契約書",txt:"水草の枯れは保険対象外。枯れた場合は別途追加。"}],
+ esc:"「聞いていない」「リースの意味がない」等の強い不満 → 即リーダーに相談。無償交換の判断は上で。"},
+
+{id:8, cat:"kusa",
+ quote:[{n:"リバースグレイン ソフト（pH安定・補助ろ材）",g:8060}],
+ q:["水草の調子が悪い・色が悪い（水道水の硬度が原因 → リバース提案）"],
+ alt:["水草 育たない 硬度","リバースグレイン","浄水器 カチオン"],
+ ans:"水道水の<b>硬度が高い</b>と水草が育ちにくい。浄水器（カチオン）＋カリウム → 改善しなければ<b>リバースソフト6.8を初回サービス</b> → 効果が出たら<b>2回目以降は別途購入</b>を提案。必ず<b>ビフォーアフター写真</b>を撮る。",
+ scripts:[
+  {l:"① 原因説明", t:"水草の状態がイマイチなのですが、原因として、こちらの地域は水道水の硬度が高く、その成分の影響で水草が育ちにくくなっているのかと思います。今後は水道水を軟水化させる浄水器を使いつつ、添加剤を入れて様子を見ようと思います。"},
+  {l:"② リバース投入（初回サービス）", t:"以前お話しした水道水の影響で水草の状態が整わない件ですが、浄水器や添加剤を試したのですが、イマイチ合わないようで…。今の浄水器に加えて、水道水の不純物を吸着除去して水草に適した水質にしてくれる濾過材があるので、今回はこれを試してみようと思います。最近導入したもので高額なため本来は別途になるのですが、効果が確実に出るかまだ分からないので、今回は試しに入れてみますね。効果が出て気に入っていただけたら、それ以降は別途で導入をご検討いただけたら嬉しいです。"},
+  {l:"③ 効果確認 → 継続提案", t:"浄水器に加えて〇ヶ月前に入れた濾過材の効果が出ているようで、水草の状態が大分良くなったのですが、見た目いかがでしょう？（過去の写真を見せて）以前と比べてこれだけ良くなりました。気に入っていただけましたら、良い状態を維持するために引き続き使っていきたいのですが、2回目以降は別途になります。導入させていただいてもよろしいでしょうか？"}],
+ notes:[{do:1,t:"初回はサービスで入れ、<b>効果が出てから</b>2回目以降の別途購入を提案する。"},{do:1,t:"必ず<b>ビフォーアフター写真</b>を撮る。写真で見せると納得度・購買意欲が上がる。"},{t:"まず売るのは商品より<b>「自分（専門家）」</b>。日々のメンテで信頼を勝ち取ることが前提。"}],
+ refs:[{tag:"社内",txt:"リバースグレイン ソフト6.8（60L用）卸660円→販売1,780円（税込）。カチオン併用で効果最大化。"},{tag:"マニュアル",txt:"TH（全硬度）50以下が目標。高いと栄養吸収を阻害。"}]},
+
+{id:9, cat:"kusa",
+ q:["黒髭コケが出る（陰性水草・流木に付着）"],
+ alt:["黒ひげ苔","コケ 流木","黒い苔 取れない"],
+ ans:"原因は<b>リン酸過多・水質悪化・光過多・水流不足</b>。週1で1/3水換え＋リン酸吸着剤＋照明8時間以内＋ブラシ除去or木酢液＋サイアミーズ／ヤマトヌマエビ＋フィルター掃除。",
+ scripts:[{l:"お客様への説明", t:"黒髭コケですね。リン酸や光、水流のバランスで出やすくなるコケです。週1回の水換えと照明時間の調整、コケを食べてくれる生体の追加などで、少しずつ抑えていきますね。流木などに付いたものは取れにくいので、こちらで処理していきます。"}],
+ notes:[{t:"流木・葉に付くと除去困難 → ブラシ除去のほか木酢液の塗布も有効。"}],
+ refs:[{tag:"マニュアル",txt:"リン酸0.05ppm前後が目標。高いと黒髭コケ・藻類が発生。"}]},
+
+{id:10, cat:"kusa",
+ q:["コケ・苔が多い（貝を持ってきてほしい等）"],
+ alt:["コケが多い","苔","貝を多めに","ガラスが汚れる"],
+ ans:"次回メンテでコケ取り・<b>貝の追加</b>で対応。日々マグネットで軽く落としてもらうと保ちが良い。日当たりが強いと出やすく、頻度UPや別プランの提案も。",
+ scripts:[{l:"受け止め＋対処", t:"コケの件、ご連絡ありがとうございます。次回メンテでコケ取りと、貝（コケを食べてくれる生体）の追加を多めに対応しますね。気になるときは日々マグネットで軽く落としていただけると保ちが良くなります。日当たりが強い場所だと出やすいので、状態を見て頻度や別プランのご相談をすることもございます。"}],
+ refs:[{tag:"約款1-7",txt:"ガラス面のコケはコケ取りマグネットで落としていただく場合がある。"},{tag:"約款1-12",txt:"太陽光・間接光が多い場所はコケが大量に出る可能性があり、別プランの適用となる。"}]},
+
+{id:11, cat:"kusa",
+ q:["水が緑色になった（青水・アオコ）"],
+ alt:["水槽 緑","緑色","青水","アオコ"],
+ ans:"緑は<b>植物プランクトンの増殖</b>（光・栄養が多い）。水換え・遮光・照明時間短縮で対応。次回または早め訪問。",
+ scripts:[{l:"お客様への説明", t:"ご連絡ありがとうございます。水が緑色になってしまったんですね。これは光や栄養が多いときに植物プランクトンが増えて起こるもので、水換えと照明時間の調整で改善していきます。次回メンテで対応しますが、気になるようでしたら早めに伺いますね。"}]},
+
+{id:12, cat:"kusa",
+ q:["水が白く濁った（メンテ後など）"],
+ alt:["白濁","濁っている","にごり"],
+ ans:"バクテリアの一時的なバランス崩れ等で濁ることがある。<b>エアー確保＋水換え</b>で対応。魚の鼻上げ等を伴う場合は緊急。",
+ scripts:[{l:"お客様への説明", t:"ご連絡ありがとうございます。水が白く濁ってしまったんですね。メンテ後やお水のバランスが一時的に崩れたときに起こることがあります。エアー（泡）が出ているか確認いただけますか。改善しない・お魚が苦しそうな場合はすぐに伺います。"}],
+ esc:"白濁＋魚の鼻上げ／死は水質悪化のサイン → 緊急、リーダーに相談。"},
+
+{id:13, cat:"kusa",
+ q:["異臭がする"],
+ alt:["臭い","におい","くさい"],
+ ans:"水質悪化や、見えない所での生体・餌の腐敗のサイン。状況確認し<b>早めに訪問</b>。魚の死を伴う場合は緊急。",
+ scripts:[{l:"お客様への説明", t:"ご連絡ありがとうございます。水槽から臭いがするのですね。水質の悪化や、見えないところで生体や餌が傷んでいる可能性があります。お魚の様子はいかがですか？ 早めに伺って確認・水換えをさせていただきます。"}],
+ esc:"異臭＋複数死 → 緊急、リーダーに相談。"},
+
+{id:14, cat:"kusa",
+ q:["タニシ・巻貝が大量発生"],
+ alt:["巻貝 増えた","タニシ","スネール"],
+ ans:"巻貝が増えたら、次回メンテで<b>貝対策（トーマシー等）や除去</b>で対応。餌のあげ過ぎでも増えやすい。",
+ scripts:[{l:"お客様への説明", t:"ご連絡ありがとうございます。巻貝が増えてしまったんですね。次回メンテで、貝を食べる生体を入れる・取り除く等の対策をします。餌のあげ過ぎでも増えやすいので、量はこちらで調整しますね。"}]},
+
+{id:15, cat:"kusa",
+ q:["クリプトの葉が透明に溶けた"],
+ alt:["クリプト溶け","水草 溶ける","葉が溶けた"],
+ ans:"環境変化による<b>「クリプト溶け」</b>。根が残っていれば<b>再生する</b>のでパニック不要。溶けた葉は即除去、<b>根茎は抜かない</b>、水流を確保。",
+ scripts:[{l:"お客様への説明", t:"クリプトの葉が溶けてしまったんですね。これは環境の変化でよく起こる「クリプト溶け」で、根が残っていれば再生しますのでご安心ください。溶けた葉だけ取り除いて、様子を見ていきますね。"}],
+ notes:[{do:1,t:"溶けた葉は感染防止のため<b>即除去</b>。根茎は抜かない（再生する）。"}]},
+
+{id:16, cat:"kusa",
+ q:["水質も光も完璧なのに水草が育たない（食害の可能性）"],
+ alt:["新芽 消える","魚が水草を食べる","食害"],
+ ans:"水質・光・肥料が完璧でも、<b>生体が新芽を食べている</b>ことがある。問題の生体を特定し、別水槽へ。",
+ scripts:[{l:"お客様への説明", t:"水質も光も問題ないのに新芽が消えてしまう場合、お魚やエビが水草の柔らかい新芽を食べている可能性があります。一度、どの生体が原因か確認して、必要であれば配置を見直させてください。"}],
+ notes:[{t:"<b>食害しやすい生体：</b>金魚（水草全般・完全に不向き）／ゴールデンセベラム／ゴールデンバルブ（ミクロソリウム新芽）／エンゼル（前景草）／コンゴーテトラ（ボルビティス新芽）／ゴールデンアップルスネール。"},{do:1,t:"エビは数を控えめに＋餌を十分に。"}]},
+
+{id:17, cat:"kusa",
+ q:["水草の目標値・チェックリスト（早見表）"],
+ alt:["pH TH リン酸 水温","水草 数値","水質 基準"],
+ ans:"トラブル時は順番に確認。<b>水温（28℃超えない）が最優先</b>、次に水流・根茎・カリウム。",
+ scripts:[{l:"目標値（コピー可）", t:"【水質目標値】\npH：6.0〜7.5（バリスネリアは7.0〜7.5）\nTH（全硬度）：50以下（理想30〜50）\nリン酸：0.05ppm前後\n水温：23〜25℃（28℃超えは致命的）\n\n【肥料】\nカリウム液肥：週1〜2回（最優先）\n微量元素液肥：週1回・少量\n窒素・リン：控えめ（魚の排泄物で十分）"}],
+ notes:[{do:1,t:"陰性水草は<b>水流で栄養供給</b>。根茎は<b>絶対に埋めない</b>。"},{t:"龍王石はpH・硬度が上がる → 溶岩石に。バリスネリアは弱アルカリ好みで別管理。"}]},
+
+// ───── 設備・機械 ─────
+{id:18, cat:"setsubi",
+ quote:[{n:"カミハタ Rio1100 水中ポンプ 22L/m",g:2930},{n:"カミハタ Rio1400 水中ポンプ 24L/m",g:3250},{n:"カミハタ Rio2500 水中ポンプ 34L/m",g:5900},{n:"カミハタ Rio3100 水中ポンプ 48L/m",g:8670},{n:"オクトバリオス4　DCポンプ",g:28000},{n:"オクトバリオス6　DCポンプ",g:38200}],
+ q:["ろ過器・ポンプが止まった／回っていない"],
+ alt:["ポンプ 止まった","ろ過 動かない","酸素ポンプ","循環していない"],
+ ans:"酸素・ろ過が止まると<b>魚の命に直結</b>。コンセント・水循環を確認、止まっているなら<b>至急訪問</b>。空回りしている場合はその機械の電源を切ってもらう。",
+ scripts:[{l:"確認＋至急対応", t:"ご連絡ありがとうございます。ポンプ（ろ過）が止まっているのですね。お魚にとって大事な部分なので、すぐ確認させてください。\nコンセントが抜けていないか、異音がしないか見ていただけますか。水が循環していない場合は、まずその機械の電源を切っていただき、至急伺って対応します。お魚が水面でパクパクしている場合はお知らせください。"}],
+ notes:[{t:"酸素ポンプの停止は魚が死ぬ → 最優先で訪問。"}],
+ refs:[{tag:"約款1-6",txt:"ろ過器・ヒーターは常時通電。ただし水が循環していない・露出した場合は直ちに電源を切る。"}],
+ esc:"復旧できない・魚が弱っている → リーダーに即連絡（代打手配）。"},
+
+{id:19, cat:"setsubi",
+ q:["エアー（泡）が出ない"],
+ alt:["泡が出ない","ぶくぶく 出ない","エアレーション","空気が出ない"],
+ ans:"エアー停止は<b>酸欠の恐れ</b>。電源・チューブの外れ・ポンプを確認。出ないなら早め訪問。魚の鼻上げは緊急。",
+ scripts:[{l:"確認＋対応", t:"ご連絡ありがとうございます。エアー（泡）が出なくなったのですね。お魚の酸素に関わるので確認させてください。\nエアーポンプの電源が入っているか、チューブが外れていないか見ていただけますか。直らない場合は早めに伺います。お魚が水面で口をパクパクしている場合はお知らせください。"}],
+ esc:"魚が鼻上げ（酸欠サイン） → 緊急、リーダーに相談。"},
+
+{id:20, cat:"setsubi",
+ q:["水漏れしている"],
+ alt:["水が漏れる","ホースから水","水浸し","溢れる"],
+ ans:"まず<b>安全のため漏れ箇所の電源を切ってもらう</b> → 至急訪問。床・周辺の拭き上げもお願い。漏電の危険があるため電源OFFを最優先。",
+ scripts:[{l:"安全の一次対応", t:"ご連絡ありがとうございます。水が漏れているのですね。まず安全のため、漏れている付近の機械の電源を一度切っていただけますか。床が濡れている場合は拭いていただけると助かります。至急、伺って原因を確認します。"}],
+ notes:[{t:"漏電・床への被害があるため、電源OFFを最優先で指示。"}],
+ refs:[{tag:"約款2-5",txt:"メンテ作業時の水漏れ・物損は弊社加入の請負生産物保険の範囲内で負担（多少の傷・不可抗力等は除く）。"},{tag:"約款2-17",txt:"撤去・移動後の床・周辺の修理補償はできかねる。"}],
+ esc:"止まらない水漏れ → リーダーに即連絡（代打手配）。"},
+
+{id:21, cat:"setsubi",
+ q:["異音がする"],
+ alt:["変な音","音が鳴る","凄い音","うるさい"],
+ ans:"多くは<b>ポンプ・エアーの空気噛みや水位低下</b>が原因。水位・ポンプを確認。問題なければ次回調整、ひどければ訪問。",
+ scripts:[{l:"確認＋対応", t:"ご連絡ありがとうございます。いつもと違う音がするのですね。多くはポンプやエアーの空気の噛み込み、水位が下がっていることが原因です。水の量が減っていないか見ていただけますか。続くようでしたら伺って調整します。"}]},
+
+{id:22, cat:"setsubi",
+ quote:[{n:"ゼンスイ　LED+450　マルチカラー",g:6600,u:1},{n:"ゼンスイ　LED+600　マルチカラー",g:7800,u:1},{n:"ゼンスイ　LED+900　マルチカラー",g:10800,u:1},{n:"ゼンスイ　LED+1200　マルチカラー",g:14800,u:1}],
+ q:["ライトが点滅・消えた／アダプター交換"],
+ alt:["ライト 点滅","電気がつかない 照明","アダプター 錆","ライト 消えた"],
+ ans:"ライト・アダプターの不具合。次回または早めに<b>部品交換</b>。アダプターの錆・断線は危険なので使用を控えてもらう。",
+ scripts:[{l:"確認＋対応", t:"ご連絡ありがとうございます。ライトが点滅（消えて）しまうのですね。ライトかアダプターの不具合が考えられます。アダプターに錆や傷みがある場合は、安全のため使用を控えていただき、次回または早めに部品を交換しに伺います。"}]},
+
+{id:23, cat:"setsubi",
+ q:["ライトの点灯時間を知りたい／設定"],
+ alt:["照明 時間","ライト 何時間","点灯 設定"],
+ ans:"点灯は<b>1日8〜10時間</b>が目安。長いとコケ、短いと水草が不調。残りは消して夜を感じさせる。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。ライトの点灯時間ですね。1日8〜10時間が目安です。長すぎるとコケが増え、短すぎると水草の元気がなくなります。残りの時間は消して、お魚や水草に夜を感じさせてあげてください。"}],
+ refs:[{tag:"約款1-3",txt:"ライトの照射時間は約9〜10時間の連続照射。残りは消して夜を感じさせる。"}]},
+
+{id:24, cat:"setsubi",
+ q:["ガラス蓋が落ちた／コケ取りマグネットが取れた"],
+ alt:["蓋 落ちた","マグネット 取れた","ガラス蓋","フタ 水槽の中"],
+ ans:"蓋やマグネットが水槽内に落ちた・外れた。<b>回収に伺う</b>。無理に手を入れて生体を傷つけない・手を切らないよう注意喚起。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。蓋（マグネット）が水槽の中に落ちてしまったのですね。無理に取ろうとするとお魚を驚かせたり、手を切る恐れがあるので、こちらで回収に伺います。お時間のご希望を教えてください。"}]},
+
+{id:25, cat:"setsubi",
+ q:["餌やり機・タイマーの不調／部品が落ちた"],
+ alt:["自動給餌 動かない","餌やり機 落ちた","タイマー 作動しない","給餌機"],
+ ans:"自動給餌機の作動不良や部品落下。<b>回収・再取り付けに伺う</b>。その間は手で少量を。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。自動給餌機（タイマー）の調子が悪いのですね。部品が水槽内に落ちている場合は回収し、再取り付けに伺います。それまでの間、お餌が出ていないようでしたら、少量を手であげていただいても大丈夫です（あげ過ぎにご注意ください）。"}]},
+
+{id:26, cat:"setsubi",
+ q:["機械が故障した（部品交換・修理費）"],
+ alt:["故障 修理費","部品交換 費用","壊れた 機械"],
+ ans:"部品交換・修理費は<b>基本お客様負担</b>だが、<b>保険加入なら無償範囲</b>がある。現地確認のうえ費用を<b>先に</b>案内。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。機械の故障ですね。確認して対応しますが、部品の交換や修理は、保険のご加入状況によって費用が変わります。現地で確認して、費用は先にお見積りをお伝えしますので、ご納得いただいてから進めますね。"}],
+ refs:[{tag:"約款2-4",txt:"機械・水槽の故障の部品交換・修理費は負担。保険加入時は機材5年・水槽本体/濾過槽1年まで無償（3万円以上は1年）。未加入は製品保証期間内。"}]},
+
+// ───── 環境・災害 ─────
+{id:27, cat:"saigai",
+ q:["地震のあと（こぼれ・石崩れ・点検）"],
+ alt:["地震 こぼれた","揺れた","石が崩れた","地震 水槽"],
+ ans:"揺れで<b>水がこぼれる・石やレイアウトが崩れる</b>ことがある。こぼれの拭き上げ協力をお願いし、ろ過の水位・機械を点検。被害があれば訪問。",
+ scripts:[{l:"地震のあと", t:"地震、大丈夫でしたか。揺れで水がこぼれていたり、中の石やレイアウトが崩れることがあります。フタ無し・縁無しの水槽は特にこぼれやすいので、もし溢れていたら拭き上げのご協力をお願いできますか（海水は濡れタオルで拭いてください）。ろ過の水が減っていないかも見ていただけると安心です。被害がありそうでしたら伺います。"}],
+ notes:[{t:"海水は塩ダレ注意。オールガラス・縁無し水槽は特に要確認。"}],
+ esc:"広域地震時は全体連絡に従い、被害現場をリーダーへ集約。"},
+
+{id:28, cat:"saigai",
+ q:["停電のあと（電気がつかない・復電後の確認）"],
+ alt:["停電 電気つかない","ブレーカー","復電","ビル 停電"],
+ ans:"停電・復電後にライト／ヒーター／ろ過が動かないことがある。コンセント・ブレーカーを確認し、<b>各機械が動いているか点検</b>。動かなければ訪問。ろ過とヒーターが特に大事。",
+ scripts:[{l:"停電のあと", t:"ご連絡ありがとうございます。停電のあと、電気がつかないのですね。まずコンセントとブレーカーを確認いただけますか。\n復電後は、ライト・ヒーター・ろ過（ポンプ）がきちんと動いているかが大事です。動いていない機械があれば教えてください、伺って確認します。お魚にとってはろ過とヒーターが特に大事です。"}],
+ notes:[{t:"ビルの計画停電・電気工事の予定がある場合は事前にご相談いただく。"}],
+ esc:"復電後もろ過／ヒーターが動かない・魚が弱っている → 緊急、リーダーに相談。"},
+
+{id:29, cat:"saigai",
+ quote:[{n:"ゼンスイ ZRmini",g:38500},{n:"ゼンスイ ZR-75E",g:42200},{n:"ゼンスイ ZR-130E",g:58200},{n:"ゼンスイ ZC-200α",g:57750},{n:"ゼンスイ ZTK-500",g:120000,u:1}],
+ q:["夏場の水温が高い・心配"],
+ alt:["水温 高い","夏 暑い","30度","クーラー ファン"],
+ ans:"水温は<b>24〜26℃</b>が目安、夏場30℃超で全滅の恐れ。クーラー送風・通気、水槽用ファン／クーラーを推奨。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。夏場の水温ですね。24〜26℃が目安で、30℃を超えるとお魚に危険です。お部屋のクーラーを水槽に向けて送風する・通気を良くするだけでも効果があります。それでも上がる場合は、水槽用のファンやクーラーの設置をおすすめしますので、ご相談ください。"}],
+ refs:[{tag:"約款1-5",txt:"水温は24〜26℃が理想。夏場は30℃以上に上昇し全滅する場合あり。"}]},
+
+// ───── 料金・支払 ─────
+{id:30, cat:"kane",
+ q:["請求書の内容を確認したい"],
+ alt:["請求書 確認","明細","何の料金"],
+ ans:"請求データを確認してから正確に説明。加算があれば内訳を案内。",
+ scripts:[{l:"受け止め＋確認", t:"請求書の件、ご確認ありがとうございます。〇月分の内容ですね。こちらで請求内容を確認して、改めて正確にご説明します。通常のメンテ料金に加えて、生体追加や移動などの分が加算されている場合がございます。内訳をメールでもお送りしますね。"}]},
+
+{id:31, cat:"kane",
+ q:["請求金額が違う・内訳を知りたい／二重請求"],
+ alt:["金額 違う","内訳","合計 相違","二重請求"],
+ ans:"その場で曖昧に答えず<b>確認してから</b>。二重請求・食い違いは経理＋担当で整理。",
+ scripts:[{l:"受け止め＋確認", t:"ご連絡ありがとうございます。金額が合わない（内訳を知りたい）とのこと、確認させてください。こちらで請求データを照合して、内訳を整理してご連絡します。行き違いがありましたら大変失礼しました。"}],
+ esc:"二重請求の疑い・食い違いが大きい → 経理＋担当で整理し、社内共有。"},
+
+{id:32, cat:"kane",
+ q:["請求書が届かない・再送してほしい"],
+ alt:["請求書 届かない","再送","郵送して","見えにくい"],
+ ans:"すぐ<b>再送</b>。裏写り等で見えにくい場合も再郵送。送付先を確認。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。請求書が届かない（見えにくい）とのこと、失礼しました。すぐに再送（郵送）いたします。念のため送付先のご住所を確認させてください。"}]},
+
+{id:33, cat:"kane",
+ q:["支払い方法を変えたい（カード等）／年払い・先払い"],
+ alt:["カード決済","年払い","先払い","支払方法 変更"],
+ ans:"方法変更は<b>経理確認のうえ折り返し</b>。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。お支払い方法（年払い・先払い・カード等）のご相談ですね。対応できるか経理担当に確認して折り返します。少々お時間をいただけますか。"}]},
+
+{id:34, cat:"kane",
+ q:["振込がまだ・支払期限／未納・振込不足"],
+ alt:["振込 まだ","支払期限","未納","足りないと言われた"],
+ ans:"催促口調で決めつけず、<b>行き違いの可能性</b>を前提に入金状況を確認。",
+ scripts:[{l:"受け止め＋確認", t:"ご連絡ありがとうございます。お支払いの件ですね。こちらで入金状況を確認して、どの月の分が未着かを整理してご連絡します。行き違いでしたら大変失礼しました。"}],
+ notes:[{t:"「滞納です」と決めつけない。まず事実確認から。"}],
+ refs:[{tag:"約款3-2",txt:"振込は料金発生（請求書の日付）より翌月末日以内。手数料は契約者負担。"}],
+ esc:"催促・条件変更は経理経由。回収・所有権の話は経営判断。"},
+
+{id:35, cat:"kane",
+ q:["領収書・支払証明書がほしい"],
+ alt:["領収書","支払証明書","領収書 金額違う"],
+ ans:"経理に確認のうえ発行・送付。仮領収と正式で金額が違う等は照合。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。領収書（支払証明書）の件ですね。経理に確認して発行・お送りします。金額や宛名のご希望があれば教えてください。"}]},
+
+// ───── 契約・解約 ─────
+{id:36, cat:"keiyaku",
+ q:["リース料はいつまで払うのか"],
+ alt:["リース いつまで","リース 期間","まだ払う"],
+ ans:"リースは<b>契約期間（例：5年）満了まで</b>支払い。期間・残りを契約で確認して正確に案内。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。リース料のお支払い期間ですね。リースは契約期間（〇年）が満了するまでのお支払いになります。こちらで〇〇様のご契約期間と残りを確認して、正確にご案内しますね。"}],
+ refs:[{tag:"約款2-9",txt:"リースの場合は途中解約でもリース残高満額の支払いとなる。"}],
+ esc:"期間満了・名義／不動産が絡む場合はリーダー・経理に相談。"},
+
+{id:37, cat:"keiyaku",
+ q:["解約したい・途中解約の違約金"],
+ alt:["解約したい","やめたい","違約金","最短 解約"],
+ ans:"まず<b>理由を聴く</b>。不満があれば改善提案を先に。事実（満期・30日前・途中解約費用）はやさしく正確に。気持ちが固まっている方には「最後まで気持ちよく」を優先。",
+ scripts:[
+  {l:"まず理由を聴く", t:"これまでご利用いただきありがとうございます。差し支えなければ、解約をお考えになった理由を教えていただけますか。\nもしご不満な点があれば、内容の見直しでお応えできることもあります。一度社内で相談させていただいてもよろしいでしょうか。"},
+  {l:"事実説明（やさしく）", t:"ご契約は〇年〇月が満期で、その30日前までにお申し出いただく形になっています。途中解約の場合のお手続き・費用も、こちらで正確に計算してご案内しますね。"}],
+ notes:[{t:"違約金の話から入らない。まず理由を聴き、不満なら改善提案を先に。"},{t:"強い引き止めはしない。気持ちが固まっている方には「最後まで気持ちよく」を優先。"}],
+ refs:[{tag:"約款2-10",txt:"契約満了日にて自動更新（1年）。解約は満了日の30日前までに申し出。"},{tag:"約款2-9",txt:"途中解約は残メンテ回数×料金と保険料の50%。リースは残高満額。"}],
+ esc:"解約の意向が出たら必ずリーダーに相談。違約金・減額の判断は上で。"},
+
+{id:38, cat:"keiyaku",
+ q:["撤去したい・撤去費用"],
+ alt:["撤去 費用","引き上げ","水槽 いらない"],
+ ans:"撤去は<b>別途費用</b>。更新タイミング以外の撤去は<b>撤去作業費（1回分の月額）</b>。時期・希望日を確認し見積を先に。解約に直結するのでリーダーへ。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。撤去のご相談ですね。撤去は別途お見積りになります（更新のタイミング以外の撤去は、撤去作業費として1回分の月額がかかります）。ご希望の時期を教えていただければ、費用を先にお伝えします。"}],
+ refs:[{tag:"契約書",txt:"更新タイミング以外の撤去は、撤去作業費として1回分の月額がかかる。"},{tag:"約款2-17",txt:"撤去・移動後の床・周辺の補償はできかねる。"}],
+ esc:"撤去＝解約に直結。必ずリーダーに相談。"},
+
+{id:39, cat:"keiyaku",
+ q:["水槽を移動したい・場所を変えたい"],
+ alt:["移動 費用","場所 変えたい","移設","移転"],
+ ans:"移動は<b>別途見積</b>。現地確認のうえ費用を先に。移動後の床補償は不可。",
+ scripts:[{l:"お客様への案内", t:"ご連絡ありがとうございます。水槽の移動ですね。移動先と希望日を教えていただけますか。作業内容によって別途お見積りになりますので、現地を確認して費用を先にお伝えします。"}],
+ refs:[{tag:"約款2-13",txt:"場所の異動・大掃除・大幅レイアウト変更・撤去は別途加算。"}]},
+
+{id:40, cat:"keiyaku",
+ q:["契約金額・契約期間を確認したい"],
+ alt:["契約 いくら","何年契約","契約内容 確認","いつまで契約"],
+ ans:"契約データを確認して<b>正確に</b>回答。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。ご契約の金額（期間）の確認ですね。こちらで〇〇様のご契約内容を確認して、正確にご案内します。少々お待ちください。"}]},
+
+// ───── 事務・依頼 ─────
+{id:41, cat:"jimu",
+ q:["メンテの日程・訪問・当月キャンセル"],
+ alt:["次回いつ","日程変更","早めに見て","キャンセル"],
+ ans:"次回予定を案内し、必要なら調整。当月キャンセルは<b>お客様都合か弊社都合か</b>を確認してから。",
+ scripts:[{l:"日程案内・変更", t:"次回メンテは〇月〇日頃を予定しています。ご都合いかがですか。早めに見てほしい場合は調整しますね。\n日程変更も承知しました。候補日で再調整し、当月分のお振り替えが可能かも確認しますね。"}],
+ notes:[{t:"キャンセル料を機械的に請求しない。お客様都合か弊社都合かを確認してから。"}],
+ refs:[{tag:"約款2-8",txt:"当月キャンセルは1回につきメンテ料金と保険料の50%（弊社都合は除く）。"}]},
+
+{id:42, cat:"jimu",
+ q:["見積がほしい（継続・新規・追加水槽）"],
+ alt:["見積","追加 水槽","継続 いくら","2台目"],
+ ans:"サイズ・設置場所・希望時期を伺い、<b>担当（営業）から案内</b>。納期2週間目安なら進捗をフォロー。",
+ scripts:[{l:"お客様への対応", t:"お見積りのご依頼ありがとうございます。サイズ・設置場所・ご希望の時期を伺って、担当（営業）からご案内します。継続のお見積りの場合は、現在のご契約内容を確認してご提示しますね。少しお時間をください。"}],
+ refs:[{tag:"約款2-15",txt:"2台目契約は契約書を省略し、1台目と同一条件。起点日は初請求月を1回目とする。"}],
+ esc:"見積・新規・継続提案は営業（リーダー）へ。"},
+
+{id:43, cat:"jimu",
+ q:["カタログがほしい（魚・水草）"],
+ alt:["カタログ","魚 一覧","水草 カタログ"],
+ ans:"担当より<b>魚／水草のカタログ</b>を送付。送付先を確認。",
+ scripts:[{l:"お客様への対応", t:"カタログのご希望ありがとうございます。魚／水草のカタログを担当よりお送りします。ご住所（送付先）を確認させてください。"}]},
+
+{id:44, cat:"jimu",
+ q:["名義変更・請求先／住所変更"],
+ alt:["送付先 変更","名義変更","住所変更","請求先"],
+ ans:"<b>復唱して確認</b>し、社内（経理）へ記録・反映。名義変更は新名義人へ自動引継ぎ。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。送付先（名義）の変更ですね。念のため復唱します、新しいご住所／宛名は〇〇ですね。次回請求分から反映します。"}],
+ notes:[{t:"口頭だけで完了としない。必ず社内（経理）へ記録・反映依頼まで。"}],
+ refs:[{tag:"約款2-16",txt:"名義変更は新名義人にそのまま自動引継ぎ。旧名義人は必ず新名義人へ引継ぎを。"}]},
+
+{id:45, cat:"jimu",
+ q:["担当者を教えて／担当を変えてほしい"],
+ alt:["担当 誰","担当 教えて","担当 変えて","担当変更"],
+ ans:"担当を確認して<b>折り返し</b>。担当変更の希望は<b>理由を伺いリーダーへ</b>（背景にトラブルがあることが多い）。",
+ scripts:[{l:"お客様への対応", t:"ご連絡ありがとうございます。ご担当の件ですね。確認して、担当よりご連絡を差し上げます。\n（担当変更のご希望の場合）ご不便をおかけして申し訳ありません。状況を伺って、より良い形になるよう社内で調整します。"}],
+ esc:"担当変更の希望・背景にトラブルがある場合はリーダーに相談。"},
+
+{id:46, cat:"jimu",
+ q:["クレームを対応スタッフに頼むとき（代打依頼ひな形）"],
+ alt:["代打 依頼","トラブル対応 依頼","スタッフに振る","ひな形"],
+ ans:"クレーム・トラブルが発生したら、以下の<b>8項目</b>を埋めて対応スタッフに依頼する。下のひな形をコピーして使う。",
+ scripts:[{l:"コピー用ひな形", t:"①現場名\n→\n\n②住所と(パーキング)の場所\n→\n\n③入れる時間\n→ 〇〇:〇〇〜〇〇:〇〇 / 〇〇:〇〇まで\n\n④水槽サイズ　種類\n→ 〇〇×△△×□□H、エーハイム水草 / オーバーフロー海水 等\n\n⑤かかる時間\n→ 〇時間程度\n\n⑥トラブル内容\n→ 〇〇の故障 / 〇〇から水漏れ / 爆死 等\n\n⑦やって欲しい作業\n→ フルメンテ / トラブル対処 / 〇〇の交換 等\n\n⑧今回の作業での支払い発生の有無（有りの場合は支払い方法）\n→ クレーム・トラブル対応系は基本「なし」。メンテの代打なら「有り」＋請求書／現金／クレジット を記載"}],
+ notes:[{t:"パーキングが複雑な場合は「個別で連絡します」と記載。"},{t:"支払い：クレーム・トラブル対応は基本なし。代打メンテは有り（方法を明記）。"}]},
+];
+const NCATS=[{"id": "ko", "name": "顧客対応", "c": "#E2574C"}, {"id": "ke", "name": "契約・リース", "c": "#9163A8"}, {"id": "ka", "name": "お金・回収", "c": "#D38A12"}, {"id": "ro", "name": "労務・スタッフ", "c": "#2A9D8F"}, {"id": "hd", "name": "経営判断", "c": "#1C7293"}];
+const NAVI=[{"cat": "ko", "q": ["解約を申し出られた"], "ans": "まず<b>引き止めず理由を聞く</b>。条件・違約金の話から入らない。約款上は満了30日前まで＝過ぎれば1年自動更新。途中解約は<b>残回数×(メンテ料+保険料)の50%</b>、リースは残高満額。感情を受け止め、続けられる代替案を出してから条件を伝える。", "scripts": [{"l": "受け止め＋条件は後出ししない", "t": "ご連絡ありがとうございます。これまでご利用いただき本当に感謝しております。差し支えなければ、解約をお考えになった理由を教えていただけますか？\n（理由を伺った上で）ご契約上は契約満了日の30日前までにお申し出いただく形で、途中解約の場合は残りの回数に応じた精算が発生いたします。ただ、その前に〇〇様に合うプラン変更や一時的なご相談などできることがないか、一度ご提案させてください。"}], "notes": [{"t": "条件・違約金から入らない。まず理由と感情を受け止める。"}, {"do": 1, "t": "解約はオファーを作る宝庫。失注理由を必ずヒアリングし次の武器にする。"}, {"t": "格安プランに安易に逃げない。価値を再提示してから。"}], "refs": [{"tag": "約款2-9", "txt": "途中解約は残メンテ回数×(メンテ料+保険料)の50%。リースは残高満額。"}, {"tag": "約款2-10", "txt": "契約満了日の30日前までに申し出。過ぎると1年自動更新。"}], "esc": "強い不満・法人VIP・高額リース残債 → 条件提示の前に中川さんに相談。"}, {"cat": "ko", "q": ["値引きを求められた"], "ans": "安く出せる手段を<b>引き出しに置かない</b>。コストは感情で動く＝魅力を伝えれば高く感じない。値引きでなく<b>『買える状態』</b>(分割／支払い後ろ倒し／1年契約)を作る。どうしても引くなら高値から段階的に。", "scripts": [{"l": "値引きでなく条件で応える", "t": "ありがとうございます。正直に申し上げると、この価格は内容を責任を持って維持するための金額でして、ここを下げるとクオリティのお約束ができなくなってしまいます。\nそのかわり、初期のご負担を抑える分割や、まず1年でしっかり結果を出すプランなど、〇〇様が始めやすい形をご提案させてください。"}], "notes": [{"t": "『予算が合わない』を鵜呑みにしない＝魅力を出しきれていないだけ。"}, {"do": 1, "t": "値引き前に分割・後ろ倒し・仮押さえ等『買える状態』を作る。"}, {"t": "一度安く見せたプランは後で勧めても選ばれない。"}], "refs": [{"tag": "原則・営業", "txt": "コストは感情で高くも安くもなる。"}, {"tag": "原則・営業", "txt": "買えるようにしてあげるのが営業の仕事。"}]}, {"cat": "ko", "q": ["返金を求められた（撤去・解約・イメージ相違）"], "ans": "撤去/解約時の返金は<b>原則なし</b>。ただし値引分の回収は必要。施工後のイメージ相違の返金返品も約款上なし。共感はしつつ約款を根拠に、<b>代替（次回調整・別プラン）で着地</b>。前例が他客に波及するので安易に返金しない。", "scripts": [{"l": "共感＋原則を根拠に代替提案", "t": "ご不満を感じさせてしまい申し訳ございません。ご契約上は、施工後のイメージ相違や撤去に伴う返金はお受けしていないのですが、〇〇様のお気持ちはしっかり受け止めたいので、次回メンテでの調整や別のご提案で、ご納得いただける形を一緒に考えさせてください。"}], "notes": [{"t": "『規約なので』で会話を終えない。必ず代替案とセット。"}, {"t": "安易に返金しない＝前例が他客に波及する。"}], "refs": [{"tag": "約款2-3", "txt": "商品・作業料の返品返金は不可。"}, {"tag": "約款3-3", "txt": "出来上がりイメージ相違による返金返品は行わない。"}, {"tag": "原則・財務", "txt": "返金せず値引分は回収する。"}], "esc": "高額・強硬なケース → 無償対応の判断は中川さんへ。"}, {"cat": "ko", "q": ["クレームで強い不満をぶつけられた"], "ans": "<b>逃げない</b>。相手の言葉の裏の『期待値』を汲む。<b>レスポンスの速さ＝信頼</b>。初動はいきなり社長を出さず『上席に確認します』でワンクッション。原因は断定しない。", "scripts": [{"l": "受け止め＋即動く姿勢", "t": "このたびはご不快な思いをおかけし、誠に申し訳ございません。まずすぐに状況を確認し、上席にも共有のうえ、責任を持って対応いたします。\nお手数ですが、今いちばんお困りの点を教えていただけますか。すぐに動きます。"}], "notes": [{"do": 1, "t": "レスポンスは速く。遅れは良い対応も台無しにする。"}, {"t": "最初からトップ(社長)を出さない。『上席に確認』で受ける。"}, {"t": "愚痴でなく『期待値』を読み、“やっぱり良かった”をゴールに。"}], "refs": [{"tag": "CCS", "txt": "クレームから逃げない。期待値を汲んで満足に変える。"}, {"tag": "原則・社長業", "txt": "レスポンスの速さ＝信頼。"}], "esc": "法的リスク・SNS拡散・全損 → 即中川さんに相談。"}, {"cat": "ko", "q": ["VIP・富裕層へ提案する"], "ans": "価格・デザインの比較でなく<b>自尊心と感情</b>(ポルシェ心理)。特別感・VIP扱いで満たす。じらして『実は…』と演出。理屈は本人が後付けする。院長・社長は<b>せっかち</b>＝その場で全部見せ、イメージを先に持たせる。", "scripts": [{"l": "特別感を演出", "t": "〇〇様だからこそ、通常はあまりお出ししていない特別なプランをご用意したいと思っています。実は…（と少しじらして）。\n〇〇様のお部屋／お店に置いたときの世界観を、まず一度イメージしていただきたいです。"}], "notes": [{"do": 1, "t": "比較や機能でなく、置いた後の未来・自尊心を刺激する。"}, {"t": "稼いで日が浅い客ほど『自分は特別』を満たすと刺さる。"}, {"do": 1, "t": "院長・社長はせっかち。即・全部見せる。"}], "refs": [{"tag": "原則・顧客心理", "txt": "ポルシェ/トヨタ。憧れカテゴリで先に勝つ。"}, {"tag": "原則・営業", "txt": "VIPは感情で売り、理屈は後付け。"}]}, {"cat": "ko", "q": ["失注した"], "ans": "<b>『予算が合わなかった』で片付けない</b>＝魅力を出しきれなかったと反省。失注理由を必ずヒアリングし、次のオファー(初回スポット→定期3ヶ月無料 等)を作る。取れた案件より学びがある。", "scripts": [{"l": "失注理由を聞く一言", "t": "この度はご縁がなく残念ですが、今後のために一点だけ教えていただけますか。決め手になった点や、当社に足りなかった点はどこでしたか？ 率直なご意見が本当にありがたいです。"}], "notes": [{"do": 1, "t": "失注理由を直接聞く。盛り上がり≠刺さる。困りごとを掴む。"}, {"do": 1, "t": "失注から新オファーを必ず1つ作る習慣に。"}], "refs": [{"tag": "原則・営業", "txt": "失注は予算のせいにしない／失注から武器を作る。"}]}, {"cat": "ko", "q": ["注文の意思が見える／最終段階のメール"], "ans": "<b>『ご検討ください』はNG</b>(冷静にさせる)。タイトルを発注書にし発注方法を明記。最終は『イメージを膨らませておいてください』。期限と理由を切る。冒頭で『嬉しい』気持ちを書く。", "scripts": [{"l": "発注へ導く", "t": "この度はありがとうございます、〇〇様にお任せいただけて本当に嬉しいです。\n下記の通り発注書をお送りします。ご発注は△△（方法）で承ります。〇月〇日までにお返事いただけますと、◇◇（理由）に間に合います。\n仕上がりのイメージを、ぜひ膨らませておいてくださいね。"}], "notes": [{"t": "『検討してください』で締めない。発注書＋発注方法＋期限。"}, {"do": 1, "t": "冒頭で感謝と“嬉しい”気持ちを書く＝パーソナリティを出す。"}], "refs": [{"tag": "原則・営業", "txt": "見積書でなく発注書／検討でなく想像させる。"}]}, {"cat": "ko", "q": ["料金が別途かかる事を伝える（水草交換・追加 等）"], "ans": "<b>料金の後出しが最大のトラブル要因</b>。隠さず先に、やわらかく、共感とセットで。必ず個別契約を確認し、本数と見積りを先に出して<b>納得を得てから</b>進める。", "scripts": [{"l": "料金は先に率直に", "t": "〇〇の件、ご連絡ありがとうございます。状態を確認しますね。実は△△は契約上は別途のお見積りになるのですが…（と先にお伝えしたうえで）、念のため〇〇様のご契約内容も確認して、必要な分の本数とお見積りを先にお伝えします。ご納得いただいてから進めますのでご安心ください。"}], "notes": [{"t": "後出し（作業後・請求段階で初めて別途と言う）は厳禁。"}, {"do": 1, "t": "料金は先に＋共感とセット。個別契約を必ず確認。"}], "refs": [{"tag": "約款2-2", "txt": "消耗品交換・生体補充はお客様負担(保険で対応可)。"}]}, {"cat": "ke", "q": ["リースを組みたいと言われた"], "ans": "<b>『自社リース』とは言わない</b>(飛んでもリスク無いと感づかれる)。『リース会社の審査があり、手数料/金利は当社負担』と<b>第三者を絡ませて見せる</b>(ジャパネット式)。汎用性<b>30万</b>が基準（超えると特注で再リース不可）。", "scripts": [{"l": "第三者を絡ませて見せる", "t": "分割でのご導入も可能です。リース会社さんの審査を通す形になりますが、手数料や金利分は当社が負担しますので、〇〇様のご負担は月々の定額のみです。審査に必要な書類だけ、後ほどご案内しますね。"}], "notes": [{"t": "『自社リース／社内審査』と言わない。第三者(リース会社)を見せる。"}, {"t": "30万以下＝汎用水槽で再リース可。超えると特注で通らない。"}], "refs": [{"tag": "原則・財務", "txt": "自社リースの建前／汎用性30万基準。"}]}, {"cat": "ke", "q": ["ナイト系・飲食店のリース可否"], "ans": "ナイト系/飲食は<b>最もリースが通らない</b>。基本不可→<b>財務次第で最大30万</b>。本業が堅い(売上8割が不動産等)なら親会社契約で全額も可。連帯保証は資産を持つ社長個人に。", "notes": [{"t": "基本不可。決算を見て最大30万まで。"}, {"do": 1, "t": "本業が堅ければ親会社名義／連帯保証で全額可も。"}], "refs": [{"tag": "原則・財務", "txt": "ナイト系は基本不可・財務次第／保証人は資産を持つ本人。"}], "esc": "高額・判断が難しい案件 → 中川さんへ。"}, {"cat": "ke", "q": ["連帯保証人を誰にするか"], "ans": "<b>法人と個人(代表)は法的に別物</b>。法人が倒産しても個人に支払義務は及ばない。だから一番資産を持つ<b>社長個人</b>を連帯保証に。資産のない奥様等では意味がない。高齢・後継なしは相続放棄リスク→法人名義/連帯保証で対応。", "notes": [{"t": "資産を持つ本人を保証人に。"}, {"t": "高齢(後継なし)は死亡時の相続放棄で負債が残るリスク。"}], "refs": [{"tag": "原則・財務", "txt": "保証人は資産を持つ本人／高齢は相続放棄リスク。"}]}, {"cat": "ke", "q": ["与信（法人リース）の判断"], "ans": "<b>4点</b>＝履歴事項全部証明・印鑑証明・決算書・通帳コピーで満額か一部かを審査。信用ある企業は不要なことも。小規模は連帯保証で検討。<b>審査段階は最小書類</b>(決算書等)で、免許・住民票等は通過後に。客の手間を最小に。", "notes": [{"do": 1, "t": "審査段階は決算書等のみ。客の負担を最小に。"}], "refs": [{"tag": "原則・財務", "txt": "4点で与信を判断／与信は最小書類で。"}]}, {"cat": "ke", "q": ["約款を変えてほしいと言われた"], "ans": "約款変更は<b>原則不可</b>。1人の例外を他客に広げない。条件によりケースバイケースで一部飲むが、<b>契約書表紙の備考で対応</b>(約款本体は触らない)。契約書の条件が約款と相違する場合は契約書が優先。", "notes": [{"t": "約款は原則いじらない。例外は備考でケース対応。"}], "refs": [{"tag": "約款2-14", "txt": "契約書の条件が約款と相違する場合は契約書が優先。"}, {"tag": "原則・財務", "txt": "約款は原則いじらない。"}]}, {"cat": "ke", "q": ["補償の範囲を聞かれた"], "ans": "補償は<b>『当社の過失』かつ『物損』</b>の2条件、保険会社の認定額(減価償却後)の範囲内。<b>営業補償(逸失利益)は対象外</b>。魚の死亡・水草枯れは保険加入時のみ。作業時以外の損害は因果関係問わず補償不可。", "notes": [{"t": "過失×物損のみ。営業補償・不可抗力・経年劣化は対象外。"}], "refs": [{"tag": "約款2-5", "txt": "作業時の物損は請負生産物保険の範囲内(傷・アクリル傷・営業補償を除く)。"}, {"tag": "約款2-1", "txt": "魚の死亡・水草枯れは補償不可(希望は別途保険)。"}]}, {"cat": "ka", "q": ["未納が続いている"], "ans": "大原則は<b>入金/契約があるまで設置部に発注を流さない</b>(資金不足で平気で解除される)。約款上、滞納時は<b>水槽所有権は当社帰属</b>、2ヶ月以上の滞納は初期費用清算済でも回収可。淡々と、しかし回収は必ず。", "scripts": [{"l": "事務的に・しかし明確に", "t": "いつもありがとうございます。〇月分のお支払いがまだ確認できておりませんので、ご確認をお願いできますでしょうか。行き違いでしたら申し訳ございません。\nもしご事情があればお気軽にご相談ください、お支払い方法のご相談も承ります。"}], "notes": [{"t": "入金/契約前に発注しない。"}, {"do": 1, "t": "滞納時の所有権・回収は約款の根拠を持っておく。"}], "refs": [{"tag": "約款3-5", "txt": "滞納時は水槽所有権は当社に帰属。"}, {"tag": "約款3-6", "txt": "2ヶ月以上滞納は初期費用清算済でも回収あり。"}, {"tag": "原則・財務", "txt": "入金まで発注しない。"}]}, {"cat": "ka", "q": ["入金前に発注を急かされた"], "ans": "<b>入金または発注書サイン</b>があるまで設置部に流さない。資金不足で平気で解除される。急かされても建付けを崩さず、先に契約書とサインを回収する。", "notes": [{"t": "入金まで発注しない。例外を作らない。"}], "refs": [{"tag": "原則・財務", "txt": "入金まで発注しない。"}]}, {"cat": "ka", "q": ["クレジット決済手数料を客に請求したい"], "ans": "カード会社規約上、<b>決済手数料を客に請求するのはNG</b>。『外部委託先のシステム利用料／委託料』として別途請求するのが正しい建付け。", "notes": [{"t": "“手数料”でなく“委託料”。建付けを誤ると規約違反。"}], "refs": [{"tag": "原則・財務", "txt": "手数料でなく委託料。"}]}, {"cat": "ka", "q": ["値引き・キャンセル料を処理する"], "ans": "値引(キャンセル料からの差引等)した場合は<b>必ず堀さんへ経理処理</b>＝①転売利益を売上計上 ②該当月の売上を修正、を申告。数字の整合を崩さない。", "notes": [{"do": 1, "t": "値引き/キャンセルは必ず堀さんへ申告(売上計上＋修正)。"}], "refs": [{"tag": "原則・社内", "txt": "値引は売上と一緒に処理。"}]}, {"cat": "ro", "q": ["スタッフが昇給／外注費の還元を求めてきた"], "ans": "報酬は<b>労働時間に対して決まる</b>。『他社いくらだから浮いた分を還元』は労務上成立しない。<b>お金で動かすとリーダーの尊厳が失われ組織が頓挫</b>。評価・役割・ビジョンで動かす。時短は業務を棚卸し・入替えして範囲内に収める。", "notes": [{"t": "『浮いた分=報酬』にしない。労働時間で考える。"}, {"t": "お金で釣らない。評価・役割・ビジョンで動かす。"}, {"do": 1, "t": "報酬の話は本人に期待を持たせる前に、先に中川さんに相談。"}], "refs": [{"tag": "原則・社長業", "txt": "労務の原則／お金のバラマキ。"}], "esc": "報酬・労務の判断は、本人の見ている場でなく先に中川さんへ。"}, {"cat": "ro", "q": ["スタッフ・部署の不満が爆発した"], "ans": "『改善できるか』より<b>『定例会議に必ず参加してもらう』</b>のが近道。ブラックボックス感が消えると不満の概念自体が無くなる。CCSの3原則(基礎／ポジティブ変換／全員参加)に立ち返る。", "notes": [{"do": 1, "t": "まず会議に巻き込む。情報を開示する。"}, {"t": "愚痴でなく『どう改善するか』の提案に変換させる土壌を。"}], "refs": [{"tag": "原則・社長業", "txt": "組織の不満解消＝まず会議に巻き込む。"}, {"tag": "CCS", "txt": "安定期3原則。"}]}, {"cat": "ro", "q": ["ハラスメントの相談を受けた"], "ans": "就業規則62条にハラスメント窓口の定めあり。<b>速やかに報告・事実調査に着手</b>。相談者が不利益を受けないよう配慮(相談・協力を理由とする不利益取扱いは禁止)。該当者は懲戒規定で対処。一人で抱えず正しい手順で。", "notes": [{"do": 1, "t": "速やかに記録・報告・調査。相談者を守る。"}, {"t": "相談・協力を理由に不利益に扱わない。"}], "refs": [{"tag": "就業規則62条", "txt": "ハラスメント禁止・窓口設置・不利益取扱い禁止。"}, {"tag": "就業規則73-74条", "txt": "懲戒の種類・事由。"}], "esc": "事実認定・処分は会社判断。中川さん／総務と必ず連携。"}, {"cat": "ro", "q": ["残業・休日の扱いを聞かれた"], "ans": "所定は<b>実働8時間、10:00〜20:00、休憩合計2時間</b>。現場は原則直行直帰で移動時間は労働時間に含めない。休日は各月6日＋年末年始3/GW3/夏期3。時間外/休日労働は<b>36協定と事前許可</b>が前提(無許可業務は割増不払い)。割増は時間外1.25/休日1.35/深夜0.25。", "refs": [{"tag": "就業規則20-21条", "txt": "実働8h・10:00〜20:00・休憩2h・現場は直行直帰。"}, {"tag": "就業規則28-30条", "txt": "休日と時間外/休日労働命令(36協定・事前許可)。"}, {"tag": "賃金22条", "txt": "割増 時間外1.25/休日1.35/深夜0.25。"}]}, {"cat": "ro", "q": ["スタッフが私傷病で長期欠勤している"], "ans": "業務外傷病で連続30日欠勤等は休職を命じることがある(私傷病の休職期間は<b>6ヶ月</b>)。休職中は無給、社保本人負担分は会社立替→本人支払。<b>期間満了で事由が消えなければ当然退職</b>。復職は治癒証明＋必要なら会社指定医の受診。", "refs": [{"tag": "就業規則46-49条", "txt": "休職事由／期間6ヶ月／無給／満了で当然退職／復職手続。"}], "esc": "解雇・退職に関わる判断は会社・専門家と連携。"}, {"cat": "ro", "q": ["採用を強化したい"], "ans": "採用＝<b>広告精度×求人メッセージ×面接力</b>の掛け算。無料プラン＋広告でも応募は来る。広告で取れても面接力が弱いと失注する。試用期間は3か月(必要時1回6か月まで延長可)。CCSの採用基準(改革に一緒に参画したい人)に合うか。", "refs": [{"tag": "原則・マーケ", "txt": "採用は掛け算で考える。"}, {"tag": "就業規則14-15条", "txt": "試用期間3か月／本採用拒否。"}, {"tag": "CCS", "txt": "採用基準。"}]}, {"cat": "hd", "q": ["社長としての初動（面談要望・トップ対応を求められた）"], "ans": "営業もクレームも初動は『社長を出す』でなく<b>『上席に確認します』でワンクッション</b>。直接トップを出さない。決裁はガバナンスを尊重し<b>決裁ラインを飛ばさない</b>(部の長の決済を先に通す)。", "notes": [{"t": "いきなりトップを出さない。一段クッションを置く。"}, {"t": "決裁は管理職を飛ばさず、先に確認を通す。"}], "refs": [{"tag": "原則・社長業", "txt": "初動は『上席に確認』／決裁ラインを飛ばさない。"}]}, {"cat": "hd", "q": ["経費・投資を判断する（削減／継続中止）"], "ans": "数字(経費削減等)の裏の<b>顧客心理(影)</b>を必ず見る＝『調子が悪いのに魚を入れてもらえない客』を会議に呼んで同じ話ができるか。<b>費用対効果(回収できるか)で続行/中止を自分でジャッジ</b>。測れない施策は判断不能(計測設計が前提)。魚＝お金＝命。", "notes": [{"do": 1, "t": "数字の裏の顧客心理（影）を必ず見る。"}, {"do": 1, "t": "続行/中止は費用対効果で自分が責任を持って判断。"}], "refs": [{"tag": "原則・社長業", "txt": "光と影／費用対効果で続行判断。"}, {"tag": "CCS", "txt": "魚＝お金＝命。"}]}, {"cat": "hd", "q": ["AIで返信文・資料を作るとき"], "ans": "AIの返信を<b>読むだけはインプットに留まり身につかない</b>。自分で考えアウトプットを重ねて血肉にする。AIは答えの補足程度。<b>重要な意思決定は自分の頭で考え、責任を取る</b>。", "notes": [{"t": "AIは補助。重要な判断は自分の頭で。"}], "refs": [{"tag": "原則・社長業", "txt": "AIは補助、判断は自分。"}]}];
+const DOCS=[{"id": "yk", "name": "約款（顧客契約）", "c": "#9163A8"}, {"id": "sg", "name": "就業規則", "c": "#1C7293"}, {"id": "cg", "name": "賃金規定", "c": "#D38A12"}, {"id": "ik", "name": "育児・介護", "c": "#2A9D8F"}, {"id": "cs", "name": "経営理念・CCS", "c": "#E07B39"}, {"id": "hk", "name": "働き方", "c": "#6b7e96"}];
+const KITEI=[{"doc": "yk", "ref": "約款1", "title": "飼育・設置の注意", "body": "ライト照射は約9〜10時間の連続照射（残りは消灯）。水温24〜26℃が理想で夏は30℃超で全滅の恐れ→送風・通気、必要なら水槽用ファン/クーラーを別途。ろ過器・ヒーターは常時通電（水循環なし/ヒーター露出時は即電源OFF）。生体は設置2週間後から徐々に。メタハラは高温で触らない。海水は塩ダレ注意。水槽は叩かない・押さない。", "tags": "ライト 水温 ヒーター ろ過 設置 海水 メタハラ"}, {"doc": "yk", "ref": "約款1-4", "title": "CO2ボンベ・コケ", "body": "CO2小型ボンベは交換が必要（別途料金・約2週に1回）。大型ボンベはボンベ会社の所有で解約後回収。ガラス面のコケはコケ取りマグネット等で落としてもらう場合あり。太陽光・間接光が多い場所はコケが大量に出る可能性があり、別途複数回訪問の別プラン適用となる。", "tags": "CO2 ボンベ コケ 太陽光 別プラン"}, {"doc": "yk", "ref": "約款2-1", "title": "生体の補償", "body": "熱帯魚の死亡・水草等の枯れについての補償は致しかねます（補償希望は別途保険）。", "tags": "魚 死亡 水草 枯れ 補償 保険"}, {"doc": "yk", "ref": "約款2-2", "title": "消耗品・生体補充", "body": "各種消耗品の交換追加、各種生体の補充追加はお客様のご負担（補償希望は別途保険）。", "tags": "消耗品 生体 補充 負担"}, {"doc": "yk", "ref": "約款2-3", "title": "返品・返金", "body": "商品・作業料の返品・返金等は承りません。", "tags": "返品 返金"}, {"doc": "yk", "ref": "約款2-4", "title": "機材補償（保険加入時）", "body": "損害補償 月額保険(小型魚用)加入で機材補償を無料付帯。メンテ開始から機材は5年、水槽本体と濾過槽は1年まで無償。ただし税抜3万円以上の機材は1年まで。未加入は製品保証書期間内にて無償。", "tags": "機材 保険 5年 1年 無償"}, {"doc": "yk", "ref": "約款2-5", "title": "作業時の物損", "body": "メンテ作業時の水漏れ・火災・作業ミスによる物損は、当社加入の請負生産物保険の適用範囲内で負担（水槽・用品等の傷、アクリル面の傷、不可抗力、営業補償等を除く）。作業時以外の損害は施工/管理技術の因果関係に関わらず補償不可。", "tags": "物損 水漏れ 火災 保険 営業補償"}, {"doc": "yk", "ref": "約款2-8", "title": "当月キャンセル", "body": "当月のキャンセルが生じた場合、1回につき契約メンテ料金と保険料の50％を申し受ける。当社都合のキャンセルは別。", "tags": "キャンセル 50% 当月"}, {"doc": "yk", "ref": "約款2-9", "title": "途中解約", "body": "途中解約は契約期間内の残メンテ回数×(メンテ料+保険料)の50％。当社都合は無料。リースは途中解約でもリース残高満額の支払い。", "tags": "途中解約 違約金 50% リース 残高"}, {"doc": "yk", "ref": "約款2-10", "title": "自動更新・解約期限", "body": "契約は契約満了日にて自動更新(1年)。解約は必ず契約満了日の30日前までに申し出。30日前を過ぎると契約更新となる。", "tags": "自動更新 解約 30日 満了"}, {"doc": "yk", "ref": "約款2-11", "title": "緊急出張", "body": "水質トラブル等は定期メンテ以外に無料で緊急出張。ただしトラブル要因により作業料金や商品代が加算される場合あり。", "tags": "緊急 出張 無料 水質"}, {"doc": "yk", "ref": "約款2-12", "title": "料金変動", "body": "出張先の距離や規模・条件などによりメンテ料金が変動する場合がある。設置場所の移動・大掃除・大幅レイアウト変更・撤去は別途料金。", "tags": "料金 変動 移動 撤去 レイアウト"}, {"doc": "yk", "ref": "約款2-14", "title": "契約書優先", "body": "契約書に条件が記載され約款と相違が生じる内容は、契約書内の条件が優先される。", "tags": "契約書 優先 約款 相違"}, {"doc": "yk", "ref": "約款2-15", "title": "2台目以降", "body": "追加・交換等で2台目をご契約の場合は新たな契約書締結を省略し、1台目と同一条件、2台目の契約起点日は初請求月を1回目とする。", "tags": "2台目 追加 契約 起点"}, {"doc": "yk", "ref": "約款2-16", "title": "名義変更", "body": "契約者名義が変わった場合、新名義人にそのまま契約が自動で引き継がれる。旧名義人は必ず新名義人へ引継ぎを。", "tags": "名義 変更 引継ぎ"}, {"doc": "yk", "ref": "約款3-2", "title": "支払い", "body": "メンテ料金は消費税別。支払いは現金・振込。振込は請求書の日付より翌月末日以内。振込手数料は契約者負担。", "tags": "支払い 振込 消費税 手数料"}, {"doc": "yk", "ref": "約款3-3", "title": "レイアウト・肖像権", "body": "レイアウトは当社のセンスで施行（希望は事前申出）。出来上がりイメージ相違の返金返品はなし。施工後の水槽の肖像権は当社も保有しカタログ/HP掲載の場合あり。", "tags": "レイアウト 肖像権 イメージ 返金"}, {"doc": "yk", "ref": "約款3-5", "title": "滞納と所有権", "body": "メンテ料金や違約金などに滞納がある場合、水槽所有権は当社に帰属する。", "tags": "滞納 所有権 違約金"}, {"doc": "yk", "ref": "約款3-6", "title": "回収", "body": "約款不履行、及び2ヶ月以上の滞納がある場合は、初期費用清算済みでも商品を回収する場合がある。", "tags": "回収 滞納 不履行"}, {"doc": "yk", "ref": "約款3-7", "title": "管轄裁判所", "body": "訴訟の必要が生じた場合の第一審の専属的合意管轄は松戸地方裁判所または松戸簡易裁判所。", "tags": "裁判 管轄 松戸 訴訟"}, {"doc": "sg", "ref": "就業14条", "title": "試用期間", "body": "採用日から3か月の試用期間。試用期間は勤続年数に通算。会社は雇用形態に応じて短縮・不設定も可。", "tags": "試用期間 3か月 採用"}, {"doc": "sg", "ref": "就業15条", "title": "本採用拒否", "body": "試用期間中に不適格と認める場合は本採用しない。必要時は1回に限り6か月まで延長可。14日経過後は解雇予告を準用。", "tags": "本採用 拒否 延長 6か月"}, {"doc": "sg", "ref": "就業16条", "title": "人事異動", "body": "業務都合で配置転換・転勤・職種変更・応援・一時異動を命じることがある。正当な理由なく拒めない。原則1週間前に内示。", "tags": "異動 配転 転勤 内示"}, {"doc": "sg", "ref": "就業19条", "title": "業務引継ぎ", "body": "自ら退職する者は退職日までに90日以上の業務引継ぎ期間を設ける。怠った場合は懲戒処分あり。", "tags": "引継ぎ 退職 90日"}, {"doc": "sg", "ref": "就業20条", "title": "所定労働時間", "body": "所定労働は実働8時間、始業10:00/終業20:00。現場作業は原則直行直帰で移動時間は労働時間に含めない。", "tags": "労働時間 8時間 10時 20時 直行直帰 移動"}, {"doc": "sg", "ref": "就業21条", "title": "休憩", "body": "労働時間の途中に合計2時間の休憩。現場作業と現場作業の間に交替で与える。", "tags": "休憩 2時間"}, {"doc": "sg", "ref": "就業24-26条", "title": "変形・フレックス", "body": "労使協定により1か月単位／1年単位の変形労働時間制、フレックスタイム制を実施可。フレキシブル：始業6:00〜13:00、終業17:00〜22:00。", "tags": "変形労働 フレックス"}, {"doc": "sg", "ref": "就業28条", "title": "休日", "body": "休日は各月6日（各週1日以上）。加えて年末年始3日・GW3日・夏期休日3日・会社指定日。振替あり。", "tags": "休日 6日 年末年始 GW 夏期 振替"}, {"doc": "sg", "ref": "就業29-30条", "title": "時間外・休日労働命令", "body": "業務上必要な場合に時間外・休日労働を命じることがある（36協定の範囲）。事前に所属長の許可が必要で、無許可業務の通常賃金・割増賃金は支払わない。", "tags": "時間外 残業 休日労働 36協定 許可"}, {"doc": "sg", "ref": "就業32条", "title": "代休", "body": "休日労働に代休を付与する場合、法定休日労働は割増0.35のみ、時間外該当は割増0.25のみ支払う。", "tags": "代休 割増"}, {"doc": "sg", "ref": "就業33条", "title": "育児等の労働制限", "body": "3歳未満の子を養育する者の請求で所定外労働なし。就学前の子/要介護で請求時、時間外は月24h・年150h上限、深夜免除。", "tags": "育児 介護 時間外 深夜 制限"}, {"doc": "sg", "ref": "就業34条", "title": "管理監督者", "body": "会社が定める管理監督者等は、時間外・休日・代休の規定を適用しない。", "tags": "管理監督者 適用除外"}, {"doc": "sg", "ref": "就業35条", "title": "年次有給休暇", "body": "付与日数は勤続に応じ10/11/12/14/16/18/20日。基準日直前1年の所定労働日の8割以上出勤が対象。有効期間は付与日から2年。", "tags": "有給 年休 付与 8割 2年"}, {"doc": "sg", "ref": "就業36-37条", "title": "半休・取得手続", "body": "半日(4時間)単位の年休取得可。取得は原則1週間前まで（1週間以上離れるなら1か月前）。10日以上付与者は年5日の時季指定。", "tags": "半休 年休 手続 時季指定"}, {"doc": "sg", "ref": "就業40条", "title": "産前産後", "body": "産前6週(多胎14週)以内・産後8週の休暇。無給。", "tags": "産前産後 出産 無給"}, {"doc": "sg", "ref": "就業43条", "title": "育児時間", "body": "1歳未満の乳児を育てる女性は1日2回各30分の育児時間。無給。", "tags": "育児時間 30分"}, {"doc": "sg", "ref": "就業46-47条", "title": "休職", "body": "業務外傷病で連続30日欠勤等は休職を命じることがある。私傷病の休職期間は6ヶ月（情状により延長あり）。", "tags": "休職 私傷病 30日 6ヶ月"}, {"doc": "sg", "ref": "就業48条", "title": "休職中の取扱い", "body": "休職期間は原則勤続年数に算入せず、無給。社会保険の本人負担分は会社が立替→本人が会社指定の方法で支払う。", "tags": "休職 無給 社会保険 立替"}, {"doc": "sg", "ref": "就業49条", "title": "復職", "body": "休職期間満了までに事由が消滅しない場合は当然退職。復職には主治医の治癒証明、必要時は会社指定医の受診。", "tags": "復職 治癒証明 当然退職"}, {"doc": "sg", "ref": "就業52-53条", "title": "退職・辞職", "body": "退職希望日の90日以上前に届出で原則承認。辞職は民法627条2項による。退職日まで引継ぎ、直前2週間は就労。", "tags": "退職 辞職 90日 引継ぎ"}, {"doc": "sg", "ref": "就業54-55条", "title": "退職時手続・競業避止", "body": "退職/解雇時は貸与品返還・精算。役職者/企画職は離職後1年間、国内で競業/在職中の顧客との取引を禁止。退職7日前まで誓約書提出。", "tags": "競業避止 守秘 退職 誓約書"}, {"doc": "sg", "ref": "就業56条", "title": "定年", "body": "定年は満60歳（達した月の末日で退職）。本人希望で満65歳まで継続雇用。", "tags": "定年 60歳 65歳 継続雇用"}, {"doc": "sg", "ref": "就業57-58条", "title": "解雇", "body": "身体精神の障害/能力不足/勤務不良/協調性欠如/事業縮小等は普通解雇。解雇予告は労基法20条による。", "tags": "解雇 普通解雇 予告"}, {"doc": "sg", "ref": "就業60条", "title": "服務規律", "body": "会社許可なき副業禁止、勤務時間中の私的販売・政治宗教活動の禁止、秘密保持、私物PC/USBの接続禁止、顧客情報の私的記録禁止、酒気帯び運転禁止 等。", "tags": "服務 副業 秘密 私物PC 酒気帯び"}, {"doc": "sg", "ref": "就業62条", "title": "ハラスメント禁止", "body": "セクハラ・パワハラ・マタハラを禁止。会社は窓口を設置し、苦情・相談に速やかに調査着手。相談・調査協力を理由とする不利益取扱いは行わない。", "tags": "ハラスメント セクハラ パワハラ 窓口"}, {"doc": "sg", "ref": "就業63条", "title": "出退勤", "body": "タイムシートに始終業時刻を記入/報告し所属長の確認を得る。私用外出は許可制。日常携帯品以外の持込持出は会社の許可。", "tags": "出退勤 タイムシート 外出"}, {"doc": "sg", "ref": "就業65条", "title": "遅刻早退欠勤", "body": "遅刻・早退・欠勤のおそれは直ちに所属長へ届出。傷病は診断書を求めることあり。無断欠勤は年休振替を原則認めない。", "tags": "遅刻 早退 欠勤 無断"}, {"doc": "sg", "ref": "就業67-68条", "title": "端末・SNS", "body": "貸与端末は業務範囲のみ、私用禁止（会社は閲覧・GPS特定可）。公式SNSは申請承認制。私的でも会社/顧客情報・制服/ロゴ発信や誹謗中傷は禁止。", "tags": "端末 SNS 私用 GPS"}, {"doc": "sg", "ref": "就業70条", "title": "各種届出", "body": "氏名・現住所/通勤経路・扶養家族・学歴/資格に異動が生じたら、あらかじめ又は1週間以内に届け出る。", "tags": "届出 住所 扶養 資格"}, {"doc": "sg", "ref": "就業72-74条", "title": "表彰・懲戒", "body": "懲戒は譴責/減給/出勤停止(14労働日以内)/降格/諭旨解雇/懲戒解雇。減給上限あり。懲戒事由は経歴詐称・無断欠勤・命令違反・秘密漏洩・競業・横領背任窃盗詐欺・職権濫用等多数。", "tags": "表彰 懲戒 譴責 減給 懲戒解雇"}, {"doc": "sg", "ref": "就業82条", "title": "健康診断", "body": "従業員は1年に1回、医師による定期健康診断を受診する。", "tags": "健康診断 年1回"}, {"doc": "sg", "ref": "就業86-89条", "title": "災害補償", "body": "業務上の傷病は労基法に基づき補償。療養3年で打切補償。労災給付がある場合は調整。上積補償は民事賠償請求権放棄の文書提出が条件。", "tags": "災害補償 労災 打切補償"}, {"doc": "sg", "ref": "就業・施行", "title": "施行", "body": "本就業規則は令和4年2月1日から施行。", "tags": "施行 令和4年"}, {"doc": "cg", "ref": "賃金2条", "title": "賃金の構成", "body": "基本給＋諸手当（試験/売上/役職/勤続/育児/特別/管理職）＋割増賃金（時間外/休日/深夜）。", "tags": "賃金 構成 手当 基本給"}, {"doc": "cg", "ref": "賃金5条", "title": "計算期間・支払日", "body": "当月1日〜当月末日締めの期間について、翌月25日までに支払う。支払日が休日なら翌営業日。", "tags": "給料日 締め 25日 支払"}, {"doc": "cg", "ref": "賃金8条", "title": "休暇・休業の賃金", "body": "年休は固定給対象者は通常賃金、歩合給対象者は平均賃金。産前産後等は無給。会社都合の休業は平均賃金の60％の休業手当。", "tags": "年休 無給 休業手当 60%"}, {"doc": "cg", "ref": "賃金10条", "title": "基本給", "body": "月給制。(1)管理職・固定給対象者は学歴・能力・経験等で決定。(2)歩合給対象者は担当顧客数×歩合率（リミット5達成度等）で決定。", "tags": "基本給 月給 歩合 固定給"}, {"doc": "cg", "ref": "賃金13-15条", "title": "売上/役職/勤続手当", "body": "売上手当・役職手当・勤続手当は、いずれも時間外労働割増賃金の支給に代える固定残業の対価。実際の時間外が見込みを超えたら差額を別途支給。", "tags": "売上手当 役職手当 勤続手当 固定残業"}, {"doc": "cg", "ref": "賃金16条", "title": "育児手当", "body": "中学生以下の子を扶養する者に、子1人当たり月15,000円を支給。", "tags": "育児手当 15000 子"}, {"doc": "cg", "ref": "賃金18条", "title": "管理職手当", "body": "管理監督者に業務内容から見込む額を支給。深夜労働分は月30時間見込みを含む。深夜以外の割増は支給しない。", "tags": "管理職手当 管理監督者 深夜"}, {"doc": "cg", "ref": "賃金19条", "title": "交通費", "body": "通勤の有料道路はETCで支払い。月の総額が基準額を超えた分は従業員負担。", "tags": "交通費 ETC 高速"}, {"doc": "cg", "ref": "賃金20条", "title": "諸手当の届出", "body": "諸手当の届出は所定期日まで。期日までに届出なきものは原則遡及支給しない（会社が認めれば最大2年遡及）。", "tags": "手当 届出 遡及"}, {"doc": "cg", "ref": "賃金22条", "title": "割増賃金", "body": "時間外1.25・休日1.35・深夜0.25。算定基準賃金＝基本給＋試験手当＋勤続手当＋特別手当。", "tags": "割増 時間外 1.25 休日 1.35 深夜 0.25"}, {"doc": "cg", "ref": "賃金23条", "title": "賞与", "body": "業績・査定・貢献度を考慮して支給（業績により不支給あり）。原則1月支給。算定対象期間は前年1/1〜12/31。支給日在籍かつ以降3ヶ月以上在籍予定の者が対象。", "tags": "賞与 ボーナス 1月 査定"}, {"doc": "cg", "ref": "賃金別紙1", "title": "歩合給", "body": "担当顧客数×担当顧客1件あたりの歩合率（就業3年目まで/4年目以降×アシスタント/デザイナー×件数帯40未満〜56以上）＋リミット5加算。内勤はS/A/B/C/Dで件数換算。現場48件が全員のノルマ（最低基本ライン）。詳細数値は早見表（元規定）参照。", "tags": "歩合給 担当顧客 リミット5 48件 早見表"}, {"doc": "cg", "ref": "賃金別紙2", "title": "保障給", "body": "1時間あたりの保障給は、平均賃金の6割か、所定の計算式のいずれか高い額。", "tags": "保障給 平均賃金 6割"}, {"doc": "ik", "ref": "育児休業", "title": "育児休業", "body": "原則子が1歳まで（条件で1歳6か月/2歳まで）。原則1か月前に申出。労使協定で入社1年未満等を除外可。期間中は無給。", "tags": "育児休業 1歳 申出 無給"}, {"doc": "ik", "ref": "出生時育休", "title": "出生時育児休業（産後パパ育休）", "body": "子の出生後8週間以内に4週間(28日)まで。原則2週間前に申出。2回まで分割可。労使協定により休業中の就業も可（上限あり）。", "tags": "産後パパ育休 出生時 28日 分割"}, {"doc": "ik", "ref": "介護休業", "title": "介護休業", "body": "対象家族1人につき通算93日まで、3回まで分割可。原則2週間前に申出。無給。", "tags": "介護休業 93日 3回 無給"}, {"doc": "ik", "ref": "看護休暇", "title": "子の看護休暇", "body": "就学前の子の世話・予防接種等のため、子1人で年5日・2人以上で年10日。1日/時間単位で取得可。無給。", "tags": "看護休暇 子 5日 10日"}, {"doc": "ik", "ref": "介護休暇", "title": "介護休暇", "body": "要介護家族の世話のため、家族1人で年5日・2人以上で年10日。1日/時間単位で取得可。無給。", "tags": "介護休暇 5日 10日"}, {"doc": "ik", "ref": "労働制限", "title": "所定外・時間外・深夜の制限", "body": "3歳未満の子→所定外労働なし。就学前の子/要介護→時間外は月24h・年150h上限、深夜(22-5時)免除（請求による）。", "tags": "所定外 時間外 深夜 制限 育児 介護"}, {"doc": "ik", "ref": "短時間", "title": "育児・介護短時間勤務", "body": "3歳未満の子→原則9:00〜16:00(休憩12-13時)の短時間勤務。介護は利用開始から3年で2回まで同様の短時間。", "tags": "短時間勤務 時短 9時 16時"}, {"doc": "ik", "ref": "施行", "title": "施行", "body": "本規程は2022年10月1日から実施。", "tags": "施行 2022"}, {"doc": "cs", "ref": "安定期9ヶ年", "title": "安定期9ヶ年計画", "body": "創業期→成長期を経て、現在は安定期9ヶ年（第一/第二/第三 各3年）→その後は展開期。第一安定期で最重要なのは基礎力。", "tags": "安定期 9ヶ年 展開期 基礎力"}, {"doc": "cs", "ref": "3原則", "title": "安定期3原則", "body": "①基礎をしっかりやる（社内ルール厳守・挨拶・報連相・掃除）②愚痴不満ネガティブを言わずポジティブに変換して発信 ③傍観者・評論家にならず全員で会社の方針/企画に参加。", "tags": "3原則 基礎 ポジティブ 全員参加"}, {"doc": "cs", "ref": "経営理念", "title": "経営理念", "body": "自分たちにしか出来ないアクアリウムの仕事に自信と優越感を持ち、お客様対応や社内問題を通じて人間的に成長していくこと。", "tags": "経営理念 自信 成長"}, {"doc": "cs", "ref": "ミッション", "title": "ミッション", "body": "世の中に“家具インテリア＝水槽”という選択肢があることを広く認知させ、選択の文化として根付かせる。", "tags": "ミッション 水槽 インテリア 文化"}, {"doc": "cs", "ref": "ヴィジョン", "title": "ヴィジョン", "body": "品質・価格・顧客数の3点で絶対的1位の座を強固にする。", "tags": "ヴィジョン 品質 価格 顧客数 1位"}, {"doc": "cs", "ref": "ターゲット", "title": "顧客ターゲット", "body": "富裕層を中心とした個人、及び集客/差別化に困っている法人店舗等。", "tags": "ターゲット 富裕層 法人"}, {"doc": "cs", "ref": "AQUA指標", "title": "日々の行動指針（AQUA）", "body": "Anticipate＝先回り・気配り・先手／Question＝想像でなくヒヤリング／Unique＝面白みのある提案・キャラ／Adjust＝自分でなく常に相手のニーズに合わせる。", "tags": "AQUA 先回り ヒヤリング 提案 ニーズ"}, {"doc": "cs", "ref": "仕事の流儀", "title": "社長が求める仕事のやり方", "body": "スピードは品質に勝る（すぐやる＝信頼）。挨拶・返事・期限・報連相・小さな約束を徹底。失敗は成長のチャンス。聞くは一時の恥。ストレスは成長痛。", "tags": "スピード 報連相 約束 失敗 ストレス"}, {"doc": "cs", "ref": "お客様対応", "title": "お客様対応の考え方", "body": "相手の表現の裏にある『期待値』を汲み取り、精進して満足してもらう。クレームから逃げない。“やっぱり良かった”をゴールに置く。", "tags": "期待値 クレーム 満足"}, {"doc": "cs", "ref": "経費", "title": "経費・お魚の考え方", "body": "経費を使う時は削減余地と回収可否を常に考える。魚＝お金であり、まず命。1000円の魚を安易に無駄に殺さない。", "tags": "経費 魚 お金 命"}, {"doc": "cs", "ref": "緊急時", "title": "緊急時の対応", "body": "お客様は自分で水槽を触れない。緊急時のクレームは最優先。“自分の客ではない”という気持ちは捨て、自分たちの客として動く。", "tags": "緊急 最優先 クレーム"}, {"doc": "cs", "ref": "CCS試験", "title": "CCSと試験", "body": "CCS＝Corporate Culture Standard（企業文化の基準）。毎年1月と7月の決算発表で虫食い試験を実施。", "tags": "CCS 試験 決算 1月 7月"}, {"doc": "hk", "ref": "①経営/管理職", "title": "経営側・管理職・リーダー", "body": "年収400〜1000万(最大月80万)。教育・問題解決・マネジメントが主業務でメンテには携わらない頭脳プレイヤー。成果と結果が収益。会社が責任を取り将来保証あり。賞与あり。サブリーダーはこの登竜門。", "tags": "働き方 管理職 リーダー 年収 マネジメント"}, {"doc": "hk", "ref": "②デザイナー", "title": "メンテナンスデザイナー（主力）", "body": "年収300〜550万(最大月45万)。完全歩合で即日給与反映、社内副業も評価に組込み。長く勤めるほど手当増。社保保証、原則生涯解雇なし、賞与あり。会社の方針/業務依頼は原則断れない。", "tags": "働き方 デザイナー 歩合 主力 社保"}, {"doc": "hk", "ref": "③契約社員", "title": "契約社員", "body": "0〜350万(最大月30万)。アルバイトと正社員の間。仕事量を自由選択、基本給概念なし。社保あり、賞与なし。業績/状況で契約打切りあり。追加業務依頼は断れる。", "tags": "働き方 契約社員 自由 賞与なし"}, {"doc": "hk", "ref": "④独立代理店", "title": "独立起業代理店", "body": "0〜無限。会社対会社の取引で自由、基本報酬高い、節税。将来保証なし、自分でミスの責任、発注されない可能性、病気怪我で収入ゼロ。条件＝入社5年/リーダー2年/サブリーダー3年/リミット5デザイナー7割のいずれか＋自分でクレーム対応ができること。", "tags": "働き方 独立 代理店 フリーランス 条件"}, {"doc": "hk", "ref": "3構成", "title": "成長の3構成", "body": "成長シート(リミット5/CCS)＝何を学べばスキルが上がるか＋モデル賃金＝どのポジションで所得いくらか＋ステップアップ基準＝何をクリアすればどのポジションに上がれるか。", "tags": "成長シート モデル賃金 ステップアップ リミット5"}];
+const GCATS=[{"id": "g0", "name": "社長業・経営視点", "c": "#1C7293"}, {"id": "g1", "name": "営業", "c": "#E2574C"}, {"id": "g2", "name": "マーケティング", "c": "#E07B39"}, {"id": "g3", "name": "顧客心理", "c": "#9163A8"}, {"id": "g4", "name": "リース・契約・財務", "c": "#2A9D8F"}, {"id": "g5", "name": "社内ルール・実務", "c": "#6b7e96"}, {"id": "g6", "name": "忘れてはいけないルール", "c": "#C9A227"}];
+const GENSOKU=[{"cat": "g0", "theme": "マインドセット", "point": "『既になっている』と自己定義する", "teach": "セルフイメージを毎日声に出して脳に刷り込む。『なりたい』ではなく『既になっている』と定義する。最低6ヶ月毎日。マインドが変われば行動も成果も劇的に変わる。", "sit": "営業が辛く鬱気味と弱音を吐露", "date": "2023.05.16"}, {"cat": "g0", "theme": "コンフォートゾーン", "point": "壁とストレスは成長の証", "teach": "壁＝前進した証拠、ストレス＝できていない証明。喜んで受け入れ絶対に後退しない。ぬるま湯(適温領域)こそリスク。", "sit": "同上", "date": "2023.05.16"}, {"cat": "g0", "theme": "苦手の克服", "point": "苦手は『慣れ』で潰す", "teach": "皆が当たり前にできる事はできないといけない。要因を分析しチェックリスト化して慣れる。慣れていない＝面倒なだけ。慣れれば勝ち。", "sit": "見積・契約書など細かい仕事が苦手", "date": "2023.05.16"}, {"cat": "g0", "theme": "予定表は秘書", "point": "予定表の奴隷になる", "teach": "1週間前に翌週を紙に分単位で書く。その場で考えず予定表の奴隷になる。5分10分の隙間も無駄にしない。", "sit": "スケジュール管理が雑になり崩れた", "date": "2023.05.16"}, {"cat": "g0", "theme": "できる理由を探す", "point": "『どうすれば出来るか』で考える", "teach": "出来ない理由でなく『どうすれば簡単にできるか』を考える習慣。委託・分解で解消する。一流ビジネスマンの必須スキル。", "sit": "付帯作業を『大変』と捉えがち", "date": "2023.04.22"}, {"cat": "g0", "theme": "翌日に持ち越さない", "point": "その日のうちに完結させる", "teach": "1日の仕事を完了させてから終わるルール。ゲーム的ルールとご褒美で楽しみながらやる。", "sit": "タスク管理の相談", "date": "2024.08.07"}, {"cat": "g0", "theme": "経営視点への転換", "point": "全体最適で判断する", "teach": "これまで『自分のタスク』→これから『会社全体/部署間の利益損失、ブランディングを理解した上で』タスクをやる。投資回収・継続中止を自らジャッジする。", "sit": "TikTok継続可否の判断", "date": "2025.02.18"}, {"cat": "g0", "theme": "光と影", "point": "数字の裏の顧客心理を見る", "teach": "物事には常に光と影。経費削減の裏で『調子が悪いのに魚を入れてもらえない客』の心理が抜けている。客を会議に呼んで同じ話ができるか。", "sit": "仕入れ削減を全員が成功と喜ぶ", "date": "2026.06.04"}, {"cat": "g0", "theme": "お金のバラマキ", "point": "報酬以外で人を動かす", "teach": "お金を出す事自体でなく『お金以外で頑張ってもらう仕組み/ビジョン/評価』をしないのがダメ。お金に逃げるとリーダーの尊厳が失われ組織は頓挫する。", "sit": "小林さんにバナー報酬を提案して指摘", "date": "2026.05.28"}, {"cat": "g0", "theme": "労務の原則", "point": "浮いた分=報酬ではない", "teach": "報酬は労働時間に対して決まる。『他社いくらだから浮いた分』は労務上成立しない。時短契約は業務を棚卸し・入替えして範囲内に収める。", "sit": "外注費が浮いた分を還元する発想", "date": "2026.05.28"}, {"cat": "g0", "theme": "組織の不満解消", "point": "まず会議に巻き込む", "teach": "改善できるかでなく『定例会議に必ず参加してもらう』のが近道。ブラックボックス感が消え不満の概念自体が無くなる。建設的議論の土台を作る。", "sit": "メンテ部が営業部に不満爆発", "date": "2026.03.29"}, {"cat": "g0", "theme": "社長になる工程表", "point": "逆算の工程表を持つ", "teach": "会社成長計画でなく『自分が社長になるための工程表』。いつ何を完了すれば全員から推薦されるかを逆算し、4年間自分用に進捗照合する。", "sit": "事業計画の宿題", "date": "2026.04.30"}, {"cat": "g0", "theme": "当面やるべき事", "point": "まずインプットと信頼", "teach": "当面最重要＝問題発見/課題設定/改善策、会議設計運営、各部署把握、重要案件の最終確認。幹部育成や文化作りはまだ不要、今はインプットと信頼構築。", "sit": "社長業の棚卸し", "date": "2026.04.30"}, {"cat": "g0", "theme": "上席に確認", "point": "初動は『上席に確認』", "teach": "営業もクレームも初動は『社長に確認します』でなく『上席に確認します』。直接トップを出さずワンクッション置く。", "sit": "内覧会で社長面談の要望", "date": "2024.12.28"}, {"cat": "g0", "theme": "ガバナンス決済", "point": "決裁ラインを飛ばさない", "teach": "この種の決済は部の長(管理職)が決済する。組織図/ガバナンスを尊重し、飛ばさず先に大野に確認する。", "sit": "PC購入の相談", "date": "2025.04.29"}, {"cat": "g0", "theme": "会食マナー", "point": "手土産と食い下がりの作法", "teach": "年下営業を誘った場合は基本相手払い。1対1なら『契約頂いたのは当社』と一度食い下がる。手土産(3000-5000円、熨斗『御礼』)を持参する。", "sit": "客の社長と会食", "date": "2024.12.18"}, {"cat": "g0", "theme": "AIとの付き合い方", "point": "AIは補助、判断は自分", "teach": "AIの返信を読むだけはインプットに留まり身につかない。自分で考えアウトプットを重ねて血肉にする。AIは答えの補足程度。重要な意思決定は自分の頭で。", "sit": "AIで返信文を作る風潮", "date": "2026.06.15"}, {"cat": "g0", "theme": "刃を研ぐ/写経", "point": "毎週書き写して刷り込む", "teach": "表とセルフイメージを毎週書き写して刷り込む(写経の効果)。スキルとマインドをバランス良く上げる。", "sit": "マンツー後のまとめ方", "date": "2024.09.10"}, {"cat": "g0", "theme": "レスポンス＝信頼", "point": "速さも提案の質の一部", "teach": "レスポンスの速さ＝大切に扱われている＝信頼。良い文章でも最後の詰め(即返信)が甘いと台無し。社長は『客を待たせてないか』が気になるべき。", "sit": "土橋クレームの最終返事が遅れた", "date": "2026.06.20"}, {"cat": "g0", "theme": "安売り手段は封印", "point": "安売り手段は封印する", "teach": "安く出せる手段があると思うだけで簡単に値引きに走り、『価値を伝えて高く売る』スキルが伸びなくなる。通常の引き出しに置かない。", "sit": "最終手段の格安プラン", "date": "2023.07.08"}, {"cat": "g1", "theme": "失注は予算のせいにしない", "point": "失注を予算のせいにしない", "teach": "『予算が合わなかった』は絶対に受け入れない。『相手のコストを上回る魅力を出せなかった』と反省し考え抜く習慣をつける。", "sit": "予算が合わず失注", "date": "2023.04.21"}, {"cat": "g1", "theme": "コストは感情で変わる", "point": "感情がコスト感を決める", "teach": "コストは感情で高くも安くもなる。魅力を伝えワクワクさせれば2万円も安く感じる。相手の予算はほぼ無関係と思うくらいで丁度良い。", "sit": "同上", "date": "2023.04.21"}, {"cat": "g1", "theme": "困りごとを聞く", "point": "盛り上がりと本心は別", "teach": "盛り上がり≠刺さる。良い人ほど演技で盛り上がる。『なぜ今プロに頼むのか/何に困っているか』を聞き、そこを軸に感情訴求する。", "sit": "盛り上がったのに失注", "date": "2023.04.21"}, {"cat": "g1", "theme": "買えるようにしてあげる", "point": "リスクを消して買わせる", "teach": "リスクを排除する提案(1年契約/支払い後ろ倒し/レンタル/仮押さえ権利等)を諦めず考え抜く。買える状態を作るのが営業の仕事。", "sit": "開業で支払いが不安な客", "date": "2023.04.21"}, {"cat": "g1", "theme": "失注にこそ学びがある", "point": "失注をリサーチする", "teach": "取れた案件より取れなかった案件に学びがある。失注理由を必ずヒアリングしリサーチする。営業スキルUPの宝庫。", "sit": "失注対応", "date": "2023.04.21"}, {"cat": "g1", "theme": "見積書でなく発注書", "point": "検討させず発注に導く", "teach": "『ご検討ください』は『冷静になって/やめてもいい』の合図でNG。タイトルを発注書にし発注方法を明記。再検討させない。", "sit": "注文の意思があるのに見積書送付", "date": "2023.04.22"}, {"cat": "g1", "theme": "パーソナリティを出す", "point": "気持ちを言葉にする", "teach": "冒頭で感謝と『嬉しい』気持ちを書く。自分の気持ちを伝えるのがパーソナリティを出す第一歩。", "sit": "注文御礼メール", "date": "2023.04.22"}, {"cat": "g1", "theme": "期限と理由を切る", "point": "期限と理由を切る", "teach": "先延ばしはセールスの死。急いでほしい期限とその理由を必ず書く。", "sit": "同上", "date": "2023.04.22"}, {"cat": "g1", "theme": "検討でなく想像させる", "point": "最後は『想像させる』", "teach": "最終段階で『検討してください』は冷静にさせる。『イメージを膨らませておいてください』に変える。", "sit": "最終段階のメール", "date": "2023.11.30"}, {"cat": "g1", "theme": "囮プランの使い分け", "point": "囮は相手で使い分け", "teach": "囮戦略は有効だが、一度貧相に見せたプランは後で勧めても選ばれない。予算客には両方を魅力的に見せる等、客で使い分ける。", "sit": "2ヶ月1回を貧相に見せ月1回へ誘導", "date": "2023.06.09"}, {"cat": "g1", "theme": "当社だから/他社はできない", "point": "2つの文脈で差を語る", "teach": "『当社でできます』だけは弱い。『なぜ当社だとできるか/なぜ他社はできないか』の2文脈で必ず伝える。", "sit": "強み訴求が弱い", "date": "2023.10.21"}, {"cat": "g1", "theme": "ベネフィットでなく導線", "point": "因果の導線で納得させる", "teach": "良い点を伝えるだけでなく『導線』を示す。クオリティが低い→チャージ取れない→メンテ料払えない、の逆の説明もしてハラオチさせる。", "sit": "チャージ料の訴求", "date": "2023.09.17"}, {"cat": "g1", "theme": "決裁者への手紙", "point": "決裁者に直接届ける", "teach": "決裁者(奥様等)へ向けた資料/手紙を作る。本人が説明できない内容を代弁。ペルソナに合わせビフォーアフター写真も添える。", "sit": "決裁者は奥様だと読む", "date": "2024.07.18"}, {"cat": "g1", "theme": "次の行動を指定する", "point": "次の行動を指定する", "teach": "受け取った人に取ってほしいアクション(転送/お見せする等)を必ず文末に書く。", "sit": "旦那経由で奥様へ", "date": "2024.07.18"}, {"cat": "g1", "theme": "VIPは感情を揺さぶる", "point": "感情で売り理屈は後付け", "teach": "価格/デザインの比較でなく自尊心と感情。ポルシェを買う心理。じらして『実は…』と特別感を演出。後付けの理屈は本人が勝手に作る。", "sit": "成り上がり客にプレミアム提案", "date": "2025.04.08"}, {"cat": "g1", "theme": "当社ならではに翻訳", "point": "当社ならではに翻訳", "teach": "『水槽の魅力』でなく『当社だからこの魅力』。読み手が他社でも同じと感じないように書く。", "sit": "他社と比較される", "date": "2025.01.28"}, {"cat": "g1", "theme": "失注から武器を作る", "point": "失注から次の武器を作る", "teach": "失注/フィードバックから新しいオファーを常に考える(初回スポット→定期で3ヶ月無料等)。習慣化でスキル倍増。", "sit": "スポットのみ失注", "date": "2024.04.16"}, {"cat": "g1", "theme": "相手の心理を想像する癖", "point": "7つの視点で相手を読む", "teach": "立場/プライド/性格/目的/予算/物理的障害/心理的障害を常に想像。1次営業で取れなければズレを修正し2次営業へ。", "sit": "営業インフラの話", "date": "2024.09.18"}, {"cat": "g1", "theme": "高値から段階的に落とす", "point": "高値から段階的に落とす", "teach": "利益が取れるラインから攻め、反応を見て段階的にダウンセル。2パターン出して選ばせる。", "sit": "2パターン提案", "date": "2023.07.08"}, {"cat": "g1", "theme": "約束したオファーは必ず実行", "point": "約束は必ず履行する", "teach": "約束したオファー(問屋リスト/原価/HP掲載/カリキュラム等)を破棄するのは厳禁。現場に丸投げせず必ず実行する。", "sit": "メンテ部に丸投げしかけ", "date": "2023.04.22"}, {"cat": "g1", "theme": "決まる前に懸念を潰す", "point": "決まる前に懸念を潰す", "teach": "業者を決める前に『悩んでいる点/問題点は？見積は自由に変更可』と明確に問題点を確認する。", "sit": "見積から10日経過", "date": "2023.05.14"}, {"cat": "g2", "theme": "ブランディング(高級)", "point": "高級ブランドの世界観で", "teach": "チャラい見せ方は富裕層に響かない。シャネル/ルイヴィトンの世界観。背伸びして手に入れたいと思わせる。相見積もりを取らず当社に頼む層は『ザ・サービス業』を嫌う。", "sit": "社内コンテストの投稿", "date": "2025.08.22"}, {"cat": "g2", "theme": "ノイズ客を入れない", "point": "ノイズ客を入れない", "teach": "趣味客が集まるとAIがそれをアクティブと誤認し更に集める→問合せ減。趣味客は自ら検索する導線なので、広告では排除しベネフィットで富裕層を取りに行く。", "sit": "趣味ユーザーが集まりすぎた", "date": "2025.09.18"}, {"cat": "g2", "theme": "広告構成(黄金手順)", "point": "この順番を死守する", "teach": "問題提起→共感→あおり→解決策とベネフィット→証拠→オファー→希少性→行動→期限→追伸。LP/セールスレター/営業に共通する最強手順。", "sit": "動画広告のシナリオ", "date": "2025.09.18"}, {"cat": "g2", "theme": "クリニック向け構成(保存版)", "point": "惹きつけ→あおり→証拠→行動", "teach": "ヘッドライン→課題提起と共感→導入事例とベネフィット→失敗事例であおり→当社の強み→当社しかない→お客様の声→実績(証拠)→導入しやすいプラン→オファー＆期限→行動導線。", "sit": "全社会議の資料", "date": "2026.05.12"}, {"cat": "g2", "theme": "媒体で売り方を変える", "point": "媒体で売り方を変える", "teach": "じっくり吟味する人＝商品紹介中心のHPが有効。成り行き(衝動)買い＝黄金手順が有効。インスタ/YouTubeは一撃CVなので衝動型で作る。", "sit": "衝動買いとじっくり", "date": "2025.09.18"}, {"cat": "g2", "theme": "主張でなく客観証明", "point": "主張でなく客観証明", "teach": "『水槽を置いている』は証拠でない。累計5000件、経営者/芸能人導入、映画ドラマ採用など客観的な証明を出す。", "sit": "動画の『証拠』パート", "date": "2025.10.03"}, {"cat": "g2", "theme": "機能でなく未来を売る", "point": "機能でなく未来を売る", "teach": "機能でなく『置いたらどうなるか』のベネフィット(くつろぎ/自慢/趣味/家族/子供)で、水槽を知らない富裕層に欲しいと思わせる。", "sit": "富裕層向け動画", "date": "2025.09.18"}, {"cat": "g2", "theme": "SEOは別ドメイン", "point": "別ドメイン＋内部リンク", "teach": "サブディレクトリで新ブログを足すと本体TOPと競合し順位が乱れる。別ドメイン＋内部リンクで公式のSEOパワーを使い共倒れを避ける。", "sit": "集客ブログの構想", "date": "2023.11.06"}, {"cat": "g2", "theme": "測れないものは判断不能", "point": "測れないものは判断不能", "teach": "流入経路ごとに計測タグ/専用番号を設計しないと効果を正しく測れない。施策の継続/中止判断は正確な計測が前提。", "sit": "TikTok計測", "date": "2024.09.17"}, {"cat": "g2", "theme": "費用対効果で続行判断", "point": "費用対効果で続行判断", "teach": "支払いコストに対し回収できるか、続けるか辞めるかを責任を持ってジャッジ。当初狙った数値から評価する。", "sit": "動画本数の交渉", "date": "2025.02.18"}, {"cat": "g2", "theme": "因果を測ってから報酬化", "point": "因果を測ってから報酬化", "teach": "100万再生でも問合せ0なら赤字。再生数と問合せの因果が数値化されるまで成果報酬は慎重に。", "sit": "TikTok成果報酬", "date": "2025.01.17"}, {"cat": "g2", "theme": "採用は掛け算で考える", "point": "採用は掛け算で考える", "teach": "採用＝広告精度×求人メッセージ×面接力。無料プラン＋広告でも十分応募は来る。広告で取れても面接力が弱いと失注する。", "sit": "求人の数値分析", "date": "2026.03.20"}, {"cat": "g2", "theme": "建前と本音の両方を刺す", "point": "建前と本音の両方を刺す", "teach": "表のテーマ(会社の集客/ブランド)に加え、ワンマン社長個人が『めっちゃ楽しめる』ワクワク感も入れる。商品の差で締める。", "sit": "ディーラー向け文面", "date": "2024.01.23"}, {"cat": "g2", "theme": "誤解を生む画は使わない", "point": "誤解を生む画は使わない", "teach": "内容が良くても水が濁っていると素人は『水槽=濁るもの』と誤認する。良い素材ほど撮り直してでもクリアに。", "sit": "濁った水槽の動画", "date": "2025.08.06"}, {"cat": "g2", "theme": "冒頭で宣伝臭を消す", "point": "冒頭で宣伝臭を消す", "teach": "DMが多く届く世界では同じ形式はスルーされる。冒頭を宣伝っぽくしない。ビジュアル/事例を添えて返信動機を作る。", "sit": "インスタDM施策", "date": "2025.06.30"}, {"cat": "g3", "theme": "ポルシェ/トヨタ", "point": "憧れカテゴリで先に勝つ", "teach": "相手が憧れるカテゴリ(ポルシェ=サンゴ)でまず同等以上を示してから『まずはトヨタ(クマノミ)から』と誘導。専門の他社に劣って見せない。", "sit": "サンゴに興味が移った客", "date": "2026.06.20"}, {"cat": "g3", "theme": "過去形は今やってない印象", "point": "過去形を避ける", "teach": "『過去に対応した』は『もう今はやっていない』印象。『現在管理している一例』に変える。", "sit": "『過去に対応した写真』", "date": "2026.06.20"}, {"cat": "g3", "theme": "格下げワードを使わない", "point": "格下げワードを使わない", "teach": "『〜も可能』はおまけ・専門でない印象。『かなり得意/人気プラン/専門部隊』と専門性で語る。", "sit": "『サンゴも対応可能』", "date": "2026.06.20"}, {"cat": "g3", "theme": "ネガティブを植えない", "point": "ネガティブを植えない", "teach": "わざわざ『苦手』と書くと逆に刷り込まれる。否定文でも弱点ワードは持ち出さない。", "sit": "『苦手ではない』と否定", "date": "2026.06.20"}, {"cat": "g3", "theme": "数字の見せ順を設計", "point": "数字の見せ順を設計", "teach": "最初に大きな金額が頭に入ると心理的抵抗が強い。『初期0円・月々◯◯万円台』に見せ替える。", "sit": "初期費用5,000,000円", "date": "2026.06.08"}, {"cat": "g3", "theme": "速さを動詞で見せる", "point": "速さを動詞で見せる", "teach": "『お伺いする』は速さが伝わらない。『すぐ駆けつける』で対応力を可視化。遠方他社との差別化になる。", "sit": "『お伺いする』", "date": "2026.06.20"}, {"cat": "g3", "theme": "窓口を立てて動かす", "point": "窓口を立てて動かす", "teach": "『トップに転送して』は窓口のプライドを傷つけアウト。窓口を立てつつ、トップも必ず喜ぶ自信を示す(窓口の手柄になる)。", "sit": "事務長が窓口、理事長がトップ", "date": "2025.01.28"}, {"cat": "g3", "theme": "本音を読んで設計", "point": "本音を読んで設計", "teach": "初期費用を抑えたがる＝『最悪払わなければいい/撤去で終わり』の心理。連帯保証でも回収は手間と知っている。本音を先読みして条件設計。", "sit": "ホスト社長の心理", "date": "2026.06.16"}, {"cat": "g3", "theme": "表面の熱量を疑う", "point": "表面の熱量を疑う", "teach": "盛り上がっていても刺さっていない事がある。困りごとを直接聞いて本心を掴む。", "sit": "良い人ほど演技で盛り上がる", "date": "2023.04.21"}, {"cat": "g3", "theme": "特別扱いで満たす", "point": "特別扱いで満たす", "teach": "稼いで日が浅い人は『自分は特別』と思いたい。特別感/VIPで自尊心を満たすと刺さる。", "sit": "成り上がり客", "date": "2025.04.08"}, {"cat": "g3", "theme": "即・全部見せる", "point": "即・全部見せる", "teach": "院長/社長は短時間で全情報を知りたいせっかちが多い。その場で全部見せる/イメージを先に持たせる。", "sit": "院長/社長への提案", "date": "2024.01.25"}, {"cat": "g3", "theme": "期待値は低めに設計", "point": "期待値は低めに設計", "teach": "『3年かかる』と言って半年で育つとクレーム。逆に控えめに言えばクレームになりにくい。期待値を超える設計を。", "sit": "金魚の成長スピード", "date": "2023.06.05"}, {"cat": "g4", "theme": "自社リースの建前", "point": "第三者を絡ませて見せる", "teach": "『社内審査/自社リース』と言うと悪い客は『飛んでもリスク無い』と感づく。『リース会社の審査があり手数料/金利は当社負担』と第三者を絡ませて見せる(ジャパネット式)。", "sit": "キャスト/オリコの件", "date": "2026.04.15"}, {"cat": "g4", "theme": "汎用性=30万基準", "point": "価格基準は汎用性の逆算", "teach": "リースは『使い回せる商品』が前提。30万以下=汎用水槽で再リース可能、超えると特注で再利用不可→リース会社は受けない。だから上限30万。", "sit": "ナイト系の上限", "date": "2026.06.18"}, {"cat": "g4", "theme": "基本不可・財務次第", "point": "基本不可、財務次第", "teach": "ナイト系/飲食は最もリースが通らない。基本不可→財務次第で最大30万。本業が堅い(売上8割が不動産等)なら親会社契約で全額も可。", "sit": "ホストクラブ", "date": "2026.06.17"}, {"cat": "g4", "theme": "保証人は資産を持つ本人", "point": "保証人は資産を持つ本人", "teach": "法人と個人(代表)は法的に別物。法人が倒産しても個人に支払義務なし。だから一番お金を持つ社長個人を連帯保証に。奥様(資産なし)では意味がない。", "sit": "奥様を連帯保証に", "date": "2025.02.03"}, {"cat": "g4", "theme": "4点で与信を判断", "point": "4点で与信を判断", "teach": "履歴事項全部証明/印鑑証明/決算書/通帳コピーの4点で満額か一部かを審査。信用ある企業は不要な事も。小規模は連帯保証で検討。", "sit": "法人リース", "date": "2023.12.30"}, {"cat": "g4", "theme": "1年回収を原則に", "point": "1年回収を原則に", "teach": "原則1年以内に初期費用を回収する。『1年後に解約して転売』を前提にしてはいけない。6ヶ月契約は相手が6ヶ月で切れるリスクで金額設定。", "sit": "レンタル案件", "date": "2023.07.08"}, {"cat": "g4", "theme": "入金まで発注しない", "point": "入金まで発注しない", "teach": "入金/契約があるまで設置部に流さない。資金不足で平気で解除される。発注前に必ず契約書とサインを回収。", "sit": "入金前に発注しかけ", "date": "2023.06.29"}, {"cat": "g4", "theme": "手数料でなく委託料", "point": "手数料でなく委託料", "teach": "カード会社規約上、決済手数料を客に請求するのはNG。『外部委託先のシステム利用料』として別途請求するのが正しい建付け。", "sit": "4%手数料を客に請求", "date": "2025.04.02"}, {"cat": "g4", "theme": "約款は原則いじらない", "point": "約款は原則いじらない", "teach": "約款変更は原則不可。条件により一部飲むがケースバイケース。1人の例外を他客に適用しない。契約書表紙の備考で対応。", "sit": "自動更新の変更要望", "date": "2023.06.29"}, {"cat": "g4", "theme": "過失×物損のみ補償", "point": "過失×物損のみ補償", "teach": "補償は『当社の過失』かつ『物損』が2条件。保険会社の認定額(減価償却後)の範囲内。営業補償(逸失利益)は対象外。", "sit": "5億補償の質問", "date": "2024.04.14"}, {"cat": "g4", "theme": "返金せず値引分は回収", "point": "返金せず値引分は回収", "teach": "撤去/解約時の返金は原則なし(誰も管理しきれない)。値引分の回収は必要。対応は案件ごとに異なる(解約金1年分請求等)。", "sit": "撤去返金の要望", "date": "2023.11.14"}, {"cat": "g4", "theme": "分散は条件を契約書に", "point": "分散は条件を契約書に", "teach": "複数台契約は契約書を全て分け発注前に回収。『1台解約ごとに自宅メンテ＋◯円』等の条件を明記しリスク回避。", "sit": "自宅費用をクリニックに按分", "date": "2024.10.24"}, {"cat": "g4", "theme": "カード通過は与信代わり", "point": "カード通過は与信代わり", "teach": "リースが厳しい時はタイムズ/カード24分割で。カードが通れば当社に一括入金されベスト。通らない=支払能力なしの判断材料。", "sit": "リース不可で資金繰り懸念", "date": "2024.09.26"}, {"cat": "g4", "theme": "与信は最小書類で", "point": "与信は最小書類で", "teach": "審査段階では収益性が分かる決算書等のみ。免許/印鑑証明/住民票/通帳等は審査通過後でOK。客の手間を最小に。", "sit": "風間案件", "date": "2026.03.23"}, {"cat": "g4", "theme": "高齢は相続放棄リスク", "point": "高齢は相続放棄リスク", "teach": "高齢(75歳)で後継なしは、死亡時に遺族が相続放棄で負債が残るリスク。クリニック名義/連帯保証で対応。", "sit": "75歳の与信", "date": "2024.12.11"}, {"cat": "g5", "theme": "キックバック制度", "point": "自分で動けば20%＋1ヶ月", "teach": "自分で見積/打合せした新規は初期費用利益の20%＋メンテ1ヶ月分。丸投げはバックなし。精算は堀が管轄。", "sit": "インセンティブの質問", "date": "2023.01.21"}, {"cat": "g5", "theme": "利用案件は三点セット", "point": "利用案件は三点セット", "teach": "メンテ部を使い利益を出す案件は①丸投げしない②メンテプラン共有③客に定期満足度チェック、が必須セット。", "sit": "メンテ部で2年目更新狙い", "date": "2023.04.22"}, {"cat": "g5", "theme": "出張作業は出張費", "point": "出張作業は出張費", "teach": "出張して作業が想定される場合は出張費(5000円)が掛かる。ケースバイケースだが基本もらう。", "sit": "緊急対応の出張", "date": "2024.01.22"}, {"cat": "g5", "theme": "値引は売上と一緒に処理", "point": "値引は売上と一緒に処理", "teach": "値引(キャンセル料からの差引)した場合、①転売利益を売上計上②該当月の売上を修正、を堀に申告する。", "sit": "神猿の値引分", "date": "2024.01.29"}, {"cat": "g5", "theme": "〆日基準で月次集計", "point": "〆日基準で月次集計", "teach": "営業成績メールの〆日(21日〜翌20日)区分に揃える。打合せ/受注/失注の件数と顧客名、初期費用損益、メンテ有無を月ごとに。", "sit": "営業データ集計", "date": "2023.09.20"}, {"cat": "g5", "theme": "転売を毎月確認する", "point": "転売を毎月確認する", "teach": "無駄になった仕入れは毎月の固定日に転売したか堀と確認するルーティン。転売まで案件が残る仕組みにする。", "sit": "余った仕入れ", "date": "2024.09.03"}, {"cat": "g5", "theme": "通常は印影画像で", "point": "通常は印影画像で", "teach": "国登録の実印は1つのみ、他は屋号印(非登録)。請求書は印影画像をExcelに貼って出力。割り印が要る契約書のみ実物印鑑。", "sit": "社印が欲しい", "date": "2025.07.04"}, {"cat": "g5", "theme": "実印案件は千葉ちゃんへ", "point": "実印案件は千葉ちゃんへ", "teach": "中川実印が必要な請求書は千葉ちゃんに集約。1年分作っておく。毎回中川に押印依頼するルール。", "sit": "実印が必要な案件", "date": "2025.05.02"}, {"cat": "g5", "theme": "成約後は必ず申し送り", "point": "成約後は必ず申し送り", "teach": "成約したら堀に申し送り(精算)。本社決裁→千葉ちゃんが振込確認。申請を忘れない。", "sit": "成約後", "date": "2023.05.15"}, {"cat": "g5", "theme": "登録完了を必ず報告", "point": "登録完了を必ず報告", "teach": "アメックスは中川がQRコードExcelを発行→客が登録→登録完了を必ず中川に連絡→中川が決済。連絡を守る。", "sit": "アメックス決済", "date": "2024.09.26"}, {"cat": "g5", "theme": "月末平日に決済", "point": "月末平日に決済", "teach": "アクシスは月末日(平日)に当社が決済をかける。客の引落日ではなく『客がお買物した日』。", "sit": "アクシス決済", "date": "2025.02.22"}, {"cat": "g5", "theme": "発注/使用/余剰の3点管理", "point": "発注/使用/余剰の3点管理", "teach": "発注個数/金額、使用分、余剰分の3点をMMC金額ベースで整理し堀のLR在庫管理エクセルに入力する。", "sit": "風間さんのLR", "date": "2026.05.14"}, {"cat": "g5", "theme": "端末は必ずロック", "point": "端末は必ずロック", "teach": "社外秘(営業成績等)を閲覧する端末は全てロック/セキュリティを徹底する。", "sit": "社外秘データ送付", "date": "2023.02.21"}, {"cat": "g5", "theme": "録音は厳重に個人管理", "point": "録音は厳重に個人管理", "teach": "極秘情報が多いので録音は山縣個人だけで厳密管理。他者がログインで聞けない事を確認する。", "sit": "マンツー録音", "date": "2026.04.15"}, {"cat": "g5", "theme": "高額は社内で抱えない", "point": "高額は社内で抱えない", "teach": "信用力が極めて高い個人/会社以外、300万の肩代わりリースは不可。ワキタ等リース会社の与信orオリコ分割へ。", "sit": "300万リース", "date": "2023.06.27"}, {"cat": "g6", "theme": "営業", "point": "コストは感情で高くも安くもなる", "teach": "失注を『予算が合わなかった』で片付けない。相手のコストを上回る魅力を出せなかったと反省する。", "sit": "", "date": ""}, {"cat": "g6", "theme": "営業", "point": "検討させると冷静になり離脱する", "teach": "『ご検討ください』で締めない。意思があるなら発注書にして発注方法を明記する。最終段階は『イメージを膨らませて』。", "sit": "", "date": ""}, {"cat": "g6", "theme": "営業", "point": "安売り癖はスキルを殺す", "teach": "安く出せる値引き手段を通常の引き出しに置かない。まず価値を伝えて高く売る。", "sit": "", "date": ""}, {"cat": "g6", "theme": "営業", "point": "オファー破棄は厳禁", "teach": "約束したオファーは必ず実行する。現場に丸投げしない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "営業・顧客心理", "point": "当社ならではに翻訳する", "teach": "『当社でできます』で終わらせず、『なぜ当社/なぜ他社はできないか』の2文脈を必ず添える。", "sit": "", "date": ""}, {"cat": "g6", "theme": "顧客心理", "point": "言葉一つで心理が動く", "teach": "過去形(『過去に対応』)・格下げワード(『〜も対応可能』)・弱点ワード(『苦手ではない』)を使わない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "顧客心理", "point": "第一印象の数字を設計", "teach": "大きな初期費用は『初期0円・月々◯◯』に見せ替える。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "資金不足で平気で解除される", "teach": "入金または発注前サインがあるまで、設置部に発注を流さない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "変えるなら備考でケース対応", "teach": "約款は原則変更しない。1人の例外を他客に広げない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "カード会社規約違反になる", "teach": "クレジット決済手数料を客に請求しない(外注委託料として別途請求)。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "飛ばれリスクを下げる", "teach": "リースは『リース会社の審査がある』建付けで見せる(自社リースと言わない)。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "法人と個人は別物", "teach": "連帯保証人は資産を持つ社長個人にする。奥様等では意味がない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "汎用性30万の逆算", "teach": "ナイト系/飲食は基本リース不可。財務次第で最大30万まで。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "過失×物損が2条件", "teach": "保険は『当社の過失』かつ『物損』のみ、認定額(減価償却後)の範囲。営業補償は不可。", "sit": "", "date": ""}, {"cat": "g6", "theme": "契約", "point": "誰も管理しきれない", "teach": "撤去/解約で返金しない。値引分は回収する。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "バラマキは組織を頓挫させる", "teach": "お金で人を動かさない。お金以外で頑張ってもらう仕組み/評価を先に作る。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "労務の原則", "teach": "報酬は労働時間で決める。『浮いた分=報酬』にしない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社内ルール", "point": "期待を持たせない", "teach": "報酬/労務の相談は本人の見ている場でなく、先に中川に直接する。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "ガバナンスを守る", "teach": "決裁ラインを飛ばさない(管理職決済を尊重)。初動は『上席に確認します』。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "遅れは台無しにする", "teach": "レスポンスは速く(速さ=信頼)。最後の詰めを甘くしない。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "AIは補助", "teach": "重要な意思決定はAI任せにせず、自分の頭で考え責任を取る。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "一流の必須スキル", "teach": "出来ない理由でなく『どうすれば出来るか/簡単になるか』で考える。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社内ルール", "point": "三点セット必須", "teach": "メンテ部を使う案件は丸投げ禁止(プラン共有＋満足度チェック)。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社内ルール", "point": "数字の整合を守る", "teach": "値引き/キャンセルは必ず堀へ経理処理(売上計上と修正)。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社内ルール", "point": "抜けると精算が崩れる", "teach": "成約したら必ず受注報告/申し送りをする。", "sit": "", "date": ""}, {"cat": "g6", "theme": "社長業", "point": "光と影", "teach": "数字の成果(経費削減等)の裏にある顧客心理(影の部分)を必ず見る。", "sit": "", "date": ""}, {"cat": "g6", "theme": "マーケ", "point": "黄金の販売手順", "teach": "広告/LP/営業は『問題提起→共感→あおり→解決→証拠→オファー→希少性→行動→期限→追伸』の順で組む。", "sit": "", "date": ""}, {"cat": "g6", "theme": "マーケ", "point": "AIが客層を誤認する", "teach": "富裕層狙いの広告に趣味客(ノイズ)を入れない。ベネフィットで富裕層を取りに行く。", "sit": "", "date": ""}];
+const INFO=[{"l": "📍 本社", "v": "〒111-0032 東京都台東区浅草3-36-9 小宮ビル2F"}, {"l": "🏛 ショールーム（予約制）", "v": "東京都中央区銀座1-13-4 片桐ビルB1"}, {"l": "🏭 工場", "v": "千葉県松戸市小金きよしヶ丘4-6-1"}, {"l": "📦 荷物の発送先", "v": "〒270-0003 千葉県松戸市東平賀537", "hl": 1}, {"l": "🌐 ホームページ", "v": "http://www.aqualink.tv"}, {"l": "🏦 お振込先", "v": "千葉興業銀行 小金支店\n普通 6168421 アクアリンク", "hl": 1}, {"l": "✉️ 山縣 連絡先", "v": "TEL 090-4955-3577\nsupport-1@aqualink.tv"}, {"l": "💳 カード登録フォーム入力用メール", "v": "fish@aqualink.tv", "hl": 1}];
+const STAFF=[{"n": "堀 誉幸（ホリ タカユキ）", "tel": "090-3339-3577", "r": "設置部"}, {"n": "石垣 克敏（イシガキ カツトシ）", "tel": "090-4013-3577", "r": "設置部"}, {"n": "東口 悠人（ヒガシグチ ユウト）", "tel": "080-1311-5356", "r": "設置部"}];
+const PARTNER=[{"l": "有限会社スイテック 事務所", "v": "〒510-0832 三重県四日市市伊倉3-6-7"}];
+// ---------- helpers ----------
+function teiji(g){return Math.ceil(g*1.2/10)*10;}
+function yen(n){return n.toLocaleString('ja-JP');}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function hl(t,q){if(!q)return t;try{return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="hl-t">$1</span>');}catch(e){return t;}}
+const CMAP={};
+[CATS,NCATS,DOCS,GCATS].forEach(arr=>arr.forEach(c=>{CMAP[c.id]=c;}));
+
+const SECTIONS=[
+ {id:"cust",   ic:"🐟", name:"お客様対応",      sub:"魚・水草・設備・クレームの返答文例", wide:1, kind:"navi", data:D,       cats:CATS},
+ {id:"mgmt",   ic:"🧭", name:"社長の対応・判断", sub:"解約・値引き・リース・未納・労務など", wide:1, kind:"navi", data:NAVI,    cats:NCATS},
+ {id:"mitsu",  ic:"💴", name:"見積・商品価格",   sub:"原価→提示額（×1.2）",               kind:"mitsu", data:PRODUCTS, cats:null},
+ {id:"kitei",  ic:"📑", name:"規定を引く",       sub:"約款・就業規則・賃金・育児介護ほか", kind:"kitei", data:KITEI,   cats:DOCS},
+ {id:"gensoku",ic:"💡", name:"経営の原則",       sub:"中川さんの教え",                     kind:"gensoku", data:GENSOKU, cats:GCATS},
+ {id:"info",   ic:"🏢", name:"会社情報",         sub:"住所・連絡先・振込先・設置部",       kind:"info", data:null, cats:null},
+];
+const SEC=Object.fromEntries(SECTIONS.map(s=>[s.id,s]));
+
+let mode="home", activeCat="all";
+let COPY={}, cid=0;
+const qEl=document.getElementById('q'), clrEl=document.getElementById('clr'), listEl=document.getElementById('list');
+const chipsEl=document.getElementById('chips'), cntEl=document.getElementById('cnt'), noEl=document.getElementById('nores');
+const crumbEl=document.getElementById('crumb');
+
+function terms(){const r=qEl.value.trim().toLowerCase();return r?r.split(/\s+/):[];}
+function naviHay(d){return (d.q.join(' ')+' '+(d.alt||[]).join(' ')+' '+d.ans+' '+(d.scripts||[]).map(s=>s.t).join(' ')+' '+(d.notes||[]).map(n=>n.t).join(' ')+' '+(d.refs||[]).map(r=>r.tag+r.txt).join(' ')).toLowerCase();}
+function kiteiHay(d){return (d.ref+' '+d.title+' '+d.body+' '+d.tags+' '+CMAP[d.doc].name).toLowerCase();}
+function gensHay(d){return (d.theme+' '+d.point+' '+d.teach+' '+d.sit).toLowerCase();}
+function mitsuHay(p){return (p.n+' '+p.c).toLowerCase();}
+function tmAll(tms,hay){return tms.every(t=>hay.includes(t));}
+
+// ---------- card builders (return HTML string) ----------
+function quoteHtml(quote){
+  if(!quote||!quote.length)return '';
+  const rows=quote.map(p=>`<div class="qt-row"><div class="qt-nm">${esc(p.n)}</div><div class="qt-pr"><span class="qt-genka">原価 ¥${yen(p.g)}</span><br><span class="qt-teiji">¥${yen(teiji(p.g))}</span> <span class="qt-lbl">提示(税別)</span></div></div>`).join('');
+  return `<div class="sec"><div class="sec-l"><span class="b" style="background:var(--warn);"></span>交換・買い替えの見積もり（税別）</div><div class="qt"><div class="qt-hd"><span>商品</span><span>原価 → 提示額（×1.2）</span></div>${rows}<div class="qt-note">提示額＝原価×1.2（20%上乗せ・税別、10円単位に切り上げ）。最終は見積タブ／契約でご確認ください。</div></div></div>`;
+}
+function naviCard(d,raw){
+  const col=CMAP[d.cat].c, catName=CMAP[d.cat].name;
+  const scriptsHtml=(d.scripts||[]).map(s=>{const id='c'+(cid++);COPY[id]=s.t;return `<div class="script"><button class="copy-btn" data-c="${id}">📋 コピー</button><div class="script-l">${esc(s.l)}</div><div class="script-t">${hl(esc(s.t),raw)}</div></div>`;}).join('');
+  const scriptsSec=scriptsHtml?`<div class="sec"><div class="sec-l"><span class="b" style="background:var(--teal);"></span>そのまま送れる文例（タップでコピー）</div>${scriptsHtml}</div>`:'';
+  const notesHtml=(d.notes&&d.notes.length)?`<div class="sec"><div class="sec-l"><span class="b" style="background:var(--warn);"></span>気をつけるポイント</div><div class="notes">${d.notes.map(n=>`<div class="note ${n.do?'do':''}"><span class="m">${n.do?'◎':'✕'}</span><span>${hl(n.t,raw)}</span></div>`).join('')}</div></div>`:'';
+  const qtHtml=quoteHtml(d.quote);
+  const escHtml=d.esc?`<div class="sec"><div class="sec-l"><span class="b" style="background:#c0392b;"></span>こんな時は相談（リーダー／中川さん）</div><div class="esc"><span class="m">▲</span><span>${d.esc}</span></div></div>`:'';
+  const refsHtml=(d.refs&&d.refs.length)?`<button class="refs-toggle">根拠（約款・規定・原則）を見る ▾</button><div class="refs">${d.refs.map(r=>`<div class="ref"><span class="tag">${esc(r.tag)}</span>${esc(r.txt)}</div>`).join('')}</div>`:'';
+  const altHtml=(d.alt&&d.alt.length&&!raw)?`<div class="alt">${d.alt.slice(0,3).map(a=>`<span class="alt-c">${esc(a)}</span>`).join('')}</div>`:'';
+  return `<div class="item"><div class="item-head"><div class="qbar" style="background:${col};"></div><div class="item-main"><span class="item-cat" style="color:${col};background:${col}1a;">${catName}</span><div class="item-q"><span class="quote">「</span>${hl(esc(d.q[0]),raw)}<span class="quote">」</span></div>${altHtml}</div><span class="chev">▶</span></div><div class="detail"><div class="sec"><div class="sec-l"><span class="b" style="background:var(--blue);"></span>こう対応する</div><div class="ans">${d.ans}</div></div>${scriptsSec}${notesHtml}${qtHtml}${escHtml}${refsHtml}</div></div>`;
+}
+function kiteiCard(d,raw){
+  const col=CMAP[d.doc].c, dn=CMAP[d.doc].name;
+  return `<div class="kcard"><div class="kh"><span class="ktag" style="background:${col};">${dn}</span><span class="kref">${esc(d.ref)}</span><span class="ktitle">${hl(esc(d.title),raw)}</span></div><div class="kbody">${hl(esc(d.body),raw)}</div></div>`;
+}
+function gensCard(d,raw){
+  const col=CMAP[d.cat].c, cn=CMAP[d.cat].name;
+  const meta=(d.sit?`<div class="sec"><div class="sec-l"><span class="b" style="background:var(--ink3);"></span>きっかけ・状況</div><div class="ans" style="border-left-color:var(--ink3);background:#f6f8fa;">${hl(esc(d.sit),raw)}${d.date?`　<span style="color:var(--ink3);font-size:11px;">（${esc(d.date)}）</span>`:''}</div></div>`:'');
+  return `<div class="item"><div class="item-head"><div class="qbar" style="background:${col};"></div><div class="item-main"><span class="item-cat" style="color:${col};background:${col}1a;">${cn}</span><div class="item-q">${hl(esc(d.point),raw)}</div><div class="item-pt">${hl(esc(d.theme),raw)}</div></div><span class="chev">▶</span></div><div class="detail"><div class="sec"><div class="sec-l"><span class="b" style="background:var(--gold);"></span>中川さんの教え</div><div class="ans" style="border-left-color:var(--gold);background:#fbf7ea;">${hl(esc(d.teach),raw)}</div></div>${meta}</div></div>`;
+}
+function mitsuRow(p,raw){
+  return `<div class="prow"><span class="pcat">${esc(p.c)}</span><div class="pnm">${hl(esc(p.n),raw)}</div><div class="ppr"><div class="pg">原価 ¥${yen(p.g)}</div><div class="pt">¥${yen(teiji(p.g))}</div><div class="pl">提示(税別)</div></div></div>`;
+}
+
+// ---------- views ----------
+function setCrumb(html){crumbEl.innerHTML=html;crumbEl.classList.toggle('show',!!html);}
+function showChips(show){chipsEl.classList.toggle('hide',!show);}
+
+function renderHome(){
+  document.getElementById('homeBtn').style.display='none';
+  setCrumb(''); showChips(false); cntEl.textContent=''; noEl.style.display='none';
+  let html='<div class="hello">こんにちは、山縣さん。<b>困ったらまず上の検索</b>。対応の文例・規定・経営の原則まで一度に出ます。下のジャンルから辿ることもできます。</div><div class="tiles">';
+  SECTIONS.forEach(s=>{
+    const c=s.data?s.data.length:null;
+    const cnt=c!==null?`<div class="tile-c"><b>${c}</b> 件</div>`:`<div class="tile-c">タップで開く</div>`;
+    if(s.wide){
+      html+=`<div class="tile wide" data-nav="${s.id}" style="border-top-color:${s.id==='cust'?'var(--teal)':'var(--blue)'};"><div class="tile-ic">${s.ic}</div><div class="tile-tx"><div class="tile-n">${s.name}</div><div class="tile-s">${s.sub}</div></div>${cnt}</div>`;
+    }else{
+      html+=`<div class="tile" data-nav="${s.id}"><div class="tile-ic">${s.ic}</div><div class="tile-n">${s.name}</div><div class="tile-s">${s.sub}</div>${cnt}</div>`;
+    }
+  });
+  html+='</div>';
+  listEl.innerHTML=html;
+}
+
+function buildChips(sec){
+  chipsEl.innerHTML='';
+  if(!sec.cats){showChips(false);return;}
+  showChips(true);
+  const all=document.createElement('button');
+  all.className='chip'+(activeCat==='all'?' active':'');
+  if(activeCat==='all')all.style.background='var(--navy)';
+  all.textContent='すべて';
+  all.onclick=()=>{activeCat='all';buildChips(sec);render();};
+  chipsEl.appendChild(all);
+  sec.cats.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='chip'+(activeCat===c.id?' active':'');
+    if(activeCat===c.id)b.style.background=c.c;
+    b.innerHTML=`<span class="dot" style="background:${c.c};"></span>${c.name}`;
+    b.onclick=()=>{activeCat=c.id;buildChips(sec);render();};
+    chipsEl.appendChild(b);
+  });
+}
+
+function renderSection(id){
+  const sec=SEC[id];
+  document.getElementById('homeBtn').style.display='inline-block';
+  setCrumb(`<span class="home" data-nav="home">← ホーム</span><span class="sep">｜</span><span>${sec.ic} ${sec.name}</span>`);
+  buildChips(sec);
+  if(sec.kind==='info'){renderInfo();return;}
+  if(sec.kind==='mitsu'){renderMitsu('');return;}
+  let html='', shown=0;
+  if(sec.kind==='kitei'&&activeCat==='all')html='<div class="intro">📑 約款・就業規則・賃金規定・育児介護規程・経営理念(CCS)・働き方を要点で引けます。正確な条文・金額は元の規定書を確認してください。</div>';
+  if(sec.kind==='gensoku'&&activeCat==='all')html='<div class="intro">💡 中川さんとのやり取りから抽出した経営・営業・顧客心理の原則集。タップで詳しい教えが開きます。</div>';
+  sec.data.forEach(d=>{
+    const dc=(sec.kind==='kitei')?d.doc:d.cat;
+    if(activeCat!=='all'&&dc!==activeCat)return;
+    shown++;
+    if(sec.kind==='navi')html+=naviCard(d,'');
+    else if(sec.kind==='kitei')html+=kiteiCard(d,'');
+    else html+=gensCard(d,'');
+  });
+  listEl.innerHTML=html;
+  cntEl.textContent=`${shown} 件`;
+  noEl.style.display=shown?'none':'block';
+}
+
+function renderMitsu(raw){
+  let html='<div class="mitsu-note"><b>原価</b>＝仕入れ価格（税別）／<b>提示額</b>＝原価×1.2（20%上乗せ・税別、10円単位に切り上げ）。お客様には提示額でご案内します。</div>';
+  const q=raw.toLowerCase(); let shown=0;
+  PRODUCTS.forEach(p=>{
+    if(q){ if(!mitsuHay(p).includes(q))return; }
+    else { if(p.c!==(activeCat==='all'?p.c:activeCat))return; }
+    shown++; html+=mitsuRow(p,raw);
+  });
+  listEl.innerHTML=html;
+  cntEl.textContent=`${shown} 件`;
+  noEl.style.display=shown?'none':'block';
+}
+function mitsuChips(){
+  // mitsu uses product categories
+  chipsEl.innerHTML=''; showChips(true);
+  const cats=['all'].concat(PCATS);
+  cats.forEach(name=>{
+    const b=document.createElement('button');
+    const on=(name==='all'&&activeCat==='all')||activeCat===name;
+    b.className='chip'+(on?' active':'');
+    if(on)b.style.background='var(--warn)';
+    b.textContent=name==='all'?'すべて':name;
+    b.onclick=()=>{activeCat=name;mitsuChips();render();};
+    chipsEl.appendChild(b);
+  });
+}
+
+function renderInfo(){
+  showChips(false);
+  let html='<div class="info-card"><div class="info-name">アクアリンク株式会社</div><div class="info-tel"><a href="tel:0120579595">📞 TEL 0120-57-9595</a><a class="fax" href="tel:0120689595">FAX 0120-68-9595</a></div><div style="text-align:center;margin-top:8px;font-size:12px;color:var(--ink2);">携帯：090-4955-3577</div></div>';
+  INFO.forEach(c=>{
+    const id='c'+(cid++); COPY[id]=(c.v||'').replace(/\n/g,' ');
+    html+=`<div class="info-card ${c.hl?'hl':''}"><div class="ic-l">${c.l}</div><div class="ic-row"><div class="ic-v">${esc(c.v).replace(/\n/g,'<br>')}</div><button class="ic-copy" data-c="${id}">📋 コピー</button></div></div>`;
+  });
+  html+='<div class="sub-h">🛠 設置部</div>';
+  STAFF.forEach(s=>{ const tel=s.tel.replace(/[^0-9]/g,''); html+=`<div class="staff"><div class="sn">${esc(s.n)}</div><span class="sr">${esc(s.r)}</span><a href="tel:${tel}">📞 ${esc(s.tel)}</a></div>`; });
+  html+='<div class="sub-h">🤝 取引先</div>';
+  PARTNER.forEach(c=>{ const id='c'+(cid++); COPY[id]=(c.v||'').replace(/\n/g,' '); html+=`<div class="info-card"><div class="ic-l">${esc(c.l)}</div><div class="ic-row"><div class="ic-v">${esc(c.v).replace(/\n/g,'<br>')}</div><button class="ic-copy" data-c="${id}">📋 コピー</button></div></div>`; });
+  listEl.innerHTML=html;
+  cntEl.textContent=''; noEl.style.display='none';
+}
+
+function renderSearch(raw){
+  document.getElementById('homeBtn').style.display='inline-block';
+  setCrumb(`<span class="home" data-nav="home">← ホーム</span><span class="sep">｜</span><span>「${esc(raw)}」の検索結果</span>`);
+  showChips(false);
+  const tms=terms(); let html='', total=0;
+  // navi sections: cust, mgmt
+  [["cust",D],["mgmt",NAVI]].forEach(([sid,arr])=>{
+    const hits=arr.filter(d=>tmAll(tms,naviHay(d)));
+    if(hits.length){total+=hits.length;const s=SEC[sid];
+      html+=`<div class="grp"><div class="grp-h" data-nav="${sid}"><span class="gi">${s.ic}</span><span>${s.name}</span><span class="gc">${hits.length}件 ›</span></div>${hits.map(d=>naviCard(d,raw)).join('')}</div>`;}
+  });
+  // mitsu
+  const mh=PRODUCTS.filter(p=>mitsuHay(p).includes(raw.toLowerCase()));
+  if(mh.length){total+=mh.length;
+    html+=`<div class="grp"><div class="grp-h" data-nav="mitsu"><span class="gi">💴</span><span>見積・商品価格</span><span class="gc">${mh.length}件 ›</span></div>${mh.slice(0,40).map(p=>mitsuRow(p,raw)).join('')}${mh.length>40?`<div class="cnt">ほか${mh.length-40}件（見積タブで全て表示）</div>`:''}</div>`;}
+  // kitei
+  const kh=KITEI.filter(d=>tmAll(tms,kiteiHay(d)));
+  if(kh.length){total+=kh.length;
+    html+=`<div class="grp"><div class="grp-h" data-nav="kitei"><span class="gi">📑</span><span>規定を引く</span><span class="gc">${kh.length}件 ›</span></div>${kh.map(d=>kiteiCard(d,raw)).join('')}</div>`;}
+  // gensoku
+  const gh=GENSOKU.filter(d=>tmAll(tms,gensHay(d)));
+  if(gh.length){total+=gh.length;
+    html+=`<div class="grp"><div class="grp-h" data-nav="gensoku"><span class="gi">💡</span><span>経営の原則</span><span class="gc">${gh.length}件 ›</span></div>${gh.map(d=>gensCard(d,raw)).join('')}</div>`;}
+  listEl.innerHTML=html;
+  cntEl.textContent=total?`全体で ${total} 件`:'';
+  noEl.style.display=total?'none':'block';
+}
+
+function render(){
+  COPY={}; cid=0;
+  const raw=qEl.value.trim();
+  clrEl.classList.toggle('show',!!raw);
+  if(raw){ renderSearch(raw); return; }
+  if(mode==='home'){ renderHome(); return; }
+  if(mode==='mitsu'){ document.getElementById('homeBtn').style.display='inline-block'; setCrumb(`<span class="home" data-nav="home">← ホーム</span><span class="sep">｜</span><span>💴 見積・商品価格</span>`); mitsuChips(); renderMitsu(''); return; }
+  renderSection(mode);
+}
+
+function goHome(){mode='home';activeCat='all';qEl.value='';window.scrollTo(0,0);render();}
+function goSection(id){ if(id==='home'){goHome();return;} mode=id;activeCat='all';qEl.value='';window.scrollTo(0,0);render(); }
+
+// ---------- events ----------
+function doCopy(text,btn){
+  const ok=()=>{toast('コピーしました ✓');if(btn){const o=btn.innerHTML;btn.innerHTML='✓ 完了';btn.classList.add('done');setTimeout(()=>{btn.innerHTML=o;btn.classList.remove('done');},1400);}};
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(ok).catch(()=>legacy(text,ok));}else legacy(text,ok);
+}
+function legacy(text,ok){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.top='-1000px';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');ok();}catch(e){toast('コピーできませんでした');}document.body.removeChild(ta);}
+let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1600);}
+
+listEl.addEventListener('click',e=>{
+  const cp=e.target.closest('.copy-btn');   if(cp){e.stopPropagation();doCopy(COPY[cp.dataset.c],cp);return;}
+  const ic=e.target.closest('.ic-copy');    if(ic){doCopy(COPY[ic.dataset.c],ic);return;}
+  const rt=e.target.closest('.refs-toggle');if(rt){const r=rt.nextElementSibling;const o=r.classList.toggle('open');rt.textContent=o?'根拠を閉じる ▴':'根拠（約款・規定・原則）を見る ▾';return;}
+  const nav=e.target.closest('[data-nav]'); if(nav){goSection(nav.dataset.nav);return;}
+  const head=e.target.closest('.item-head');if(head){const it=head.closest('.item');const det=it.querySelector('.detail');const o=det.classList.toggle('open');it.querySelector('.chev').classList.toggle('open',o);return;}
+});
+crumbEl.addEventListener('click',e=>{const n=e.target.closest('[data-nav]');if(n)goSection(n.dataset.nav);});
+document.getElementById('homeBtn').onclick=goHome;
+document.getElementById('logo').onclick=goHome;
+qEl.addEventListener('input',render);
+clrEl.onclick=()=>{qEl.value='';qEl.focus();render();};
+
+render();
+</script>
+</body>
+</html>
